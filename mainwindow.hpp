@@ -2,6 +2,7 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include <QSqlRelationalTableModel>
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QSqlRelationalTableModel *rmodel;
 };
 
 #endif // MAINWINDOW_HPP
