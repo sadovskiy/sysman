@@ -23,3 +23,5 @@ FORMS    += mainwindow.ui \
     dialogconnecttodatabase.ui
 
 RESOURCES += ico.qrc
+
+TRANSLATIONS += test_ru_RU.ts
