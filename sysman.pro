@@ -24,4 +24,4 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += ico.qrc
 
-TRANSLATIONS += test_ru_RU.ts
+TRANSLATIONS += sysman_ru_RU.ts
