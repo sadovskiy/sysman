@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TableViewTabForm</class>
+ <widget class="QWidget" name="TableViewTabForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>907</width>
+    <height>777</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <widget class="QTableView" name="tableView">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>1</number>
+     </property>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::DragDrop</enum>
+     </property>
+     <property name="defaultDropAction">
+      <enum>Qt::CopyAction</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectItems</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QFrame" name="frameAddRow">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetFixedSize</enum>
+            </property>
+            <item row="5" column="0">
+             <layout class="QVBoxLayout" name="verticalLayoutRegistrationAdministrativeUnit">
+              <item>
+               <widget class="QLabel" name="labelRegistrationAdministrativeUnit">
+                <property name="text">
+                 <string>Registration Administrative Unit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxRegistrationAdministrativeUnit">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutName">
+              <item>
+               <widget class="QLabel" name="labelName">
+                <property name="text">
+                 <string>Name</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditName"/>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="3">
+             <layout class="QVBoxLayout" name="verticalLayoutPlaceOfBirth">
+              <item>
+               <widget class="QLabel" name="labelPlaceOfBirth">
+                <property name="text">
+                 <string>Place Of Birth</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxPlaceOfBirth">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="3">
+             <layout class="QVBoxLayout" name="verticalLayoutPassportSubdivisionCode">
+              <item>
+               <widget class="QLabel" name="labelPassportSubdivisionCode">
+                <property name="text">
+                 <string>Passport Subdivision Code</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBoxPassportSubdivisionCode"/>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <layout class="QVBoxLayout" name="verticalLayoutSex">
+              <item>
+               <widget class="QLabel" name="labelSex">
+                <property name="text">
+                 <string>Sex</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxSex">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="0">
+             <layout class="QVBoxLayout" name="verticalLayoutPassportSeries">
+              <item>
+               <widget class="QLabel" name="labelPassportSeries">
+                <property name="text">
+                 <string>Passport Series</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBoxPassportSeries">
+                <property name="maximum">
+                 <number>9999</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutPassportNumber">
+              <item>
+               <widget class="QLabel" name="labelPassportNumber">
+                <property name="text">
+                 <string>Passport Number</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBoxPassportNumber">
+                <property name="maximum">
+                 <number>999999</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutCitizenship">
+              <item>
+               <widget class="QLabel" name="labelCitizenship">
+                <property name="text">
+                 <string>Citizenship</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxCitizenship">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="0">
+             <layout class="QVBoxLayout" name="verticalLayoutPostcode">
+              <item>
+               <widget class="QLabel" name="labelPostcode">
+                <property name="text">
+                 <string>Postcode</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBoxPostcode">
+                <property name="maximum">
+                 <number>999999</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="0">
+             <layout class="QVBoxLayout" name="verticalLayoutSurname">
+              <item>
+               <widget class="QLabel" name="labelSurname">
+                <property name="text">
+                 <string>Surname</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditSurname"/>
+              </item>
+             </layout>
+            </item>
+            <item row="5" column="2">
+             <layout class="QVBoxLayout" name="verticalLayoutRegistrationDate">
+              <item>
+               <widget class="QLabel" name="labelRegistrationDate">
+                <property name="text">
+                 <string>Registration Date</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dateEditRegistrationDate">
+                <property name="displayFormat">
+                 <string notr="true">dd.MM.yyyy (ddd)</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="2">
+             <layout class="QVBoxLayout" name="verticalLayoutEmail">
+              <item>
+               <widget class="QLabel" name="labelEmail">
+                <property name="text">
+                 <string>Email</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditEmail"/>
+              </item>
+             </layout>
+            </item>
+            <item row="5" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutRegistrationAdress">
+              <item>
+               <widget class="QLabel" name="labeRegistrationAdress">
+                <property name="text">
+                 <string>Registration Adress</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditRegistrationAdress"/>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="2">
+             <layout class="QVBoxLayout" name="verticalLayoutPassportAuthority">
+              <item>
+               <widget class="QLabel" name="labelPassportAuthority">
+                <property name="text">
+                 <string>Passport Authority</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditPassportAuthority"/>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="2">
+             <layout class="QVBoxLayout" name="verticalLayoutPatronym">
+              <item>
+               <widget class="QLabel" name="labelPatronym">
+                <property name="text">
+                 <string>Patronym</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditPatronym"/>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="1">
+             <layout class="QVBoxLayout" name="verticalLayoutPhone">
+              <item>
+               <widget class="QLabel" name="labelPhone">
+                <property name="text">
+                 <string>Phone Number</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBoxPhone">
+                <property name="maximum">
+                 <number>9999999</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="2">
+             <layout class="QVBoxLayout" name="verticalLayoutDateOfBirth">
+              <item>
+               <widget class="QLabel" name="labelDateOfBirth">
+                <property name="text">
+                 <string>Date Of Birth</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dateEditDateOfBirth">
+                <property name="currentSection">
+                 <enum>QDateTimeEdit::DaySection</enum>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">dd.MM.yyyy (ddd)</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="3">
+             <layout class="QVBoxLayout" name="verticalLayoutPassportDateOfIssue">
+              <item>
+               <widget class="QLabel" name="labelPassportDateOfIssue">
+                <property name="text">
+                 <string>Passport Date Of Issue</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dateEditPassportDateOfIssue">
+                <property name="displayFormat">
+                 <string notr="true">dd.MM.yyyy (ddd)</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayoutIndividualTaxpayerIdentificationNumber">
+            <item>
+             <widget class="QLabel" name="labelIndividualTaxpayerIdentificationNumber">
+              <property name="text">
+               <string>Individual Taxpayer Identification Number</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxIndividualTaxpayerIdentificationNumber"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutAddRow">
+        <item>
+         <spacer name="horizontalSpacerAddRow">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonAddRow">
+          <property name="text">
+           <string>Add Row</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditSurname</tabstop>
+  <tabstop>lineEditName</tabstop>
+  <tabstop>lineEditPatronym</tabstop>
+  <tabstop>comboBoxPlaceOfBirth</tabstop>
+  <tabstop>comboBoxSex</tabstop>
+  <tabstop>comboBoxCitizenship</tabstop>
+  <tabstop>dateEditDateOfBirth</tabstop>
+  <tabstop>spinBoxPassportSubdivisionCode</tabstop>
+  <tabstop>spinBoxPassportSeries</tabstop>
+  <tabstop>spinBoxPassportNumber</tabstop>
+  <tabstop>lineEditPassportAuthority</tabstop>
+  <tabstop>dateEditPassportDateOfIssue</tabstop>
+  <tabstop>comboBoxRegistrationAdministrativeUnit</tabstop>
+  <tabstop>lineEditRegistrationAdress</tabstop>
+  <tabstop>dateEditRegistrationDate</tabstop>
+  <tabstop>spinBoxPostcode</tabstop>
+  <tabstop>spinBoxPhone</tabstop>
+  <tabstop>lineEditEmail</tabstop>
+  <tabstop>spinBoxIndividualTaxpayerIdentificationNumber</tabstop>
+  <tabstop>pushButtonAddRow</tabstop>
+  <tabstop>tableView</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

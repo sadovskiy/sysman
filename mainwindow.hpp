@@ -4,8 +4,11 @@
 #include <QMainWindow>
 #include <QSqlRelationalTableModel>
 #include <QTranslator>
-#include <QHeaderView>
-#include <QSortFilterProxyModel>
+#include <QTreeWidgetItem>
+#include <QVector>
+
+#include "country.hpp"
+#include "tableviewtabform.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -22,18 +25,15 @@ public:
 private slots:
     void on_actionConnect_triggered();
     void update();
-    void closeTab(int Index);
-    void CrMenu();
+    void closeTab(int index);
+    void itemTabNewOrOpen(QTreeWidgetItem *item, int col);
+    void setCurrentItem(int index);
 
 private:
     Ui::MainWindow *ui;
     QTranslator appTranslator;
-    QHeaderView *pHeader;
-    QSortFilterProxyModel *proxyModel;
-    QSqlRelationalTableModel *rmodel1;
-    QSqlRelationalTableModel *rmodel2;
-    QSqlRelationalTableModel *rmodel3;
-    QSqlRelationalTableModel *rmodel4;
+    TableViewTabForm *tvtab;
+    QVector<Country> countryList;
 };
 
 #endif // MAINWINDOW_HPP

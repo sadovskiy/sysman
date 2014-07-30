@@ -37,7 +37,7 @@
        <item>
         <widget class="QLineEdit" name="lineEditUserName">
          <property name="text">
-          <string>sysmanadmin</string>
+          <string>smadm</string>
          </property>
         </widget>
        </item>
