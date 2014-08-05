@@ -1,7 +1,7 @@
 #include "country.hpp"
 
-Country::Country(int num, QString alpha2, QString alpha3,
-                 QString cyr3, QString comm, long telecode):
+Country::Country(const int num, const QString alpha2, const QString alpha3,
+                 const QString cyr3, const QString comm, const long telecode):
     numCodeCountry(num), alpha2CodeCountry(alpha2), alpha3CodeCountry(alpha3),
     cyr3CodeCountry(cyr3), comment(comm), telephonCode(telecode)
 {

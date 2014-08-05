@@ -2,9 +2,14 @@
 #define COUNTRYDELEGATE_HPP
 
 #include <QStyledItemDelegate>
+#include <QMap>
+
+#include "country.hpp"
 
 class CountryDelegate : public QStyledItemDelegate
 {
+    Q_OBJECT
+
 public:
     CountryDelegate(QObject *parent = 0);
     // Отрисовывает ячейку элемента внутри таблицы до и после редактирования
@@ -15,7 +20,7 @@ public:
     QString displayText(const QVariant &value, const QLocale &locale) const;
 
     // Создаёт виджет редактора элемента
-/*    QWidget *createEditor(QWidget *parent,
+    QWidget *createEditor(QWidget *parent,
                            const QStyleOptionViewItem &option,
                            const QModelIndex &index) const;
 
@@ -30,7 +35,9 @@ public:
     // Задаёт располажение редактора (editor) на форме
     void updateEditorGeometry(QWidget *editor,
                               const QStyleOptionViewItem &option,
-                              const QModelIndex &index) const;*/
+                              const QModelIndex &index) const;
+private:
+    QMap<QString, int> countryList;
 };
 
 #endif // COUNTRYDELEGATE_HPP

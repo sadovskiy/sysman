@@ -26,12 +26,16 @@ private slots:
     void on_actionConnect_triggered();
     void update();
     void closeTab(int index);
-    void itemTabNewOrOpen(QTreeWidgetItem *item, int col);
+    void itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col);
     void setCurrentItem(int index);
+
 
 private:
     Ui::MainWindow *ui;
+
     QTranslator appTranslator;
+    QTranslator  qtTranslator;
+
     TableViewTabForm *tvtab;
     QVector<Country> countryList;
 };

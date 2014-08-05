@@ -16,6 +16,7 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
 
     connect(ui->pushButtonAddRow, SIGNAL(clicked()),
             this, SLOT(addRow()));
+    ui->frameAddRow->setVisible(false);
 }
 
 TableViewTabForm::~TableViewTabForm()
@@ -31,7 +32,8 @@ void TableViewTabForm::setTableName(QString name)
 
     rmodel->select();
 
-    qDebug() << rmodel->lastError().text();
+    if (rmodel->lastError().isValid())
+        qDebug() << rmodel->lastError().text();
 
     ui->tableView->setModel(rmodel);
     ui->tableView->resizeColumnsToContents();
@@ -44,11 +46,15 @@ void TableViewTabForm::setTableName(QString name)
                                             new DateColumnDelegate(this));
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("registration_date"),
                                             new DateColumnDelegate(this));
+
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("sex"),
                                             new SexColumnDelegate(this));
-/*
+    ui->tableView->setColumnWidth(rmodel->fieldIndex("sex"), 120);
+
+
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("citizenship"),
-                                            new CountryDelegate(this));*/
+                                            new CountryDelegate(this));
+    ui->tableView->setColumnWidth(rmodel->fieldIndex("citizenship"), 250);
 
     rmodel->setHeaderData(rmodel->fieldIndex("order_admission_num"), Qt::Horizontal, tr("order_admission_num"));
     rmodel->setHeaderData(rmodel->fieldIndex("order_dismissal_num"), Qt::Horizontal, tr("order_dismissal_num"));
@@ -61,14 +67,12 @@ void TableViewTabForm::setTableName(QString name)
     rmodel->setHeaderData(rmodel->fieldIndex("date_of_pay"), Qt::Horizontal, tr("date_of_pay"));
     rmodel->setHeaderData(rmodel->fieldIndex("penalties"), Qt::Horizontal, tr("penalties"));
 
-
     rmodel->setHeaderData(rmodel->fieldIndex("contract_number"), Qt::Horizontal, tr("contract_number"));
     rmodel->setHeaderData(rmodel->fieldIndex("contract_date"), Qt::Horizontal, tr("contract_date"));
     rmodel->setHeaderData(rmodel->fieldIndex("contract_type"), Qt::Horizontal, tr("contract_type"));
     rmodel->setHeaderData(rmodel->fieldIndex("surname"), Qt::Horizontal, tr("surname"));
     rmodel->setHeaderData(rmodel->fieldIndex("name"), Qt::Horizontal, tr("name"));
     rmodel->setHeaderData(rmodel->fieldIndex("patronym"), Qt::Horizontal, tr("patronym"));
-    rmodel->setHeaderData(rmodel->fieldIndex("Sex"), Qt::Horizontal, tr("Sex"));
     rmodel->setHeaderData(rmodel->fieldIndex("date_of_birth"), Qt::Horizontal, tr("date_of_birth"));
     rmodel->setHeaderData(rmodel->fieldIndex("place_of_birth"), Qt::Horizontal, tr("place_of_birth"));
     rmodel->setHeaderData(rmodel->fieldIndex("citizenship"), Qt::Horizontal, tr("citizenship"));
@@ -91,7 +95,7 @@ void TableViewTabForm::setTableName(QString name)
     rmodel->setHeaderData(rmodel->fieldIndex("surname"), Qt::Horizontal, tr("surname"));
     rmodel->setHeaderData(rmodel->fieldIndex("name"), Qt::Horizontal, tr("name"));
     rmodel->setHeaderData(rmodel->fieldIndex("patronym"), Qt::Horizontal, tr("patronym"));
-    rmodel->setHeaderData(rmodel->fieldIndex("Sex"), Qt::Horizontal, tr("Sex"));
+    rmodel->setHeaderData(rmodel->fieldIndex("sex"), Qt::Horizontal, tr("sex"));
     rmodel->setHeaderData(rmodel->fieldIndex("date_of_birth"), Qt::Horizontal, tr("date_of_birth"));
     rmodel->setHeaderData(rmodel->fieldIndex("place_of_birth"), Qt::Horizontal, tr("place_of_birth"));
     rmodel->setHeaderData(rmodel->fieldIndex("citizenship"), Qt::Horizontal, tr("citizenship"));
@@ -119,6 +123,10 @@ void TableViewTabForm::setTableName(QString name)
     rmodel->setHeaderData(rmodel->fieldIndex("actual_amount_of_payment"), Qt::Horizontal, tr("actual_amount_of_payment"));
     rmodel->setHeaderData(rmodel->fieldIndex("date_of_pay"), Qt::Horizontal, tr("date_of_pay"));
     rmodel->setHeaderData(rmodel->fieldIndex("penalties"), Qt::Horizontal, tr("penalties"));
+
+    // Для кнопки сокрытия фрэйма с полями для ввода данных в таблицу
+    connect(ui->pushButtonShowHideFrameAddRow, SIGNAL(clicked()),
+            this, SLOT(ShowHideFrameAddRow()));
 
 }
 
@@ -154,4 +162,16 @@ void TableViewTabForm::addRow()
     rmodel->setData(rmodel->index(row, 3), ui->comboBoxCitizenship->currentText());
 
     rmodel->submitAll();
+}
+
+void TableViewTabForm::ShowHideFrameAddRow()
+{
+    if (ui->frameAddRow->isVisible()) {
+        ui->frameAddRow->setVisible(false);
+        ui->pushButtonShowHideFrameAddRow->setText(tr("Show Frame Add Row"));
+    }
+    else {
+        ui->frameAddRow->setVisible(true);
+        ui->pushButtonShowHideFrameAddRow->setText(tr("Hide Frame Add Row"));
+    }
 }

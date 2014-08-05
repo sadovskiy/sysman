@@ -6,6 +6,8 @@
 
 class SexColumnDelegate : public QStyledItemDelegate
 {
+    Q_OBJECT
+
 public:
     SexColumnDelegate(QObject *parent = 0);
 
@@ -36,7 +38,6 @@ public:
 
 private:
     QMap<QString, int> sexList;
-
 };
 
 #endif // SEXCOLUMNDELEGATE_HPP

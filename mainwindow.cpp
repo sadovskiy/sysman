@@ -9,6 +9,8 @@
 #include <QSqlRecord>
 #include <QModelIndex>
 #include <QMessageBox>
+#include <QDir>
+#include <QLibraryInfo>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,8 +18,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Загружаем перевод
     qApp->installTranslator(&appTranslator);
-    appTranslator.load("/home/keeper_b/devprogs/sysman/sysman_translation_ru_RU.qm");
+    qApp->installTranslator(&qtTranslator);
+    appTranslator.load("sysman_translation_" + QLocale::system().name(),
+                       qApp->applicationDirPath());
+
+    qtTranslator.load("qt_" + QLocale::system().name(),
+                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+
+
+
+//    qDebug() << qApp->applicationDirPath();
 
     ui->retranslateUi(this);
 
@@ -33,9 +45,12 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(closeTab(int)));
 
     connect(ui->treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)),
-            this, SLOT(itemTabNewOrOpen(QTreeWidgetItem*,int)));
+            this, SLOT(itemTabNewOrOpenCurrent(QTreeWidgetItem*,int)));
     connect(ui->tabWidget, SIGNAL(currentChanged(int)),
             this, SLOT(setCurrentItem(int)));
+
+    connect(ui->actionAbout, SIGNAL(triggered()),
+            qApp, SLOT(aboutQt()));
 
     // Прячем первую колонку списка так как там хранятся названия таблиц БД
     ui->treeWidget->hideColumn(1);
@@ -77,29 +92,6 @@ void MainWindow::on_actionConnect_triggered()
         QSqlDatabase db = QSqlDatabase::database();
         if (db.isOpen())
             ui->actionConnect->setChecked(true);
-
-        QSqlQuery query("SELECT * FROM country_table");
-
-        if (!query.isActive())
-            QMessageBox::warning(this, tr("Database Error"),
-                                 query.lastError().text());
-
-        while(query.next()){
-            countryList.append(Country(query.value(0).toInt(),
-                                       query.value(1).toString(),
-                                       query.value(2).toString(),
-                                       query.value(3).toString(),
-                                       query.value(4).toString(),
-                                       query.value(5).toInt()));
-        }
-        for (int i = 0; i < countryList.count(); i++) {
-            qDebug() << countryList[i].nCodeCountry() << " "
-                     << countryList[i].a2CodeCountry() << " "
-                     << countryList[i].a3CodeCountry() << " "
-                     << countryList[i].c3CodeCountry() << " "
-                     << countryList[i].comm() << " "
-                     << countryList[i].tCode();
-        }
     }
 }
 
@@ -113,7 +105,7 @@ void MainWindow::closeTab(int index)
     ui->tabWidget->removeTab(index);
 }
 
-void MainWindow::itemTabNewOrOpen(QTreeWidgetItem *item, int col)
+void MainWindow::itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col)
 {
     int flag = -1;
     TableViewTabForm *tableviewtab = 0;
@@ -126,6 +118,7 @@ void MainWindow::itemTabNewOrOpen(QTreeWidgetItem *item, int col)
         ui->tabWidget->setCurrentIndex(flag);
     else {
         tableviewtab = new TableViewTabForm(this);
+
         tableviewtab->setWindowTitle(item->text(col));
         ui->tabWidget->addTab(tableviewtab, item->text(col));
         ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
@@ -145,3 +138,4 @@ void MainWindow::setCurrentItem(int index)
             ui->treeWidget->setCurrentItem(items.at(0));
     }
 }
+

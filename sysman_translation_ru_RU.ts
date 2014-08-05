@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
+    <name>CountryDelegate</name>
+    <message>
+        <location filename="countrydelegate.cpp" line="30"/>
+        <source>Russia</source>
+        <translation>Россия (Российская Федерация)</translation>
+    </message>
+    <message>
+        <location filename="countrydelegate.cpp" line="31"/>
+        <source>Other</source>
+        <translation>Иностранное</translation>
+    </message>
+</context>
+<context>
     <name>DialogConnectToDataBase</name>
     <message>
         <location filename="dialogconnecttodatabase.ui" line="23"/>
@@ -27,7 +40,7 @@
     <message>
         <location filename="dialogconnecttodatabase.ui" line="58"/>
         <source>40^NmKL</source>
-        <translation>40^NmKL</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -121,24 +134,39 @@
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="260"/>
+        <location filename="mainwindow.ui" line="246"/>
+        <source>Templates Documents</source>
+        <translation>Шаблоны документов</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="251"/>
+        <source>Info</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="281"/>
         <source>Connect</source>
         <translation>Соединение</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="263"/>
+        <location filename="mainwindow.ui" line="284"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="268"/>
+        <location filename="mainwindow.ui" line="289"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="271"/>
+        <location filename="mainwindow.ui" line="292"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="301"/>
+        <source>About Qt</source>
+        <translation>О Qt</translation>
     </message>
     <message>
         <source>id</source>
@@ -273,9 +301,24 @@
         <translation type="obsolete">ИНН</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="84"/>
+        <source>Not known</source>
+        <translation type="obsolete">Неизвестно</translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="obsolete">Мужской</translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation type="obsolete">Женский</translation>
+    </message>
+    <message>
+        <source>Not applicable</source>
+        <translation type="obsolete">Непременимо</translation>
+    </message>
+    <message>
         <source>Database Error</source>
-        <translation>Ошибка базы данных</translation>
+        <translation type="obsolete">Ошибка базы данных</translation>
     </message>
 </context>
 <context>
@@ -298,7 +341,11 @@
     <message>
         <location filename="sexcolumndelegate.cpp" line="13"/>
         <source>Not applicable</source>
-        <translation>Неприминимо</translation>
+        <translation>Непременимо</translation>
+    </message>
+    <message>
+        <source>test</source>
+        <translation type="obsolete">Проверка</translation>
     </message>
 </context>
 <context>
@@ -309,297 +356,311 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="80"/>
+        <location filename="tableviewtabform.ui" line="92"/>
         <source>Registration Administrative Unit</source>
         <translation>Место регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="98"/>
+        <location filename="tableviewtabform.ui" line="110"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="112"/>
+        <location filename="tableviewtabform.ui" line="124"/>
         <source>Place Of Birth</source>
         <translation>Место рождения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="130"/>
+        <location filename="tableviewtabform.ui" line="142"/>
         <source>Passport Subdivision Code</source>
         <translation>Код подразделения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="144"/>
-        <location filename="tableviewtabform.cpp" line="71"/>
-        <location filename="tableviewtabform.cpp" line="94"/>
+        <location filename="tableviewtabform.ui" line="156"/>
         <source>Sex</source>
         <translation>Пол</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="162"/>
+        <location filename="tableviewtabform.ui" line="174"/>
         <source>Passport Series</source>
         <translation>Серия паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="180"/>
+        <location filename="tableviewtabform.ui" line="192"/>
         <source>Passport Number</source>
         <translation>Номер паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="198"/>
+        <location filename="tableviewtabform.ui" line="210"/>
         <source>Citizenship</source>
         <translation>Гражданство</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="216"/>
+        <location filename="tableviewtabform.ui" line="228"/>
         <source>Postcode</source>
         <translation>Почтовый индекс</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="234"/>
+        <location filename="tableviewtabform.ui" line="246"/>
         <source>Surname</source>
         <translation>Фамилия</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="248"/>
+        <location filename="tableviewtabform.ui" line="260"/>
         <source>Registration Date</source>
         <translation>Дата регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="269"/>
+        <location filename="tableviewtabform.ui" line="281"/>
         <source>Email</source>
         <translation>Электронная почта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="283"/>
+        <location filename="tableviewtabform.ui" line="295"/>
         <source>Registration Adress</source>
         <translation>Адрес регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="297"/>
+        <location filename="tableviewtabform.ui" line="309"/>
         <source>Passport Authority</source>
         <translation>Кто выдал</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="311"/>
+        <location filename="tableviewtabform.ui" line="323"/>
         <source>Patronym</source>
         <translation>Отчество</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="325"/>
+        <location filename="tableviewtabform.ui" line="337"/>
         <source>Phone Number</source>
         <translation>Номер телефона</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="343"/>
+        <location filename="tableviewtabform.ui" line="355"/>
         <source>Date Of Birth</source>
         <translation>Дата рождения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="367"/>
+        <location filename="tableviewtabform.ui" line="379"/>
         <source>Passport Date Of Issue</source>
         <translation>Дата выдачи</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="390"/>
+        <location filename="tableviewtabform.ui" line="402"/>
         <source>Individual Taxpayer Identification Number</source>
         <translation>ИНН</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.ui" line="434"/>
+        <location filename="tableviewtabform.ui" line="446"/>
         <source>Add Row</source>
         <translation>Добавить студента</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="53"/>
-        <location filename="tableviewtabform.cpp" line="111"/>
+        <location filename="tableviewtabform.ui" line="473"/>
+        <location filename="tableviewtabform.cpp" line="170"/>
+        <source>Show Frame Add Row</source>
+        <translation>Показать панель добавления строки</translation>
+    </message>
+    <message>
+        <location filename="tableviewtabform.cpp" line="57"/>
+        <location filename="tableviewtabform.cpp" line="114"/>
         <source>order_admission_num</source>
         <translation>Номер приказа о зачислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="54"/>
-        <location filename="tableviewtabform.cpp" line="112"/>
+        <location filename="tableviewtabform.cpp" line="58"/>
+        <location filename="tableviewtabform.cpp" line="115"/>
         <source>order_dismissal_num</source>
         <translation>Номер приказа об отчислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="55"/>
-        <location filename="tableviewtabform.cpp" line="113"/>
+        <location filename="tableviewtabform.cpp" line="59"/>
+        <location filename="tableviewtabform.cpp" line="116"/>
         <source>date_of_order_admission</source>
         <translation>Дата приказа о зачислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="56"/>
-        <location filename="tableviewtabform.cpp" line="114"/>
+        <location filename="tableviewtabform.cpp" line="60"/>
+        <location filename="tableviewtabform.cpp" line="117"/>
         <source>date_of_order_dismissal</source>
         <translation>Дата приказа об отчислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="57"/>
-        <location filename="tableviewtabform.cpp" line="116"/>
+        <location filename="tableviewtabform.cpp" line="61"/>
+        <location filename="tableviewtabform.cpp" line="119"/>
         <source>amount</source>
         <translation>Сумма оплаты по договору</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="58"/>
-        <location filename="tableviewtabform.cpp" line="117"/>
+        <location filename="tableviewtabform.cpp" line="62"/>
+        <location filename="tableviewtabform.cpp" line="120"/>
         <source>semester</source>
         <translation>Семестр</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="59"/>
-        <location filename="tableviewtabform.cpp" line="118"/>
+        <location filename="tableviewtabform.cpp" line="63"/>
+        <location filename="tableviewtabform.cpp" line="121"/>
         <source>discount</source>
         <translation>Скидка</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="60"/>
-        <location filename="tableviewtabform.cpp" line="119"/>
+        <location filename="tableviewtabform.cpp" line="64"/>
+        <location filename="tableviewtabform.cpp" line="122"/>
         <source>actual_amount_of_payment</source>
         <translation>Сумма фактической оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="61"/>
-        <location filename="tableviewtabform.cpp" line="120"/>
+        <location filename="tableviewtabform.cpp" line="65"/>
+        <location filename="tableviewtabform.cpp" line="123"/>
         <source>date_of_pay</source>
         <translation>День оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="62"/>
-        <location filename="tableviewtabform.cpp" line="121"/>
+        <location filename="tableviewtabform.cpp" line="66"/>
+        <location filename="tableviewtabform.cpp" line="124"/>
         <source>penalties</source>
         <translation>Пени</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="65"/>
-        <location filename="tableviewtabform.cpp" line="88"/>
+        <location filename="tableviewtabform.cpp" line="69"/>
+        <location filename="tableviewtabform.cpp" line="91"/>
         <source>contract_number</source>
         <translation>Номер договора</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="66"/>
-        <location filename="tableviewtabform.cpp" line="89"/>
+        <location filename="tableviewtabform.cpp" line="70"/>
+        <location filename="tableviewtabform.cpp" line="92"/>
         <source>contract_date</source>
         <translation>Дата заключения договора</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="67"/>
-        <location filename="tableviewtabform.cpp" line="90"/>
+        <location filename="tableviewtabform.cpp" line="71"/>
+        <location filename="tableviewtabform.cpp" line="93"/>
         <source>contract_type</source>
         <translation>Тип договора</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="68"/>
-        <location filename="tableviewtabform.cpp" line="91"/>
+        <location filename="tableviewtabform.cpp" line="72"/>
+        <location filename="tableviewtabform.cpp" line="94"/>
         <source>surname</source>
         <translation>Фамилия</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="69"/>
-        <location filename="tableviewtabform.cpp" line="92"/>
+        <location filename="tableviewtabform.cpp" line="73"/>
+        <location filename="tableviewtabform.cpp" line="95"/>
         <source>name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="70"/>
-        <location filename="tableviewtabform.cpp" line="93"/>
+        <location filename="tableviewtabform.cpp" line="74"/>
+        <location filename="tableviewtabform.cpp" line="96"/>
         <source>patronym</source>
         <translation>Отчество</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="72"/>
-        <location filename="tableviewtabform.cpp" line="95"/>
+        <location filename="tableviewtabform.cpp" line="75"/>
+        <location filename="tableviewtabform.cpp" line="98"/>
         <source>date_of_birth</source>
         <translation>Дата рождения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="73"/>
-        <location filename="tableviewtabform.cpp" line="96"/>
+        <location filename="tableviewtabform.cpp" line="76"/>
+        <location filename="tableviewtabform.cpp" line="99"/>
         <source>place_of_birth</source>
         <translation>Место рождения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="74"/>
-        <location filename="tableviewtabform.cpp" line="97"/>
+        <location filename="tableviewtabform.cpp" line="77"/>
+        <location filename="tableviewtabform.cpp" line="100"/>
         <source>citizenship</source>
         <translation>Гражданство</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="75"/>
-        <location filename="tableviewtabform.cpp" line="98"/>
+        <location filename="tableviewtabform.cpp" line="78"/>
+        <location filename="tableviewtabform.cpp" line="101"/>
         <source>passport_series</source>
         <translation>Серия паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="76"/>
-        <location filename="tableviewtabform.cpp" line="99"/>
+        <location filename="tableviewtabform.cpp" line="79"/>
+        <location filename="tableviewtabform.cpp" line="102"/>
         <source>passport_number</source>
         <translation>Номер паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="77"/>
-        <location filename="tableviewtabform.cpp" line="100"/>
+        <location filename="tableviewtabform.cpp" line="80"/>
+        <location filename="tableviewtabform.cpp" line="103"/>
         <source>passport_authority</source>
         <translation>Кем выдан паспорт</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="78"/>
-        <location filename="tableviewtabform.cpp" line="101"/>
+        <location filename="tableviewtabform.cpp" line="81"/>
+        <location filename="tableviewtabform.cpp" line="104"/>
         <source>passport_date_of_issue</source>
         <translation>Дата выдачи паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="79"/>
-        <location filename="tableviewtabform.cpp" line="102"/>
+        <location filename="tableviewtabform.cpp" line="82"/>
+        <location filename="tableviewtabform.cpp" line="105"/>
         <source>passport_subdivision_code</source>
         <translation>Код подразделения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="80"/>
-        <location filename="tableviewtabform.cpp" line="103"/>
+        <location filename="tableviewtabform.cpp" line="83"/>
+        <location filename="tableviewtabform.cpp" line="106"/>
         <source>registration_adm_unit</source>
         <translation>Место регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="81"/>
-        <location filename="tableviewtabform.cpp" line="104"/>
+        <location filename="tableviewtabform.cpp" line="84"/>
+        <location filename="tableviewtabform.cpp" line="107"/>
         <source>registration_adress</source>
         <translation>Адрес регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="82"/>
-        <location filename="tableviewtabform.cpp" line="105"/>
+        <location filename="tableviewtabform.cpp" line="85"/>
+        <location filename="tableviewtabform.cpp" line="108"/>
         <source>registration_date</source>
         <translation>Дата регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="83"/>
-        <location filename="tableviewtabform.cpp" line="106"/>
+        <location filename="tableviewtabform.cpp" line="86"/>
+        <location filename="tableviewtabform.cpp" line="109"/>
         <source>postcode</source>
         <translation>Почтовый индекс</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="84"/>
-        <location filename="tableviewtabform.cpp" line="107"/>
+        <location filename="tableviewtabform.cpp" line="87"/>
+        <location filename="tableviewtabform.cpp" line="110"/>
         <source>phone</source>
         <translation>Телефон</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="85"/>
-        <location filename="tableviewtabform.cpp" line="108"/>
+        <location filename="tableviewtabform.cpp" line="88"/>
+        <location filename="tableviewtabform.cpp" line="111"/>
         <source>email</source>
         <translation>Электронная почта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="86"/>
-        <location filename="tableviewtabform.cpp" line="109"/>
+        <location filename="tableviewtabform.cpp" line="89"/>
+        <location filename="tableviewtabform.cpp" line="112"/>
         <source>individual_taxpayer_identification_number</source>
         <translation>ИНН</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="133"/>
+        <location filename="tableviewtabform.cpp" line="97"/>
+        <source>sex</source>
+        <translation>Пол</translation>
+    </message>
+    <message>
+        <location filename="tableviewtabform.cpp" line="140"/>
         <source>Hide</source>
         <translation>Спрятать</translation>
+    </message>
+    <message>
+        <location filename="tableviewtabform.cpp" line="174"/>
+        <source>Hide Frame Add Row</source>
+        <translation>Спрятать панель добавления строки</translation>
     </message>
 </context>
 </TS>

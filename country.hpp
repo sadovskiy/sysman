@@ -6,9 +6,9 @@
 class Country
 {
 public:
-    Country() {};
-    Country(int num, QString alpha2, QString alpha3,
-                     QString cyr3, QString comm, long telecode);
+    Country() {}
+    Country(const int num, const QString alpha2, const QString alpha3,
+            const QString cyr3, const QString comm, const long telecode);
 
     int nCodeCountry() const;
     QString a2CodeCountry() const;

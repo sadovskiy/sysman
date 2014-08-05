@@ -241,7 +241,20 @@
     <addaction name="actionConnect"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuTemplatesDocuments">
+    <property name="title">
+     <string>Templates Documents</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>Info</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTemplatesDocuments"/>
+   <addaction name="menuInfo"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -250,11 +263,19 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionConnect"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="images/icon.qrc">
+     <normaloff>:/new/prefix_icon/gotocell.png</normaloff>:/new/prefix_icon/gotocell.png</iconset>
    </property>
    <property name="text">
     <string>Connect</string>
@@ -271,9 +292,20 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="images/icon.qrc">
+     <normaloff>:/new/prefix_icon/qt-logo.png</normaloff>:/new/prefix_icon/qt-logo.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="images/icon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionExit</sender>

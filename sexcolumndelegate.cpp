@@ -7,9 +7,9 @@
 SexColumnDelegate::SexColumnDelegate(QObject *parent):
     QStyledItemDelegate(parent)
 {
-    sexList.insert(tr("Not known"),      0);
-    sexList.insert(tr("Male"),           1);
-    sexList.insert(tr("Female"),         2);
+    sexList.insert(tr("Not known"), 0);
+    sexList.insert(tr("Male"), 1);
+    sexList.insert(tr("Female"), 2);
     sexList.insert(tr("Not applicable"), 9);
 }
 

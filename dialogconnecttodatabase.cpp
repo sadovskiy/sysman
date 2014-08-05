@@ -31,7 +31,6 @@ void DialogConnectToDataBase::dataAccepted()
 {
     userName = ui->lineEditUserName->text();
     password = ui->lineEditPassword->text();
-    qDebug() << userName;
 }
 
 void DialogConnectToDataBase::dataRejected()

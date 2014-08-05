@@ -23,7 +23,11 @@ public:
 
 public slots:
     void customHeaderMenuRequested(QPoint pos);
+
+
+private slots:
     void addRow();
+    void ShowHideFrameAddRow();
 
 private:
     Ui::TableViewTabForm *ui;
