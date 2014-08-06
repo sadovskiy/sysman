@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FrameAddPayment</class>
+ <widget class="QFrame" name="FrameAddPayment">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>579</width>
+    <height>196</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonPayment">
+       <property name="text">
+        <string>Add Row Payment</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="2">
+      <layout class="QVBoxLayout" name="verticalLayoutResolutionPayPhase">
+       <item>
+        <widget class="QLabel" name="labelResolutionPayPhase">
+         <property name="text">
+          <string>Resolution Pay Phase</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxResolutionPayPhase"/>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="3">
+      <layout class="QVBoxLayout" name="verticalLayoutActualAmountOfPayment">
+       <item>
+        <widget class="QLabel" name="labelActualAmountOfPayment">
+         <property name="text">
+          <string>Actual Amount Of Payment</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditActualAmountOfPayment"/>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayoutAmount">
+       <item>
+        <widget class="QLabel" name="labelAmount">
+         <property name="text">
+          <string>Amount</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditAmount"/>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="2">
+      <layout class="QVBoxLayout" name="verticalLayoutDiscount">
+       <item>
+        <widget class="QLabel" name="labelDiscount">
+         <property name="text">
+          <string>Discount</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditDiscount"/>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="verticalLayoutDateOfPay">
+       <item>
+        <widget class="QLabel" name="labelDateOfPay">
+         <property name="text">
+          <string>Date Of Pay</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="dateEditDateOfPay">
+         <property name="displayFormat">
+          <string notr="true">dd.MM.yyyy (ddd)</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <layout class="QVBoxLayout" name="verticalLayoutPenalties">
+       <item>
+        <widget class="QLabel" name="labelPenalties">
+         <property name="text">
+          <string>Penalties</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditPenalties"/>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayoutSemester">
+       <item>
+        <widget class="QLabel" name="labelSemester">
+         <property name="text">
+          <string>Semester</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxSemester">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>147</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="4">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>249</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditAmount</tabstop>
+  <tabstop>comboBoxSemester</tabstop>
+  <tabstop>lineEditDiscount</tabstop>
+  <tabstop>lineEditActualAmountOfPayment</tabstop>
+  <tabstop>dateEditDateOfPay</tabstop>
+  <tabstop>lineEditPenalties</tabstop>
+  <tabstop>comboBoxResolutionPayPhase</tabstop>
+  <tabstop>pushButtonPayment</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

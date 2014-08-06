@@ -4,7 +4,9 @@
 #include "sexcolumndelegate.hpp"
 #include "countrydelegate.hpp"
 
+#include <QGridLayout>
 #include <QSqlError>
+#include <QSpacerItem>
 
 TableViewTabForm::TableViewTabForm(QWidget *parent) :
     QWidget(parent),
@@ -12,11 +14,54 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    rmodel = new QSqlRelationalTableModel(this);
 
-    connect(ui->pushButtonAddRow, SIGNAL(clicked()),
-            this, SLOT(addRow()));
-    ui->frameAddRow->setVisible(false);
+    QGridLayout *glayout = new QGridLayout(this);
+    QSpacerItem *horizontalSpacerButtonSHFrame = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    QHBoxLayout *hspbottom = new QHBoxLayout;
+
+    hspbottom->addItem(horizontalSpacerButtonSHFrame);
+    hspbottom->addWidget(ui->pushButtonShowHideFrameAddRow);
+
+    framestud = new FrameAddStudent(this);
+    framecontr = new FrameAddContract(this);
+    frameoadm = new FrameAddOrderAdmission(this);
+    frameodism = new FrameAddOrderDismission(this);
+    framepayment = new FrameAddPayment(this);
+    framepp = new FrameAddPhasePayment(this);
+    frameall = new FrameAddAll(this);
+
+    glayout->addWidget(ui->tableView, 0, 0);
+
+    glayout->addWidget(framestud, 1, 0, Qt::AlignLeft | Qt::AlignBottom);
+    glayout->addWidget(framecontr, 2, 0, Qt::AlignLeft | Qt::AlignBottom);
+    glayout->addWidget(frameoadm, 3, 0, Qt::AlignLeft | Qt::AlignBottom);
+    glayout->addWidget(frameodism, 4, 0, Qt::AlignLeft | Qt::AlignBottom);
+    glayout->addWidget(framepayment, 5, 0, Qt::AlignLeft | Qt::AlignBottom);
+    glayout->addWidget(framepp, 6, 0, Qt::AlignLeft | Qt::AlignBottom);
+    glayout->addWidget(frameall, 7, 0, Qt::AlignLeft | Qt::AlignBottom);
+
+    framestud->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+
+
+    glayout->addLayout(hspbottom, 8, 0, Qt::AlignRight);
+
+    this->setLayout(glayout);
+
+
+    framestud->setVisible(false);
+    framecontr->setVisible(false);
+    frameoadm->setVisible(false);
+    frameodism->setVisible(false);
+    framepayment->setVisible(false);
+    framepp->setVisible(false);
+    frameall->setVisible(false);
+
+    ui->tableView->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->tableView->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(customHeaderMenuRequested(QPoint)));
+
+    rmodel = new QSqlRelationalTableModel(this);
 }
 
 TableViewTabForm::~TableViewTabForm()
@@ -35,8 +80,27 @@ void TableViewTabForm::setTableName(QString name)
     if (rmodel->lastError().isValid())
         qDebug() << rmodel->lastError().text();
 
+
+    if (tName == "student_table")
+        framestud->setModel(rmodel);
+    if (tName == "contract_table")
+        framecontr->setModel(rmodel);
+    if (tName == "orders_admission_table")
+        frameoadm->setModel(rmodel);
+    if (tName == "orders_dismissal_table")
+        frameodism->setModel(rmodel);
+    if (tName == "payment_table")
+        framepayment->setModel(rmodel);
+    if (tName == "phase_payment_table")
+        framepp->setModel(rmodel);
+    if (tName == "all_data")
+        frameall->setModel(rmodel);
+
+
+
     ui->tableView->setModel(rmodel);
     ui->tableView->resizeColumnsToContents();
+
 
     ui->tableView->setColumnHidden(0, true);
 
@@ -45,6 +109,20 @@ void TableViewTabForm::setTableName(QString name)
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("passport_date_of_issue"),
                                             new DateColumnDelegate(this));
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("registration_date"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("contract_date"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("date_of_order_admission"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("date_of_order_dismissal"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("date_of_pay"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("phase_1_date"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("phase_2_date"),
+                                            new DateColumnDelegate(this));
+    ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("phase_3_date"),
                                             new DateColumnDelegate(this));
 
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("sex"),
@@ -123,10 +201,31 @@ void TableViewTabForm::setTableName(QString name)
     rmodel->setHeaderData(rmodel->fieldIndex("actual_amount_of_payment"), Qt::Horizontal, tr("actual_amount_of_payment"));
     rmodel->setHeaderData(rmodel->fieldIndex("date_of_pay"), Qt::Horizontal, tr("date_of_pay"));
     rmodel->setHeaderData(rmodel->fieldIndex("penalties"), Qt::Horizontal, tr("penalties"));
+    rmodel->setHeaderData(rmodel->fieldIndex("department"), Qt::Horizontal, tr("department"));
+    rmodel->setHeaderData(rmodel->fieldIndex("student"), Qt::Horizontal, tr("student"));
+    rmodel->setHeaderData(rmodel->fieldIndex("phase_1_amount"), Qt::Horizontal, tr("phase_1_amount"));
+    rmodel->setHeaderData(rmodel->fieldIndex("phase_1_date"), Qt::Horizontal, tr("phase_1_date"));
+    rmodel->setHeaderData(rmodel->fieldIndex("phase_2_amount"), Qt::Horizontal, tr("phase_2_amount"));
+    rmodel->setHeaderData(rmodel->fieldIndex("phase_2_date"), Qt::Horizontal, tr("phase_2_date"));
+    rmodel->setHeaderData(rmodel->fieldIndex("phase_3_amount"), Qt::Horizontal, tr("phase_3_amount"));
+    rmodel->setHeaderData(rmodel->fieldIndex("phase_3_date"), Qt::Horizontal, tr("phase_3_date"));
+    rmodel->setHeaderData(rmodel->fieldIndex("comment"), Qt::Horizontal, tr("comment"));
+    rmodel->setHeaderData(rmodel->fieldIndex("resolution_pay_phase"), Qt::Horizontal, tr("resolution_pay_phase"));
+    rmodel->setHeaderData(rmodel->fieldIndex("year_of_study"), Qt::Horizontal, tr("year_of_study"));
+    rmodel->setHeaderData(rmodel->fieldIndex("academic_program"), Qt::Horizontal, tr("academic_program"));
+    rmodel->setHeaderData(rmodel->fieldIndex("qualification"), Qt::Horizontal, tr("qualification"));
+    rmodel->setHeaderData(rmodel->fieldIndex("specialty"), Qt::Horizontal, tr("specialty"));
+    rmodel->setHeaderData(rmodel->fieldIndex("payment"), Qt::Horizontal, tr("payment"));
+    rmodel->setHeaderData(rmodel->fieldIndex("department_contract"), Qt::Horizontal, tr("department_contract"));
+/*    rmodel->setHeaderData(rmodel->fieldIndex(""), Qt::Horizontal, tr(""));
+    rmodel->setHeaderData(rmodel->fieldIndex(""), Qt::Horizontal, tr(""));
+    rmodel->setHeaderData(rmodel->fieldIndex(""), Qt::Horizontal, tr(""));*/
 
     // Для кнопки сокрытия фрэйма с полями для ввода данных в таблицу
     connect(ui->pushButtonShowHideFrameAddRow, SIGNAL(clicked()),
             this, SLOT(ShowHideFrameAddRow()));
+
+
 
 }
 
@@ -138,8 +237,17 @@ QString TableViewTabForm::tableName() const
 void TableViewTabForm::customHeaderMenuRequested(QPoint pos)
 {
     contextHeaderMenu = new QMenu(this);
-    contextHeaderMenu->addAction(new QAction(tr("Hide"), this));
+    actionHeader = new QAction(tr("Hide"), this);
+    contextHeaderMenu->addAction(actionHeader);
     contextHeaderMenu->popup(ui->tableView->horizontalHeader()->viewport()->mapToGlobal(pos));
+    connect(actionHeader, SIGNAL(triggered()), this, SLOT(HideHeader()));
+    mPos = pos;
+}
+
+void TableViewTabForm::HideHeader()
+{
+    int indexHeader = ui->tableView->horizontalHeader()->logicalIndexAt(mPos);
+    ui->tableView->hideColumn(indexHeader);
 }
 
 void TableViewTabForm::clear() const
@@ -147,31 +255,35 @@ void TableViewTabForm::clear() const
     rmodel->clear();
 }
 
-void TableViewTabForm::addRow()
-{
-    int row = rmodel->rowCount();
-    rmodel->insertRow(row);
-/*    QModelIndex index = model->index(row, );
-    ui->tableView->setCurrentIndex(index);
-    ui->tableView->edit(index);*/
-    rmodel->setData(rmodel->index(row, 0), ui->lineEditName->text());
-    rmodel->setData(rmodel->index(row, 1), ui->lineEditSurname->text());
-    rmodel->setData(rmodel->index(row, 2), ui->lineEditPatronym->text());
-    rmodel->setData(rmodel->index(row, 3), ui->comboBoxSex->currentText());
-    rmodel->setData(rmodel->index(row, 4), ui->dateEditDateOfBirth->date());
-    rmodel->setData(rmodel->index(row, 3), ui->comboBoxCitizenship->currentText());
 
-    rmodel->submitAll();
-}
 
 void TableViewTabForm::ShowHideFrameAddRow()
 {
-    if (ui->frameAddRow->isVisible()) {
-        ui->frameAddRow->setVisible(false);
-        ui->pushButtonShowHideFrameAddRow->setText(tr("Show Frame Add Row"));
-    }
-    else {
-        ui->frameAddRow->setVisible(true);
-        ui->pushButtonShowHideFrameAddRow->setText(tr("Hide Frame Add Row"));
+    QFrame *frame = 0;
+    if (tName == "student_table")
+        frame = framestud;
+    if (tName == "contract_table")
+        frame = framecontr;
+    if (tName == "orders_admission_table")
+        frame = frameoadm;
+    if (tName == "orders_dismissal_table")
+        frame = frameodism;
+    if (tName == "payment_table")
+        frame = framepayment;
+    if (tName == "phase_payment_table")
+        frame = framepp;
+    if (tName == "all_data")
+        frame = frameall;
+
+    if (frame) {
+        if (frame->isVisible()) {
+            frame->setVisible(false);
+            ui->pushButtonShowHideFrameAddRow->setText(tr("Show Frame Add Row"));
+        }
+        else {
+            frame->setVisible(true);
+            ui->pushButtonShowHideFrameAddRow->setText(tr("Hide Frame Add Row"));
+        }
     }
 }
+

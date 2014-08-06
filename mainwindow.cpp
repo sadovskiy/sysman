@@ -54,10 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Прячем первую колонку списка так как там хранятся названия таблиц БД
     ui->treeWidget->hideColumn(1);
-
- //    tableView->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
-
-//    connect(ui->tableView->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customHeaderMenuRequested(QPoint)));
 }
 
 MainWindow::~MainWindow()
@@ -86,8 +82,13 @@ void MainWindow::on_actionConnect_triggered()
         else
             ui->treeWidget->setEnabled(true);
     }
-    if (result == DialogConnectToDataBase::Rejected)
+
+    if (result == DialogConnectToDataBase::Rejected) {
         ui->actionConnect->setChecked(false);
+        QSqlDatabase db = QSqlDatabase::database();
+        db.close();
+    }
+
     {
         QSqlDatabase db = QSqlDatabase::database();
         if (db.isOpen())
@@ -107,25 +108,28 @@ void MainWindow::closeTab(int index)
 
 void MainWindow::itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col)
 {
-    int flag = -1;
-    TableViewTabForm *tableviewtab = 0;
+    if (!item->text(1).isEmpty()) {
+        int flag = -1;
+        TableViewTabForm *tableviewtab = 0;
 
-    for (int i = 0; i < ui->tabWidget->count(); i++)
-        if (ui->tabWidget->widget(i)->windowTitle() == item->text(col))
-            flag = i;
+        for (int i = 0; i < ui->tabWidget->count(); i++)
+            if (ui->tabWidget->widget(i)->windowTitle() == item->text(col))
+                flag = i;
 
-    if (flag != -1)
-        ui->tabWidget->setCurrentIndex(flag);
-    else {
-        tableviewtab = new TableViewTabForm(this);
+        if (flag != -1)
+            ui->tabWidget->setCurrentIndex(flag);
+        else {
+            tableviewtab = new TableViewTabForm(this);
 
-        tableviewtab->setWindowTitle(item->text(col));
-        ui->tabWidget->addTab(tableviewtab, item->text(col));
-        ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
+            tableviewtab->setWindowTitle(item->text(col));
+            ui->tabWidget->addTab(tableviewtab, item->text(col));
+            ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
+        }
+        tableviewtab = qobject_cast<TableViewTabForm *>(ui->tabWidget->currentWidget());
+        tableviewtab->clear();
+        tableviewtab->setTableName(item->text(1));
     }
-    tableviewtab = qobject_cast<TableViewTabForm *>(ui->tabWidget->currentWidget());
-    tableviewtab->clear();
-    tableviewtab->setTableName(item->text(1));
+
 }
 
 void MainWindow::setCurrentItem(int index)

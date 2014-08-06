@@ -35,5 +35,7 @@ void DialogConnectToDataBase::dataAccepted()
 
 void DialogConnectToDataBase::dataRejected()
 {
+    userName.clear();
+    password.clear();
     qDebug() << "Rejected";
 }

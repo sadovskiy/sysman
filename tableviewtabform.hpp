@@ -5,6 +5,15 @@
 #include <QSqlRelationalTableModel>
 #include <QMenu>
 #include <QDebug>
+#include <QAction>
+
+#include "frameaddstudent.hpp"
+#include "frameaddcontract.hpp"
+#include "frameaddorderadmission.hpp"
+#include "frameaddorderdismission.hpp"
+#include "frameaddpayment.hpp"
+#include "frameaddphasepayment.hpp"
+#include "frameaddall.hpp"
 
 namespace Ui {
 class TableViewTabForm;
@@ -20,20 +29,32 @@ public:
     void setTableName(QString name);
     QString tableName() const;
     void clear() const;
+    QSqlRelationalTableModel *rmodel;
 
 public slots:
     void customHeaderMenuRequested(QPoint pos);
 
 
 private slots:
-    void addRow();
     void ShowHideFrameAddRow();
+    void HideHeader();
 
 private:
     Ui::TableViewTabForm *ui;
     QMenu *contextHeaderMenu;
-    QSqlRelationalTableModel *rmodel;
+
     QString tName;
+    QAction *actionHeader;
+    QPoint mPos;
+
+    FrameAddStudent *framestud;
+    FrameAddContract *framecontr;
+    FrameAddOrderAdmission *frameoadm;
+    FrameAddOrderDismission *frameodism;
+    FrameAddPayment *framepayment;
+    FrameAddPhasePayment *framepp;
+    FrameAddAll *frameall;
+
 };
 
 #endif // TABLEVIEWTABFORM_HPP

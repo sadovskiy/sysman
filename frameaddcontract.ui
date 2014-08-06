@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FrameAddContract</class>
+ <widget class="QFrame" name="FrameAddContract">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>572</width>
+    <height>198</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayoutContractNumber">
+       <item>
+        <widget class="QLabel" name="labelContractNumber">
+         <property name="text">
+          <string>Contract Number</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditContractNumber"/>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayoutContractDate">
+       <item>
+        <widget class="QLabel" name="labelContractDate">
+         <property name="text">
+          <string>Contract Date</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="dateEditContractDate">
+         <property name="displayFormat">
+          <string notr="true">dd.MM.yyyy (ddd)</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="2">
+      <layout class="QVBoxLayout" name="verticalLayoutContractType">
+       <item>
+        <widget class="QLabel" name="labelContractType">
+         <property name="text">
+          <string>Contract Type</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxContractType">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="3">
+      <layout class="QVBoxLayout" name="verticalLayoutDepartmentContract">
+       <item>
+        <widget class="QLabel" name="labelDepartmentContract">
+         <property name="text">
+          <string>Department Contract</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxDepartmentContract">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="verticalLayoutYearOfStudy">
+       <item>
+        <widget class="QLabel" name="labelYearOfStudy">
+         <property name="text">
+          <string>Year Of Study</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxYearOfStudy">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <layout class="QVBoxLayout" name="verticalLayoutacAdemicProgram">
+       <item>
+        <widget class="QLabel" name="labelAdemicProgram">
+         <property name="text">
+          <string>Ademic Program</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxAdemicProgram">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="2">
+      <layout class="QVBoxLayout" name="verticalLayoutQualification">
+       <item>
+        <widget class="QLabel" name="labelQualification">
+         <property name="text">
+          <string>Qualification</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxQualification">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="3">
+      <layout class="QVBoxLayout" name="verticalLayoutSpecialty">
+       <item>
+        <widget class="QLabel" name="labelSpecialty">
+         <property name="text">
+          <string>Specialty</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxSpecialty">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="4">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="0">
+      <layout class="QVBoxLayout" name="verticalLayoutPayment">
+       <item>
+        <widget class="QLabel" name="labelPayment">
+         <property name="text">
+          <string>Payment</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditPayment"/>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonContract">
+       <property name="text">
+        <string>Add Row Contract</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditContractNumber</tabstop>
+  <tabstop>dateEditContractDate</tabstop>
+  <tabstop>comboBoxContractType</tabstop>
+  <tabstop>comboBoxDepartmentContract</tabstop>
+  <tabstop>comboBoxYearOfStudy</tabstop>
+  <tabstop>comboBoxAdemicProgram</tabstop>
+  <tabstop>comboBoxQualification</tabstop>
+  <tabstop>comboBoxSpecialty</tabstop>
+  <tabstop>lineEditPayment</tabstop>
+  <tabstop>pushButtonContract</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

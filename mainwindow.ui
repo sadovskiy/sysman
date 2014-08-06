@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Didgital System Manadgment Document</string>
   </property>
   <property name="documentMode">
    <bool>false</bool>
@@ -135,7 +135,7 @@
          <string notr="true"/>
         </property>
         <property name="flags">
-         <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled|ItemIsTristate</set>
+         <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
         </property>
         <item>
          <property name="text">
@@ -162,6 +162,9 @@
          </property>
          <property name="text">
           <string notr="true"/>
+         </property>
+         <property name="flags">
+          <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
          </property>
          <item>
           <property name="text">
@@ -192,7 +195,7 @@
            <string>Phases</string>
           </property>
           <property name="text">
-           <string notr="true"/>
+           <string notr="true">phase_payment_table</string>
           </property>
          </item>
         </item>

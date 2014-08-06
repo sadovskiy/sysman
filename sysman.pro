@@ -23,7 +23,14 @@ SOURCES += main.cpp\
     datecolumndelegate.cpp \
     sexcolumndelegate.cpp \
     countrydelegate.cpp \
-    country.cpp
+    country.cpp \
+    frameaddstudent.cpp \
+    frameaddcontract.cpp \
+    frameaddorderadmission.cpp \
+    frameaddorderdismission.cpp \
+    frameaddpayment.cpp \
+    frameaddall.cpp \
+    frameaddphasepayment.cpp
 
 HEADERS  += mainwindow.hpp \
     dialogconnecttodatabase.hpp \
@@ -31,11 +38,25 @@ HEADERS  += mainwindow.hpp \
     datecolumndelegate.hpp \
     sexcolumndelegate.hpp \
     countrydelegate.hpp \
-    country.hpp
+    country.hpp \
+    frameaddstudent.hpp \
+    frameaddcontract.hpp \
+    frameaddorderadmission.hpp \
+    frameaddorderdismission.hpp \
+    frameaddpayment.hpp \
+    frameaddall.hpp \
+    frameaddphasepayment.hpp
 
 FORMS    += mainwindow.ui \
     dialogconnecttodatabase.ui \
-    tableviewtabform.ui
+    tableviewtabform.ui \
+    frameaddstudent.ui \
+    frameaddcontract.ui \
+    frameaddorderadmission.ui \
+    frameaddorderdismission.ui \
+    frameaddpayment.ui \
+    frameaddall.ui \
+    frameaddphasepayment.ui
 
 TRANSLATIONS += sysman_translation_ru_RU.ts
 
