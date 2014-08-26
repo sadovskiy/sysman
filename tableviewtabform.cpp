@@ -81,17 +81,17 @@ void TableViewTabForm::setTableName(QString name)
         qDebug() << rmodel->lastError().text();
 
 
-    if (tName == "student_table")
+    if (tName == "student")
         framestud->setModel(rmodel);
-    if (tName == "contract_table")
+    if (tName == "contract")
         framecontr->setModel(rmodel);
-    if (tName == "orders_admission_table")
+    if (tName == "orders_admission")
         frameoadm->setModel(rmodel);
-    if (tName == "orders_dismissal_table")
+    if (tName == "orders_dismissal")
         frameodism->setModel(rmodel);
-    if (tName == "payment_table")
+    if (tName == "payment")
         framepayment->setModel(rmodel);
-    if (tName == "phase_payment_table")
+    if (tName == "phase_payment")
         framepp->setModel(rmodel);
     if (tName == "all_data")
         frameall->setModel(rmodel);
@@ -260,17 +260,17 @@ void TableViewTabForm::clear() const
 void TableViewTabForm::ShowHideFrameAddRow()
 {
     QFrame *frame = 0;
-    if (tName == "student_table")
+    if (tName == "student")
         frame = framestud;
-    if (tName == "contract_table")
+    if (tName == "contract")
         frame = framecontr;
-    if (tName == "orders_admission_table")
+    if (tName == "orders_admission")
         frame = frameoadm;
-    if (tName == "orders_dismissal_table")
+    if (tName == "orders_dismissal")
         frame = frameodism;
-    if (tName == "payment_table")
+    if (tName == "payment")
         frame = framepayment;
-    if (tName == "phase_payment_table")
+    if (tName == "phase_payment")
         frame = framepp;
     if (tName == "all_data")
         frame = frameall;

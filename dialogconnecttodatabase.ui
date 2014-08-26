@@ -54,8 +54,20 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lineEditPassword">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>40^NmKL</string>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string notr="true"/>
+         </property>
+         <property name="cursorMoveStyle">
+          <enum>Qt::LogicalMoveStyle</enum>
          </property>
         </widget>
        </item>

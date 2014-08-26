@@ -1,25 +1,33 @@
 <RCC>
-    <qresource prefix="/new/prefix_icon" lang="ru_RU">
-        <file>istac.png</file>
-        <file>new.png</file>
-        <file>New.png</file>
-        <file>open.png</file>
-        <file>Open.png</file>
-        <file>paste.png</file>
-        <file>About.png</file>
-        <file>Add.png</file>
-        <file>copy.png</file>
-        <file>cut.png</file>
-        <file>Del.png</file>
-        <file>delete-26.png</file>
-        <file>Exit.png</file>
-        <file>find.png</file>
-        <file>gotocell.png</file>
-        <file>Help.png</file>
-        <file>save.png</file>
-        <file>Save.png</file>
-        <file>Search.png</file>
-        <file>icon.png</file>
-        <file>qt-logo.png</file>
+    <qresource prefix="/new/256x256" lang="ru_RU">
+        <file>256x256/Add.png</file>
+        <file>256x256/copy.png</file>
+        <file>256x256/cut.png</file>
+        <file>256x256/Delete.png</file>
+        <file>256x256/Edit.png</file>
+        <file>256x256/find.png</file>
+        <file>256x256/gotocell.png</file>
+        <file>256x256/Information.png</file>
+        <file>256x256/new.png</file>
+        <file>256x256/open.png</file>
+        <file>256x256/Open.png</file>
+        <file>256x256/paste.png</file>
+        <file>256x256/save.png</file>
+        <file>256x256/Save.png</file>
+        <file>256x256/Serp molot.png</file>
+    </qresource>
+    <qresource prefix="/new/48x48">
+        <file>48x48/About.png</file>
+        <file>48x48/Add.png</file>
+        <file>48x48/Del.png</file>
+        <file>48x48/Exit.png</file>
+        <file>48x48/Help.png</file>
+        <file>48x48/New.png</file>
+        <file>48x48/Open.png</file>
+        <file>48x48/Save.png</file>
+        <file>48x48/Search.png</file>
+    </qresource>
+    <qresource prefix="/new/Others">
+        <file>Others/qt-logo.png</file>
     </qresource>
 </RCC>

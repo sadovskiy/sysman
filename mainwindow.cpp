@@ -73,6 +73,7 @@ void MainWindow::on_actionConnect_triggered()
         db.setDatabaseName("smdb");
         db.setUserName(dialogConnectToDataBase.getUserName());
         db.setPassword(dialogConnectToDataBase.getPassword());
+        db.setConnectOptions("requiressl=0");
 
         if (!db.open()) {
             qDebug() << db.lastError().text();

@@ -142,7 +142,7 @@
           <string>Students</string>
          </property>
          <property name="text">
-          <string notr="true">student_table</string>
+          <string notr="true">student</string>
          </property>
          <property name="flags">
           <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -153,7 +153,7 @@
           <string>Contract</string>
          </property>
          <property name="text">
-          <string notr="true">contract_table</string>
+          <string notr="true">contract</string>
          </property>
         </item>
         <item>
@@ -171,7 +171,7 @@
            <string>Admission</string>
           </property>
           <property name="text">
-           <string notr="true">orders_admission_table</string>
+           <string notr="true">orders_admission</string>
           </property>
          </item>
          <item>
@@ -179,7 +179,7 @@
            <string>Dismissal</string>
           </property>
           <property name="text">
-           <string notr="true">orders_dismissal_table</string>
+           <string notr="true">orders_dismissal</string>
           </property>
          </item>
         </item>
@@ -188,14 +188,14 @@
           <string>Payment</string>
          </property>
          <property name="text">
-          <string notr="true">payment_table</string>
+          <string notr="true">payment</string>
          </property>
          <item>
           <property name="text">
            <string>Phases</string>
           </property>
           <property name="text">
-           <string notr="true">phase_payment_table</string>
+           <string notr="true">phase_payment</string>
           </property>
          </item>
         </item>
@@ -278,7 +278,7 @@
    </property>
    <property name="icon">
     <iconset resource="images/icon.qrc">
-     <normaloff>:/new/prefix_icon/gotocell.png</normaloff>:/new/prefix_icon/gotocell.png</iconset>
+     <normaloff>:/new/256x256/256x256/gotocell.png</normaloff>:/new/256x256/256x256/gotocell.png</iconset>
    </property>
    <property name="text">
     <string>Connect</string>
@@ -298,7 +298,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="images/icon.qrc">
-     <normaloff>:/new/prefix_icon/qt-logo.png</normaloff>:/new/prefix_icon/qt-logo.png</iconset>
+     <normaloff>:/new/Others/Others/qt-logo.png</normaloff>:/new/Others/Others/qt-logo.png</iconset>
    </property>
    <property name="text">
     <string>About Qt</string>
