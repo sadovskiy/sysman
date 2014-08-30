@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?><Db flnm="smdb" nm="smdb" ver="1.3.4">
+  <VerLbl/>
+  <VerNotes/>
+  <DefTblOpts/>
+  <DocFolder>/home/keeper_b/devprogs/sysman</DocFolder>
+  <Sch Cm="Электронная система управления документооборотом ЦЭД ИСА" nm="public">
+    <Tbl UsSo="1" nm="academic_program">
+      <Cm>Таблица форм обучения</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="academic_program" nm="academic_program_table_pkey"/>
+      <Cl au="0" df="" nm="academic_program" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Форма обучения стедента</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="administrative_unit">
+      <Cm>Административная единица</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="name" nm="administrative_unit_table_pkey"/>
+      <Cl au="0" df="" nm="type" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Тип административной единицы</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="name" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Название административной единицы</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="contract">
+      <Cm>Таблица договоров</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="contract_id" nm="contract_table_pkey"/>
+      <Cl au="1" df="nextval('contract_table_contract_id_seq'::regclass)" nm="contract_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор договора</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="contract_number" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Номер договора</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="contract_date" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Дата заключения договора</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="contract_type" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Тип договора</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="payment" nu="0">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Сумма оплаты за обучение</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="department_contract" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="8" sc="null" sg="1" un="0"/>
+        <Cm>Факультет/институт</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="curriculum" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Учебный план/учебная программа</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="country">
+      <Cm>Таблица стран по ISO 3166-1 и ГОСТ 7.67-2003 и их телефонных кодов</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="num_code_country" nm="country_table_pkey"/>
+      <Cl au="0" df="" nm="num_code_country" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Числовой код стран</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="alpha2_code_country" nu="0">
+        <DT arr="0" ds="Char" en="" id="1" ln="2" sc="null" sg="1" un="0"/>
+        <Cm>Двухбуквенный код стран на латинице</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="alpha3_code_country" nu="0">
+        <DT arr="0" ds="Char" en="" id="1" ln="3" sc="null" sg="1" un="0"/>
+        <Cm>Трёх буквенный код стран на латинице</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="cyrillic3_code_country" nu="0">
+        <DT arr="0" ds="Char" en="" id="1" ln="3" sc="null" sg="1" un="0"/>
+        <Cm>Кириллический трёхбуквенный код стран</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="Comment" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="80" sc="null" sg="1" un="0"/>
+        <Cm>Наименование страны на русском языке</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="telephon_code" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Телефонный код страны</Cm>
+      </Cl>
+      <UniqueConstraints>
+        <UnCon nm="country_table_alpha2_code_country_key">
+          <ClNs>alpha2_code_country</ClNs>
+        </UnCon>
+        <UnCon nm="country_table_alpha3_code_country_key">
+          <ClNs>alpha3_code_country</ClNs>
+        </UnCon>
+        <UnCon nm="country_table_cyrillic3_code_country_key">
+          <ClNs>cyrillic3_code_country</ClNs>
+        </UnCon>
+      </UniqueConstraints>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="duration_of_studies">
+      <Cm>Таблица продолжительности обучения студента</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="duration_of_studies" nm="year_of_study_table_pkey"/>
+      <Cl au="0" df="" nm="duration_of_studies" nu="0">
+        <DT arr="0" ds="Numeric" en="" id="2" ln="3" sc="1" sg="1" un="0"/>
+        <Cm>Продолжительность обучения студента</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="orders_admission">
+      <Cm>Таблица приказов о зацислении</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="order_admission_id" nm="orders_table_pkey"/>
+      <Cl au="1" df="nextval('orders_table_id_order_seq'::regclass)" nm="order_admission_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="order_admission_num" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="date_of_order_admission" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="orders_dismissal">
+      <Cm>Таблица приказов об отчислений</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="order_dismissal_id" nm="orders_dismissal_table_pkey"/>
+      <Cl au="1" df="nextval('orders_dismissal_table_order_dismissal_id_seq'::regclass)" nm="order_dismissal_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="order_dismissal_num" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="date_of_order_dismissal" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="payment">
+      <Cm>Таблица оплаты</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="payment_id" nm="payment_pk"/>
+      <Cl au="0" df="" nm="payment_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор оплаты</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="amount" nu="0">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Полная оплата за семестр по договору</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="semester" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер семестра</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="discount" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Скидка в процентах</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="actual_amount_of_payment" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Сумма фактической оплаты студентом</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="date_of_pay" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Дата платежа</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="penalties" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Пени за просрочку платежа</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="resolution_pay_phase" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Разрешение оплаты по частям</Cm>
+      </Cl>
+      <Fk deAc="2" nm="pay_phase_fk" prLkCl="payphase_id" upAc="0">
+        <PrTb mn="0" nm="phase_payment" oe="1" sch="public" zr="1"/>
+        <CdTb mn="1" nm="payment" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="resolution_pay_phase" prCl="payphase_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="phase_payment">
+      <Cm>Оплата обучения по этапам</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="payphase_id" nm="phase_payment_table_pkey"/>
+      <Cl au="1" df="nextval('phase_payment_table_payphase_id_seq'::regclass)" nm="payphase_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор оплаты</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="amount" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Оплата</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="date" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Дата</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="prof_spec_training_program">
+      <Cm>Таблица профилей/специализаций/программа подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="prof_id" nm="profile/specialization/training_program_pkey"/>
+      <Cl au="1" df="nextval('&quot;profile/specialization/training_program_prof_id_seq&quot;'::regclass)" nm="prof_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор профиля</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Направление, в которое входит данный профиль</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="profile_name" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="250" sc="null" sg="1" un="0"/>
+        <Cm>Название профиля</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="academic_program" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Форма обычения</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="years" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Сроки обучения</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="qualification">
+      <Cm>Таблица квалификаций</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="qualification" nm="qualification_table_pkey"/>
+      <Cl au="0" df="" nm="qualification" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="12" sc="null" sg="1" un="0"/>
+        <Cm>Квалификация подготовки студента</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="semesters">
+      <Cm>Таблица семестров</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="semester" nm="semester_table_pkey"/>
+      <Cl au="0" df="" nm="semester" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер семестра</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="sex">
+      <Cm>Таблица пол человека по ISO 5218</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="sex_id" nm="Sex_table_pkey"/>
+      <Cl au="0" df="" nm="sex_id" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Код пола по ISO</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="comment" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+        <Cm>Определение кода по ISO на английском языке</Cm>
+      </Cl>
+      <UniqueConstraints>
+        <UnCon nm="Sex_table_comment_key">
+          <ClNs>comment</ClNs>
+        </UnCon>
+      </UniqueConstraints>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="specialty">
+      <Cm>Таблица направлений/специальностей</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="specialty_id" nm="specialty_pkey"/>
+      <Cl au="1" df="nextval('specialty_specialty_id_seq'::regclass)" nm="specialty_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор направления/специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty_number_1" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер направления/специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty_number_2" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер направления/специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty_number_3" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер направления/специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty_name" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Название направления/специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="property" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+        <Cm>Характеристика направления</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Специальность или нарпавление</Cm>
+      </Cl>
+      <UniqueConstraints>
+        <UnCon nm="specialty_specialty_name_key">
+          <ClNs>specialty_name</ClNs>
+        </UnCon>
+      </UniqueConstraints>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="student">
+      <Cm>Таблица студентов</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="student_id" nm="student_table_pkey"/>
+      <Cl au="1" df="nextval('&quot;student_table_ID_student_seq&quot;'::regclass)" nm="student_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор студента</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="surname" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Фамилия</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="name" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Имя</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="patronym" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+        <Cm>Отчество</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="sex" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Пол</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="date_of_birth" nu="0">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>День рождения</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="place_of_birth" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Место рождения</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="citizenship" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Гражданство</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="passport_series" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Серия (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="passport_number" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="passport_authority" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="80" sc="null" sg="1" un="0"/>
+        <Cm>Кто выдал (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="passport_date_of_issue" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Дата выдаци (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="passport_subdivision_code" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Код подразделения (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="registration_adm_unit" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Место регистрации (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="registration_adress" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+        <Cm>Адрес регистрации (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="registration_date" nu="1">
+        <DT arr="0" ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Дата регистрации (Паспорт)</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="postcode" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Почтовый индекс</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="phone" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+        <Cm>Номер телефона</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="email" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="40" sc="null" sg="1" un="0"/>
+        <Cm>Электронная почта</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="individual_taxpayer_identification_number" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>ИНН</Cm>
+      </Cl>
+      <Fk deAc="1" nm="adm_unit_fk" prLkCl="name" upAc="0">
+        <PrTb mn="0" nm="administrative_unit" oe="1" sch="public" zr="1"/>
+        <CdTb mn="1" nm="student" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="registration_adm_unit" prCl="name"/>
+      </Fk>
+      <Fk deAc="1" nm="citizenship_fk" prLkCl="num_code_country" upAc="0">
+        <PrTb mn="0" nm="country" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="student" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="citizenship" prCl="num_code_country"/>
+      </Fk>
+      <Fk deAc="1" nm="Sex_constraint" prLkCl="sex_id" upAc="1">
+        <PrTb mn="0" nm="sex" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="student" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="sex" prCl="sex_id"/>
+      </Fk>
+      <UniqueConstraints>
+        <UnCon nm="student_table_ID_student_key">
+          <ClNs>student_id</ClNs>
+        </UnCon>
+      </UniqueConstraints>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="type_administrative_unit">
+      <Cm>Типы административных единиц</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="type_au" nm="type_administrative_unit_table_pkey"/>
+      <Cl au="0" df="" nm="type_au" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Наименование административной единицы</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Seq incr="1" nm="contract_table_contract_id_seq"/>
+    <Seq incr="1" nm="orders_dismissal_table_order_dismissal_id_seq"/>
+    <Seq incr="1" nm="orders_table_id_order_seq"/>
+    <Seq incr="1" nm="phase_payment_table_payphase_id_seq"/>
+    <Seq incr="1" nm="profile_specialization_training_program_prof_id_seq"/>
+    <Seq incr="1" nm="specialty_specialty_id_seq"/>
+    <Seq incr="1" nm="student_table_ID_student_seq"/>
+    <CustomTypes/>
+  </Sch>
+  <Dgm nm="diagramA">
+    <RnCf ClkAct="true" FtSz="9" lkStgy="KeyToKeyStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="1" PkCols="1"/>
+      <ErNotation>InfoEngErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="academic_program" x="1195" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="administrative_unit" x="839" y="226"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="contract" x="1509" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="country" x="845" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="duration_of_studies" x="1819" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="orders_admission" x="2129" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="orders_dismissal" x="1195" y="158"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="payment" x="351" y="313"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="phase_payment" x="50" y="313"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="prof_spec_training_program" x="1509" y="158"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="qualification" x="1819" y="158"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="semesters" x="2129" y="158"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="sex" x="50" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="specialty" x="1195" y="246"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="student" x="361" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="type_administrative_unit" x="1509" y="246"/>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="public.payment.pay_phase_fk" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="public.student.adm_unit_fk" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="public.student.citizenship_fk" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="public.student.Sex_constraint" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines/>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <RnmMgr NxRnmId="1"/>
+  <DbDocOptionMgr>
+    <BasicOptionMgr>
+      <Name>db.doc.option.mgr</Name>
+      <BoolOpt lbl="Diagrams" nm="doc.diagrams" on="1" spl="0"/>
+      <BoolOpt lbl="Foreign Keys" nm="doc.fks" on="1" spl="0"/>
+      <BoolOpt lbl="Indexes" nm="doc.indexes" on="1" spl="0"/>
+      <BoolOpt lbl="Overwrite CSS File" nm="doc.overwrite.css" on="1" spl="0"/>
+      <BoolOpt lbl="Procedures" nm="doc.procs" on="1" spl="0"/>
+      <BoolOpt lbl="Schemas" nm="doc.schemas" on="1" spl="0"/>
+      <BoolOpt lbl="Sequences" nm="doc.sequences" on="1" spl="0"/>
+      <BoolOpt lbl="Tables" nm="doc.tables" on="1" spl="0"/>
+      <BoolOpt lbl="Triggers" nm="doc.triggers" on="1" spl="0"/>
+      <BoolOpt lbl="Views" nm="doc.views" on="1" spl="0"/>
+    </BasicOptionMgr>
+  </DbDocOptionMgr>
+  <OpenEditors>
+    <OpenEditor ClsNm="Diagram" fqn="null.diagramA" selected="1"/>
+  </OpenEditors>
+  <TreePaths>
+    <TreePath/>
+    <TreePath>/Schemas (1)</TreePath>
+    <TreePath>/Schemas (1)/public</TreePath>
+    <TreePath>/Schemas (1)/public/Tables (16)</TreePath>
+    <TreePath>/Diagrams (1)</TreePath>
+  </TreePaths>
+</Db>
