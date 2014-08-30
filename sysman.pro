@@ -58,6 +58,6 @@ FORMS    += mainwindow.ui \
     frameaddall.ui \
     frameaddphasepayment.ui
 
-TRANSLATIONS += sysman_translation_ru_RU.ts
+TRANSLATIONS += sysman_ru.ts
 
 RESOURCES += images/icon.qrc

@@ -21,15 +21,26 @@ MainWindow::MainWindow(QWidget *parent) :
     // Загружаем перевод
     qApp->installTranslator(&appTranslator);
     qApp->installTranslator(&qtTranslator);
-    appTranslator.load("sysman_translation_" + QLocale::system().name(),
-                       qApp->applicationDirPath());
+
+    appTranslator.load("sysman_" + QLocale::system().name(),
+                       QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 
     qtTranslator.load("qt_" + QLocale::system().name(),
                       QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 
+    qDebug() << qApp->applicationDirPath();
+    qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::LibrariesPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::PluginsPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::PrefixPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::LibraryExecutablesPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::BinariesPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::DataPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::ArchDataPath);
+    qDebug() << QLibraryInfo::location(QLibraryInfo::HeadersPath);
 
+    qDebug() << getenv("PATH");
 
-//    qDebug() << qApp->applicationDirPath();
 
     ui->retranslateUi(this);
 
