@@ -4,19 +4,38 @@
   <DefTblOpts/>
   <DocFolder>/home/keeper_b/devprogs/sysman</DocFolder>
   <Sch Cm="Электронная система управления документооборотом ЦЭД ИСА" nm="public">
+    <Tbl UsSo="1" nm="academic_or_applied_bachelor">
+      <Cm>Таблица вариантов подготовки бакалавриата (академический или прикладной)</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="bachelor_id" nm="academic_or_applied_bachelor_pk"/>
+      <Cl au="0" df="" nm="bachelor_id" nu="0">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор уровня</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="bachelor" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+        <Cm>Наименование бакалавриата (академический или прикладной)</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="academic_program">
       <Cm>Таблица форм обучения</Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
-      <Pk ClNs="academic_program" nm="academic_program_table_pkey"/>
+      <Pk ClNs="academic_program_id" nm="academic_program_pkey"/>
+      <Cl au="1" df="nextval('academic_program_academic_program_id_seq'::regclass)" nm="academic_program_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор формы обучения</Cm>
+      </Cl>
       <Cl au="0" df="" nm="academic_program" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
-        <Cm>Форма обучения стедента</Cm>
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Наименование формы обучения</Cm>
       </Cl>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="administrative_unit">
-      <Cm>Административная единица</Cm>
+      <Cm>Таблица административных единиц</Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
       <Pk ClNs="name" nm="administrative_unit_table_pkey"/>
       <Cl au="0" df="" nm="type" nu="0">
@@ -117,6 +136,183 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="list_academic_or_applied_bachelor">
+      <Cm>Таблица списка направлений бакалавриата (академический или прикладной) </Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="list_bachelor_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программы подготовки студента</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="bachelor_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор бакалавриата</Cm>
+      </Cl>
+      <Fk deAc="1" nm="academic_or_applied_bachelor" prLkCl="bachelor_id" upAc="0">
+        <PrTb mn="0" nm="academic_or_applied_bachelor" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_academic_or_applied_bachelor" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="bachelor_id" prCl="bachelor_id"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_academic_or_applied_bachelor" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="list_bachelor_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="list_academic_program">
+      <Cm>Таблица списка форм обучения и продолжительности</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="academic_program_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Форма обучения</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="duration_of_studies_id" nu="0">
+        <DT arr="0" ds="Numeric" en="" id="2" ln="3" sc="1" sg="1" un="0"/>
+        <Cm>Продолжительность обучения студента</Cm>
+      </Cl>
+      <Fk deAc="1" nm="academic_program" prLkCl="academic_program_id" upAc="0">
+        <PrTb mn="0" nm="academic_program" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_academic_program" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="academic_program_id" prCl="academic_program_id"/>
+      </Fk>
+      <Fk deAc="1" nm="duration_of_studies" prLkCl="duration_of_studies" upAc="0">
+        <PrTb mn="0" nm="duration_of_studies" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_academic_program" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="duration_of_studies_id" prCl="duration_of_studies"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_academic_program" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="list_profile_training">
+      <Cm>Таблица списка профилей по направлениям подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="profile_training_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Профиль подготовки</Cm>
+      </Cl>
+      <Fk deAc="1" nm="profile_training" prLkCl="profile_training_id" upAc="0">
+        <PrTb mn="0" nm="profile_training" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_profile_training" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="profile_training_id" prCl="profile_training_id"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_profile_training" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="list_specialization_training">
+      <Cm>Таблица списка специализаций подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialization_training_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Специализация подготовки</Cm>
+      </Cl>
+      <Fk deAc="1" nm="specialization_training" prLkCl="specialty_training_id" upAc="0">
+        <PrTb mn="0" nm="specialty_training" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_specialization_training" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="specialization_training_id" prCl="specialty_training_id"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_specialization_training" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="list_specialty_training">
+      <Cm>Таблица списка специальностей подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty_training_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Специальность подготовки</Cm>
+      </Cl>
+      <Fk deAc="1" nm="specialization_training" prLkCl="specialty_training_id" upAc="0">
+        <PrTb mn="0" nm="specialty_training" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_specialty_training" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="specialty_training_id" prCl="specialty_training_id"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_specialty_training" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="list_training_direction">
+      <Cm>Таблица списка направлений подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="training_direction_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор нарпавления</Cm>
+      </Cl>
+      <Fk deAc="1" nm="training_direction" prLkCl="training_direction_id" upAc="0">
+        <PrTb mn="0" nm="training_direction" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_training_direction" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_direction_id" prCl="training_direction_id"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_training_direction" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="list_training_programs_master">
+      <Cm>Таблица списка программ подготовки магистров</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Cl au="0" df="" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="training_programs_master_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Программа подготовки магистров</Cm>
+      </Cl>
+      <Fk deAc="1" nm="training_programs_master" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_master" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_training_programs_master" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_master_id" prCl="training_programs_id"/>
+      </Fk>
+      <Fk deAc="1" nm="training_programs_students" prLkCl="training_programs_id" upAc="0">
+        <PrTb mn="0" nm="training_programs_students" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="list_training_programs_master" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_id" prCl="training_programs_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="orders_admission">
       <Cm>Таблица приказов о зацислении</Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
@@ -212,42 +408,38 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
-    <Tbl UsSo="1" nm="prof_spec_training_program">
-      <Cm>Таблица профилей/специализаций/программа подготовки</Cm>
+    <Tbl UsSo="1" nm="profile_training">
+      <Cm>Таблица профилей подготовки</Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
-      <Pk ClNs="prof_id" nm="profile/specialization/training_program_pkey"/>
-      <Cl au="1" df="nextval('&quot;profile/specialization/training_program_prof_id_seq&quot;'::regclass)" nm="prof_id" nu="0">
+      <Pk ClNs="profile_training_id" nm="profile_training_pkey"/>
+      <Cl au="1" df="nextval('profile_training_profile_training_id_seq'::regclass)" nm="profile_training_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
         <Cm>Идентификатор профиля</Cm>
       </Cl>
-      <Cl au="0" df="" nm="specialty" nu="0">
-        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Направление, в которое входит данный профиль</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="profile_name" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="250" sc="null" sg="1" un="0"/>
-        <Cm>Название профиля</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="academic_program" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
-        <Cm>Форма обычения</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="years" nu="1">
-        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Сроки обучения</Cm>
+      <Cl au="0" df="" nm="profile_training" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <Cm>Наименование профиля подготовки</Cm>
       </Cl>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="qualification">
-      <Cm>Таблица квалификаций</Cm>
+      <Cm>Таблица квалификаций </Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
-      <Pk ClNs="qualification" nm="qualification_table_pkey"/>
-      <Cl au="0" df="" nm="qualification" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="12" sc="null" sg="1" un="0"/>
-        <Cm>Квалификация подготовки студента</Cm>
+      <Pk ClNs="qualification_id" nm="qualification_pkey"/>
+      <Cl au="1" df="nextval('qualification_qualification_id_seq'::regclass)" nm="qualification_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Уникальный идентификатор</Cm>
       </Cl>
-      <UniqueConstraints/>
+      <Cl au="0" df="" nm="qualification" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+        <Cm>Наименование квалификаций подготовки студента</Cm>
+      </Cl>
+      <UniqueConstraints>
+        <UnCon nm="qualification_qualification_key">
+          <ClNs>qualification</ClNs>
+        </UnCon>
+      </UniqueConstraints>
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="semesters">
@@ -280,43 +472,46 @@
       </UniqueConstraints>
       <SchTrHis/>
     </Tbl>
-    <Tbl UsSo="1" nm="specialty">
-      <Cm>Таблица направлений/специальностей</Cm>
+    <Tbl UsSo="1" nm="specialization_training">
+      <Cm>Таблица специализаций подготовки</Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
-      <Pk ClNs="specialty_id" nm="specialty_pkey"/>
-      <Cl au="1" df="nextval('specialty_specialty_id_seq'::regclass)" nm="specialty_id" nu="0">
+      <Pk ClNs="specialization_training_id" nm="specialization_training_pkey"/>
+      <Cl au="1" df="nextval('specialization_training_specialization_training_id_seq'::regclass)" nm="specialization_training_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Идентификатор направления/специальности</Cm>
+        <Cm>Идентификатор специализации</Cm>
       </Cl>
-      <Cl au="0" df="" nm="specialty_number_1" nu="1">
+      <Cl au="0" df="" nm="specialization_training" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <Cm>Наименование специализации</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="specialty_training">
+      <Cm>Таблица специальностей подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="specialty_training_id" nm="specialty_training_pkey"/>
+      <Cl au="1" df="nextval('specialty_training_specialty_training_id_seq'::regclass)" nm="specialty_training_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="specialty_training" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <Cm>Наименование специальности</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="number_1" nu="1">
         <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Номер направления/специальности</Cm>
+        <Cm>Номер направления часть 1</Cm>
       </Cl>
-      <Cl au="0" df="" nm="specialty_number_2" nu="1">
+      <Cl au="0" df="" nm="number_2" nu="1">
         <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Номер направления/специальности</Cm>
+        <Cm>Номер направления часть 2</Cm>
       </Cl>
-      <Cl au="0" df="" nm="specialty_number_3" nu="1">
+      <Cl au="0" df="" nm="number_3" nu="1">
         <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Номер направления/специальности</Cm>
+        <Cm>Номер направления часть 3</Cm>
       </Cl>
-      <Cl au="0" df="" nm="specialty_name" nu="0">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
-        <Cm>Название направления/специальности</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="property" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
-        <Cm>Характеристика направления</Cm>
-      </Cl>
-      <Cl au="0" df="" nm="specialty" nu="1">
-        <DT arr="0" ds="VarChar" en="" id="12" ln="null" sc="null" sg="1" un="0"/>
-        <Cm>Специальность или нарпавление</Cm>
-      </Cl>
-      <UniqueConstraints>
-        <UnCon nm="specialty_specialty_name_key">
-          <ClNs>specialty_name</ClNs>
-        </UnCon>
-      </UniqueConstraints>
+      <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="student">
@@ -413,7 +608,7 @@
         <CdTb mn="1" nm="student" oe="0" sch="public" zr="1"/>
         <ClPr cdCl="citizenship" prCl="num_code_country"/>
       </Fk>
-      <Fk deAc="1" nm="Sex_constraint" prLkCl="sex_id" upAc="1">
+      <Fk deAc="1" nm="sex_constraint_fk" prLkCl="sex_id" upAc="1">
         <PrTb mn="0" nm="sex" oe="1" sch="public" zr="0"/>
         <CdTb mn="1" nm="student" oe="0" sch="public" zr="1"/>
         <ClPr cdCl="sex" prCl="sex_id"/>
@@ -425,8 +620,70 @@
       </UniqueConstraints>
       <SchTrHis/>
     </Tbl>
+    <Tbl UsSo="1" nm="training_direction">
+      <Cm>Таблица направлений подготовки</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="training_direction_id" nm="training_direction_pkey"/>
+      <Cl au="1" df="nextval('training_direction_training_direction_id_seq'::regclass)" nm="training_direction_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор направления</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="training_direction" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="300" sc="null" sg="1" un="0"/>
+        <Cm>Наименование нарпавления</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="number_1" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер направления часть 1</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="number_2" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер направления часть 2</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="number_3" nu="1">
+        <DT arr="0" ds="SmallInt" en="" id="5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Номер направления часть 3</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="training_programs_master">
+      <Cm>Таблица программ подготовки магистров</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="training_programs_id" nm="training_programs_pkey"/>
+      <Cl au="1" df="nextval('training_programs_training_programs_id_seq'::regclass)" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программы</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="training_programs_m" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Наименование программы</Cm>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="training_programs_students">
+      <Cm>Таблица программ подготовки студентов</Cm>
+      <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="training_programs_id" nm="training_programs_students_pkey"/>
+      <Cl au="1" df="nextval('training_programs_students_training_programs_id_seq'::regclass)" nm="training_programs_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Идентификатор программ подготовки</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="training_programs_s" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Уровень подготовки</Cm>
+      </Cl>
+      <Fk deAc="1" nm="training_programs_students_qualification" prLkCl="qualification_id" upAc="0">
+        <PrTb mn="0" nm="qualification" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="training_programs_students" oe="0" sch="public" zr="1"/>
+        <ClPr cdCl="training_programs_s" prCl="qualification_id"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
     <Tbl UsSo="1" nm="type_administrative_unit">
-      <Cm>Типы административных единиц</Cm>
+      <Cm>Таблица типов административных единиц</Cm>
       <TblOpts>WITHOUT OIDS</TblOpts>
       <Pk ClNs="type_au" nm="type_administrative_unit_table_pkey"/>
       <Cl au="0" df="" nm="type_au" nu="0">
@@ -436,13 +693,19 @@
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
+    <Seq incr="1" nm="academic_program_academic_program_id_seq"/>
     <Seq incr="1" nm="contract_table_contract_id_seq"/>
     <Seq incr="1" nm="orders_dismissal_table_order_dismissal_id_seq"/>
     <Seq incr="1" nm="orders_table_id_order_seq"/>
     <Seq incr="1" nm="phase_payment_table_payphase_id_seq"/>
-    <Seq incr="1" nm="profile_specialization_training_program_prof_id_seq"/>
-    <Seq incr="1" nm="specialty_specialty_id_seq"/>
+    <Seq incr="1" nm="profile_training_profile_training_id_seq"/>
+    <Seq incr="1" nm="qualification_qualification_id_seq"/>
+    <Seq incr="1" nm="specialization_training_specialization_training_id_seq"/>
+    <Seq incr="1" nm="specialty_training_specialty_training_id_seq"/>
     <Seq incr="1" nm="student_table_ID_student_seq"/>
+    <Seq incr="1" nm="training_direction_training_direction_id_seq"/>
+    <Seq incr="1" nm="training_programs_students_training_programs_id_seq"/>
+    <Seq incr="1" nm="training_programs_training_programs_id_seq"/>
     <CustomTypes/>
   </Sch>
   <Dgm nm="diagramA">
@@ -467,32 +730,92 @@
       <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
       <svg path=""/>
     </DiaProps>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="academic_program" x="1195" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="administrative_unit" x="839" y="226"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="contract" x="1509" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="country" x="845" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="duration_of_studies" x="1819" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="orders_admission" x="2129" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="orders_dismissal" x="1195" y="158"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="payment" x="351" y="313"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="phase_payment" x="50" y="313"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="prof_spec_training_program" x="1509" y="158"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="qualification" x="1819" y="158"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="semesters" x="2129" y="158"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="sex" x="50" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="specialty" x="1195" y="246"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="student" x="361" y="50"/>
-    <TbGl bkCl="ff6666ff" sch="public" tbl="type_administrative_unit" x="1509" y="246"/>
-    <FkGl bkCl="ff000000" childEdge="WEST" nm="public.payment.pay_phase_fk" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+    <TbGl bkCl="ff6666ff" sch="public" tbl="academic_or_applied_bachelor" x="148" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="academic_program" x="50" y="123"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="administrative_unit" x="845" y="510"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="contract" x="1967" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="country" x="845" y="412"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="duration_of_studies" x="55" y="181"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_academic_or_applied_bachelor" x="471" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_academic_program" x="425" y="123"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_profile_training" x="476" y="244"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_specialization_training" x="1254" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_specialty_training" x="1214" y="153"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_training_direction" x="1204" y="226"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="list_training_programs_master" x="1194" y="329"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="orders_admission" x="2277" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="orders_dismissal" x="2617" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="payment" x="351" y="675"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="phase_payment" x="50" y="675"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="profile_training" x="114" y="244"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="qualification" x="509" y="317"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="semesters" x="1967" y="158"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="sex" x="50" y="412"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="specialization_training" x="2277" y="158"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="specialty_training" x="1620" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="student" x="361" y="412"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="training_direction" x="1548" y="226"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="training_programs_master" x="1579" y="329"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="training_programs_students" x="850" y="50"/>
+    <TbGl bkCl="ff6666ff" sch="public" tbl="type_administrative_unit" x="2617" y="158"/>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_academic_or_applied_bachelor.academic_or_applied_bachelor" parentEdge="" positioner="">
       <positionableLines/>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="EAST" nm="public.student.adm_unit_fk" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_academic_or_applied_bachelor.training_programs_students" parentEdge="" positioner="">
       <positionableLines/>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="EAST" nm="public.student.citizenship_fk" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_academic_program.academic_program" parentEdge="" positioner="">
       <positionableLines/>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="WEST" nm="public.student.Sex_constraint" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_academic_program.duration_of_studies" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_academic_program.training_programs_students" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_profile_training.profile_training" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_profile_training.training_programs_students" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_specialization_training.specialization_training" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_specialization_training.training_programs_students" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_specialty_training.specialization_training" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_specialty_training.training_programs_students" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_training_direction.training_direction" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_training_direction.training_programs_students" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_training_programs_master.training_programs_master" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.list_training_programs_master.training_programs_students" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.payment.pay_phase_fk" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.student.adm_unit_fk" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.student.citizenship_fk" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.student.sex_constraint_fk" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="public.training_programs_students.training_programs_students_qualification" parentEdge="" positioner="">
       <positionableLines/>
     </FkGl>
     <Notes/>
@@ -515,13 +838,9 @@
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.diagramA" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.diagramA" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>
-    <TreePath>/Schemas (1)</TreePath>
-    <TreePath>/Schemas (1)/public</TreePath>
-    <TreePath>/Schemas (1)/public/Tables (16)</TreePath>
-    <TreePath>/Diagrams (1)</TreePath>
   </TreePaths>
 </Db>

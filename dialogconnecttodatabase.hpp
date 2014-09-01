@@ -18,6 +18,7 @@ public:
 
     QString getUserName();
     QString getPassword();
+    bool getUseSSL();
 
 private:
     Ui::DialogConnectToDataBase *ui;

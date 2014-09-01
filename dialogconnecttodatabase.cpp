@@ -39,3 +39,8 @@ void DialogConnectToDataBase::dataRejected()
     password.clear();
     qDebug() << "Rejected";
 }
+
+bool DialogConnectToDataBase::getUseSSL()
+{
+    return ui->checkBoxUseSSL->isChecked();
+}

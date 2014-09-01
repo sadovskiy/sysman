@@ -6,6 +6,7 @@
 #include <QMenu>
 #include <QDebug>
 #include <QAction>
+#include <QSortFilterProxyModel>
 
 #include "frameaddstudent.hpp"
 #include "frameaddcontract.hpp"
@@ -54,7 +55,7 @@ private:
     FrameAddPayment *framepayment;
     FrameAddPhasePayment *framepp;
     FrameAddAll *frameall;
-
+    QSortFilterProxyModel *sort_filter;
 };
 
 #endif // TABLEVIEWTABFORM_HPP

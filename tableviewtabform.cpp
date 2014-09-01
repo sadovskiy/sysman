@@ -18,6 +18,7 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
     QGridLayout *glayout = new QGridLayout(this);
     QSpacerItem *horizontalSpacerButtonSHFrame = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     QHBoxLayout *hspbottom = new QHBoxLayout;
+    sort_filter = new QSortFilterProxyModel(this);
 
     hspbottom->addItem(horizontalSpacerButtonSHFrame);
     hspbottom->addWidget(ui->pushButtonShowHideFrameAddRow);
@@ -62,6 +63,10 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
             this, SLOT(customHeaderMenuRequested(QPoint)));
 
     rmodel = new QSqlRelationalTableModel(this);
+
+
+    sort_filter->setSourceModel(rmodel);
+    sort_filter->sort(rmodel->fieldIndex("surname"));
 }
 
 TableViewTabForm::~TableViewTabForm()
@@ -98,11 +103,13 @@ void TableViewTabForm::setTableName(QString name)
 
 
 
-    ui->tableView->setModel(rmodel);
+    ui->tableView->setModel(sort_filter);
     ui->tableView->resizeColumnsToContents();
 
 
     ui->tableView->setColumnHidden(0, true);
+
+
 
     ui->tableView->setItemDelegateForColumn(rmodel->fieldIndex("date_of_birth"),
                                             new DateColumnDelegate(this));

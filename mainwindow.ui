@@ -248,6 +248,20 @@
     <property name="title">
      <string>Templates Documents</string>
     </property>
+    <addaction name="actionOrder"/>
+    <addaction name="actionReference"/>
+    <addaction name="actionMemo_Reference"/>
+    <addaction name="actionContract"/>
+    <addaction name="action_rotocol"/>
+    <addaction name="actionReport"/>
+    <addaction name="actionList"/>
+    <addaction name="actionCertificate"/>
+    <addaction name="actionCertificate_Of_Degree"/>
+    <addaction name="actionTimetable"/>
+    <addaction name="actionApplication"/>
+    <addaction name="actionAdditional_Agreement"/>
+    <addaction name="actionDirection_To_Pay"/>
+    <addaction name="actionAbstract"/>
    </widget>
    <widget class="QMenu" name="menuInfo">
     <property name="title">
@@ -302,6 +316,76 @@
    </property>
    <property name="text">
     <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionOrder">
+   <property name="text">
+    <string>Order</string>
+   </property>
+  </action>
+  <action name="actionReference">
+   <property name="text">
+    <string>Reference</string>
+   </property>
+  </action>
+  <action name="actionMemo_Reference">
+   <property name="text">
+    <string>Memo Reference</string>
+   </property>
+  </action>
+  <action name="actionContract">
+   <property name="text">
+    <string>Contract</string>
+   </property>
+  </action>
+  <action name="actionReport">
+   <property name="text">
+    <string>Report</string>
+   </property>
+  </action>
+  <action name="action_rotocol">
+   <property name="text">
+    <string>Protocol</string>
+   </property>
+  </action>
+  <action name="actionList">
+   <property name="text">
+    <string>List</string>
+   </property>
+  </action>
+  <action name="actionCertificate">
+   <property name="text">
+    <string>Certificate</string>
+   </property>
+  </action>
+  <action name="actionCertificate_Of_Degree">
+   <property name="text">
+    <string>Certificate Of Degree</string>
+   </property>
+  </action>
+  <action name="actionTimetable">
+   <property name="text">
+    <string>Timetable</string>
+   </property>
+  </action>
+  <action name="actionApplication">
+   <property name="text">
+    <string>Application</string>
+   </property>
+  </action>
+  <action name="actionAdditional_Agreement">
+   <property name="text">
+    <string>Additional Agreement</string>
+   </property>
+  </action>
+  <action name="actionDirection_To_Pay">
+   <property name="text">
+    <string>Direction To Pay</string>
+   </property>
+  </action>
+  <action name="actionAbstract">
+   <property name="text">
+    <string>Abstract</string>
    </property>
   </action>
  </widget>

@@ -39,9 +39,12 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << QLibraryInfo::location(QLibraryInfo::ArchDataPath);
     qDebug() << QLibraryInfo::location(QLibraryInfo::HeadersPath);
 
+    // Так как библиотеки драйвера PostgeSQL ищются в каталогах
+    // перечисленных в переменной PATH, не плохо бы посмотреть,
+    // какие там перечислены каталоги.
     qDebug() << getenv("PATH");
 
-
+    // Перевести сообщения на русский.
     ui->retranslateUi(this);
 
     if (QSqlDatabase::isDriverAvailable("QPSQL"))
@@ -74,6 +77,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionConnect_triggered()
 {
+    ui->statusBar->clearMessage();
     DialogConnectToDataBase dialogConnectToDataBase;
     int result = dialogConnectToDataBase.exec();
 
@@ -84,15 +88,19 @@ void MainWindow::on_actionConnect_triggered()
         db.setDatabaseName("smdb");
         db.setUserName(dialogConnectToDataBase.getUserName());
         db.setPassword(dialogConnectToDataBase.getPassword());
-        db.setConnectOptions("requiressl=0");
+        db.setConnectOptions("requiressl=" + QString("%1").arg(dialogConnectToDataBase.getUseSSL()));
 
         if (!db.open()) {
             qDebug() << db.lastError().text();
             ui->statusBar->showMessage(db.lastError().text());
             ui->actionConnect->setChecked(false);
+            ui->treeWidget->setEnabled(false);
+            ui->tabWidget->clear();
         }
-        else
+        else {
             ui->treeWidget->setEnabled(true);
+            ui->statusBar->showMessage("Connected!", 2000);
+        }
     }
 
     if (result == DialogConnectToDataBase::Rejected) {
