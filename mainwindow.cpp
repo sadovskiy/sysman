@@ -42,11 +42,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // Так как библиотеки драйвера PostgeSQL ищются в каталогах
     // перечисленных в переменной PATH, не плохо бы посмотреть,
     // какие там перечислены каталоги.
-    qDebug() << getenv("PATH");
-
+//    qDebug() << getenv("PATH");
+    qDebug() << getenv("PGLOCALEDIR");
     // Перевести сообщения на русский.
     ui->retranslateUi(this);
 
+    // Проверяем наличи драйвера
     if (QSqlDatabase::isDriverAvailable("QPSQL"))
         qDebug() << "SUCCESS: PostgreSQL Database driver found." << endl;
     else
@@ -58,8 +59,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->tabWidget, SIGNAL(tabCloseRequested(int)),
             this, SLOT(closeTab(int)));
 
-    connect(ui->treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)),
+/*    connect(ui->treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)),
             this, SLOT(itemTabNewOrOpenCurrent(QTreeWidgetItem*,int)));
+            */
+    connect(ui->actionOpen, SIGNAL(triggered()),
+                this, SLOT(newTab()));
     connect(ui->tabWidget, SIGNAL(currentChanged(int)),
             this, SLOT(setCurrentItem(int)));
 
@@ -68,11 +72,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Прячем первую колонку списка так как там хранятся названия таблиц БД
     ui->treeWidget->hideColumn(1);
+
+
+    ui->treeWidget->setVisible(false);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::newTab()
+{
+    fs = new FrameStudet(this);
+    ui->tabWidget->addTab(fs, "Edit");
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
 }
 
 void MainWindow::on_actionConnect_triggered()
@@ -130,7 +144,7 @@ void MainWindow::itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col)
 {
     if (!item->text(1).isEmpty()) {
         int flag = -1;
-        TableViewTabForm *tableviewtab = 0;
+        FrameStudet *fs = 0;
 
         for (int i = 0; i < ui->tabWidget->count(); i++)
             if (ui->tabWidget->widget(i)->windowTitle() == item->text(col))
@@ -139,15 +153,15 @@ void MainWindow::itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col)
         if (flag != -1)
             ui->tabWidget->setCurrentIndex(flag);
         else {
-            tableviewtab = new TableViewTabForm(this);
+            fs = new FrameStudet(this);
 
-            tableviewtab->setWindowTitle(item->text(col));
-            ui->tabWidget->addTab(tableviewtab, item->text(col));
+            fs->setWindowTitle(item->text(col));
+            ui->tabWidget->addTab(fs, item->text(col));
             ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
         }
-        tableviewtab = qobject_cast<TableViewTabForm *>(ui->tabWidget->currentWidget());
-        tableviewtab->clear();
-        tableviewtab->setTableName(item->text(1));
+        fs = qobject_cast<FrameStudet *>(ui->tabWidget->currentWidget());
+//        fs->clear();
+//        fs->setTableName(item->text(1));
     }
 
 }

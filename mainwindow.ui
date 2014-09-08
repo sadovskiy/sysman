@@ -79,7 +79,7 @@
         <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
        <property name="autoScroll">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
@@ -106,7 +106,7 @@
         <bool>true</bool>
        </property>
        <property name="headerHidden">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="expandsOnDoubleClick">
         <bool>false</bool>
@@ -115,7 +115,7 @@
         <number>2</number>
        </property>
        <attribute name="headerVisible">
-        <bool>true</bool>
+        <bool>false</bool>
        </attribute>
        <column>
         <property name="text">
@@ -242,6 +242,8 @@
      <string>File</string>
     </property>
     <addaction name="actionConnect"/>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuTemplatesDocuments">
@@ -250,17 +252,17 @@
     </property>
     <addaction name="actionOrder"/>
     <addaction name="actionReference"/>
-    <addaction name="actionMemo_Reference"/>
+    <addaction name="actionMemoReference"/>
     <addaction name="actionContract"/>
-    <addaction name="action_rotocol"/>
+    <addaction name="actionProtocol"/>
     <addaction name="actionReport"/>
     <addaction name="actionList"/>
     <addaction name="actionCertificate"/>
-    <addaction name="actionCertificate_Of_Degree"/>
+    <addaction name="actionCertificateOfDegree"/>
     <addaction name="actionTimetable"/>
     <addaction name="actionApplication"/>
-    <addaction name="actionAdditional_Agreement"/>
-    <addaction name="actionDirection_To_Pay"/>
+    <addaction name="actionAdditionalAgreement"/>
+    <addaction name="actionDirectionToPay"/>
     <addaction name="actionAbstract"/>
    </widget>
    <widget class="QMenu" name="menuInfo">
@@ -281,6 +283,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionConnect"/>
+   <addaction name="actionOpen"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect">
@@ -328,7 +331,7 @@
     <string>Reference</string>
    </property>
   </action>
-  <action name="actionMemo_Reference">
+  <action name="actionMemoReference">
    <property name="text">
     <string>Memo Reference</string>
    </property>
@@ -343,7 +346,7 @@
     <string>Report</string>
    </property>
   </action>
-  <action name="action_rotocol">
+  <action name="actionProtocol">
    <property name="text">
     <string>Protocol</string>
    </property>
@@ -358,7 +361,7 @@
     <string>Certificate</string>
    </property>
   </action>
-  <action name="actionCertificate_Of_Degree">
+  <action name="actionCertificateOfDegree">
    <property name="text">
     <string>Certificate Of Degree</string>
    </property>
@@ -373,12 +376,12 @@
     <string>Application</string>
    </property>
   </action>
-  <action name="actionAdditional_Agreement">
+  <action name="actionAdditionalAgreement">
    <property name="text">
     <string>Additional Agreement</string>
    </property>
   </action>
-  <action name="actionDirection_To_Pay">
+  <action name="actionDirectionToPay">
    <property name="text">
     <string>Direction To Pay</string>
    </property>
@@ -386,6 +389,18 @@
   <action name="actionAbstract">
    <property name="text">
     <string>Abstract</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="images/icon.qrc">
+     <normaloff>:/new/48x48/48x48/Open.png</normaloff>:/new/48x48/48x48/Open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
    </property>
   </action>
  </widget>

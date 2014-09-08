@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     frameaddorderdismission.cpp \
     frameaddpayment.cpp \
     frameaddall.cpp \
-    frameaddphasepayment.cpp
+    frameaddphasepayment.cpp \
+    framestudet.cpp \
+    department.cpp
 
 HEADERS  += mainwindow.hpp \
     dialogconnecttodatabase.hpp \
@@ -45,7 +47,9 @@ HEADERS  += mainwindow.hpp \
     frameaddorderdismission.hpp \
     frameaddpayment.hpp \
     frameaddall.hpp \
-    frameaddphasepayment.hpp
+    frameaddphasepayment.hpp \
+    framestudet.hpp \
+    department.hpp
 
 FORMS    += mainwindow.ui \
     dialogconnecttodatabase.ui \
@@ -56,7 +60,8 @@ FORMS    += mainwindow.ui \
     frameaddorderdismission.ui \
     frameaddpayment.ui \
     frameaddall.ui \
-    frameaddphasepayment.ui
+    frameaddphasepayment.ui \
+    framestudet.ui
 
 TRANSLATIONS += sysman_ru.ts
 
