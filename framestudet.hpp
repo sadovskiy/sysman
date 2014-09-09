@@ -31,7 +31,9 @@ private slots:
 
     void on_comboBoxGroup_currentIndexChanged(int index);
 
-    void on_pushButton_clicked();
+    void on_pushButtonAddStudent_clicked();
+
+    void on_pushButtonApplyChanges_clicked();
 
 private:
     Ui::FrameStudet *ui;
