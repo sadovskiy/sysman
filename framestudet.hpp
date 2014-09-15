@@ -25,6 +25,8 @@ public:
 private slots:
     void handleSelectionChanged(QModelIndex selection);
 
+    void addWindow(QModelIndex selection);
+
     void on_comboBoxDepartment_currentIndexChanged(int index);
 
     void on_comboBoxYear_currentIndexChanged(int index);
@@ -34,6 +36,10 @@ private slots:
     void on_pushButtonAddStudent_clicked();
 
     void on_pushButtonApplyChanges_clicked();
+
+    void on_lineEditFind_textEdited(const QString &arg1);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::FrameStudet *ui;
@@ -51,8 +57,12 @@ private:
     QSqlQueryModel *qmoddepartment;
     QSqlQueryModel *qmodyear;
     QSqlQueryModel *qmodgroup;
+    QSqlQuery *qcontract;
     QSqlQuery *qInsertStudent;
+    QSqlQuery *qDeleteStudent;
 
+
+    void updateStudent();
 
 };
 
