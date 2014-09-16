@@ -85,7 +85,7 @@ void TableViewTabForm::setTableName(QString name)
     if (rmodel->lastError().isValid())
         qDebug() << rmodel->lastError().text();
 
-
+/*
     if (tName == "student")
         framestud->setModel(rmodel);
     if (tName == "contract")
@@ -101,7 +101,7 @@ void TableViewTabForm::setTableName(QString name)
     if (tName == "all_data")
         frameall->setModel(rmodel);
 
-
+*/
 
     ui->tableView->setModel(sort_filter);
     ui->tableView->resizeColumnsToContents();

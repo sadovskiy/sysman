@@ -301,7 +301,7 @@
     <string>Connect</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+C</string>
+    <string notr="true">Ctrl+C</string>
    </property>
   </action>
   <action name="actionExit">
@@ -309,7 +309,7 @@
     <string>Exit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
   </action>
   <action name="actionAbout">

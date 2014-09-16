@@ -9,8 +9,6 @@ FrameAddOrderAdmission::FrameAddOrderAdmission(QWidget *parent) :
     ui(new Ui::FrameAddOrderAdmission)
 {
     ui->setupUi(this);
-    connect(ui->pushButtonAROA, SIGNAL(clicked()),
-            this, SLOT(addRow()));
 }
 
 FrameAddOrderAdmission::~FrameAddOrderAdmission()

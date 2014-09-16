@@ -1,4 +1,5 @@
 #include "framestudet.hpp"
+#include "frameaddcontract.hpp"
 #include "ui_framestudet.h"
 
 #include <QSqlError>
@@ -11,6 +12,7 @@
 #include <QRegExp>
 #include <QRegExpValidator>
 #include <QTreeWidgetItem>
+
 
 FrameStudet::FrameStudet(QWidget *parent) :
     QFrame(parent),
@@ -153,7 +155,7 @@ FrameStudet::FrameStudet(QWidget *parent) :
         ui->comboBoxYear->addItem(iy.value());
     }
 
-    qmodpay->setQuery("SELECT discount, actual_amount_of_payment, date_of_pay, actual_amount_of_payment * 0.25 AS discount_in_prc FROM payment AS pa WHERE pa.payment_id = 4");
+    qmodpay->setQuery("SELECT discount, actual_amount_of_payment, date_of_pay, actual_amount_of_payment - (0.01 * discount * actual_amount_of_payment) AS discount_in_prc FROM payment AS pa WHERE pa.payment_id = 4");
 
     if (qmodpay->lastError().isValid())
         qDebug() << qmodpay->lastError().text();
@@ -218,14 +220,25 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
         ui->lineEditIndividualTaxpayerIdentificationNumber->setText(query.value(18).toString());
         ui->lineEditPhone->setText(query.value(19).toString());
 
+        ui->treeWidgetContract->clear();
+
+        ui->treeWidgetContract->setColumnCount(2);
+        ui->treeWidgetContract->hideColumn(1);
         ui->treeWidgetContract->header()->setStretchLastSection(true);
         ui->treeWidgetContract->header()->setSortIndicator(0, Qt::AscendingOrder);
         ui->treeWidgetContract->header()->setSortIndicatorShown(true);
         ui->treeWidgetContract->header()->model()->setHeaderData(0, Qt::Horizontal, tr("Documents"));
+        ui->treeWidgetContract->header()->model()->setHeaderData(1, Qt::Horizontal, tr("Id documents"));
+        QTreeWidgetItem *parent = ui->treeWidgetContract->invisibleRootItem();
+        parent->setFlags(Qt::ItemIsEnabled);
+        connect(ui->treeWidgetContract->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+                this, SLOT(addWindow(QModelIndex,QModelIndex)));
 
 
+        QSqlQuery queryadmission;
 
         query.exec(QString("SELECT contract2_id FROM list_contract_student WHERE student_id = %1").arg(num));
+        queryadmission.exec(QString("SELECT order_admission_id FROM list_student_in_admission WHERE student_id = %1").arg(num));
 
         if (query.lastError().isValid())
             qDebug() << query.lastError().text();
@@ -236,27 +249,51 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
 
         if (query.isValid()) {
             QSqlQuery query2;
-            query2.exec(QString("SELECT * FROM contract AS ctr "
+            query2.exec(QString("SELECT ctr.contract_date || \' - \' || ctr.contract_number, ctr.contract_id FROM contract AS ctr "
                                 "JOIN (SELECT lcst.contract2_id FROM list_contract_student AS lcst WHERE lcst.student_id = %1) AS stud "
                                 "ON stud.contract2_id = ctr.contract_id").arg(num));
 
             if (query2.lastError().isValid())
                 qDebug() << query2.lastError().text();
 
-            QTreeWidgetItem *parent = ui->treeWidgetContract->invisibleRootItem();
-            QTreeWidgetItem *item = 0;
 
-            item = new QTreeWidgetItem(parent);
+            QTreeWidgetItem *item = new QTreeWidgetItem(parent);
+
             item->setText(0, "Contract");
 
-            parent->setFlags(Qt::ItemIsEnabled);
             item->setFlags(Qt::ItemIsEnabled);
 
             while (query2.next()) {
                 QTreeWidgetItem *item2 = new QTreeWidgetItem(item);
-                item2->setText(0, query2.value(1).toString());
-                connect(ui->treeWidgetContract->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-                        this, SLOT(addWindow(QModelIndex)));
+                item2->setText(0, query2.value(0).toString());
+                item2->setText(1, query2.value(1).toString());
+            }
+        }
+
+        if (queryadmission.lastError().isValid())
+            qDebug() << queryadmission.lastError().text();
+
+        queryadmission.first();
+
+        if (queryadmission.isValid()) {
+            QSqlQuery query2;
+            query2.exec(QString("SELECT adm.date_of_order_admission || \' - \' || adm.order_admission_num, adm.order_admission_id FROM orders_admission AS adm "
+                                "JOIN (SELECT lsia.order_admission_id FROM list_student_in_admission AS lsia WHERE lsia.student_id = %1) AS ordradm "
+                                "ON ordradm.order_admission_id = adm.order_admission_id").arg(num));
+
+            if (query2.lastError().isValid())
+                qDebug() << query2.lastError().text();
+
+            QTreeWidgetItem *item = new QTreeWidgetItem(parent);
+
+            item->setText(0, "Order Admission");
+
+            item->setFlags(Qt::ItemIsEnabled);
+
+            while (query2.next()) {
+                QTreeWidgetItem *item2 = new QTreeWidgetItem(item);
+                item2->setText(0, query2.value(0).toString());
+                item2->setText(1, query2.value(1).toString());
             }
 
         }
@@ -265,21 +302,34 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
     }
 }
 
-void FrameStudet::addWindow(QModelIndex selection)
+void FrameStudet::addWindow(QModelIndex selection, QModelIndex deselection)
 {
-    QSqlQuery query;
+//    FrameAddContract *fcontract = qobject_cast<FrameAddContract *>(ui->mdiArea->activateWindow(););
+    FrameAddContract *fcontract = 0;
+    if (!fcontract)
+        fcontract = new FrameAddContract(this);
+
+    QMdiSubWindow *subWin = ui->mdiArea->addSubWindow(fcontract);
+
+    subWin->show();
+
+//    QSqlQuery query;
     // Временно 0 вместо index(selection.row(), 1)
-    const int num = ui->treeViewStudents->model()->index(selection.row(), 1).data(Qt::DisplayRole).toInt();
-    qDebug() << num;
-    qcontract->exec(QString("SELECT * FROM contract AS ctr "
-                        "JOIN (SELECT lcst.contract2_id FROM list_contract_student AS lcst WHERE lcst.student_id = %1) AS stud "
-                        "ON stud.contract2_id = ctr.contract_id").arg(num));
+    const int num = ui->treeWidgetContract->model()->index(0, 1).data(Qt::DisplayRole).toInt();
+    qDebug() << "New SubWindow Row Contract: " << selection.row();
+    qDebug() << "New SubWindow Num Contract: " << num;
+    fcontract->loadData(num);
+/*    qcontract->exec(QString("SELECT * FROM contract AS ctr "
+                            "JOIN (SELECT lcst.contract2_id FROM list_contract_student AS lcst WHERE lcst.student_id = %1) AS stud "
+                            "ON stud.contract2_id = ctr.contract_id").arg(num));
 
     if (qcontract->lastError().isValid())
         qDebug() << qcontract->lastError().text();
 
-
     qcontract->first();
+    fcontract->setModel(qcontract);
+    qDebug() << qcontract->value(1).toString();
+
 
     ui->lineEditContractNumber->setText(qcontract->value(1).toString());
     ui->dateEditContractDate->setDate(qcontract->value(2).toDate());
@@ -290,49 +340,7 @@ void FrameStudet::addWindow(QModelIndex selection)
     ui->comboBoxContractType->setCurrentText(qcontract->value(6).toString());
 
     ui->treeWidgetContract->addAction(new QAction("qcontract->value(1).toString()", this));
-
-    qcontract->first();
-
-
-
-/*
-    QTreeWidgetItem *itemRoot = 0;
-
-    if (itemRoot)
-    itemRoot = new QTreeWidgetItem(ui->treeWidgetContract);
-    itemRoot->setText(0, "Contracts");
-
-    QTreeWidgetItem *itemChild = 0;
-
-    if (itemChild)
-    itemChild = new QTreeWidgetItem;
-    itemChild->setText(0, qcontract->value(1).toString());
-    itemChild->parent();
-
-    while (qcontract->next()) {
-
-        ui->treeWidgetContract->addAction(new QAction(qcontract->value(1).toString(), this));
-        qcontract->next();
-    }
-
-    query.first();
-
-    query.exec(QString("SELECT * FROM orders_admission AS orda "
-                       "JOIN (SELECT order_admission2_id FROM list_student_orders_admission WHERE student_id = %1) AS stud "
-                       "ON stud.order_admission2_id = orda.order_admission_id").arg(num));
-
-
-    if (query.lastError().isValid())
-        qDebug() << query.lastError().text();
-
-    query.first();
-
-    ui->lineEditOrderAdmissionNum->setText(query.value(1).toString());
-    ui->dateEditDateOfOrderAdmission->setDate(query.value(2).toDate());
-    ui->lineEditGroup->setText(query.value(3).toString());
-    ui->comboBoxDepartmentInst->setCurrentText(query.value(4).toString());
-    ui->lineEditCoursesEnrollment->setText(query.value(5).toString());
-    */
+*/
 }
 
 void FrameStudet::on_comboBoxDepartment_currentIndexChanged(int index)
@@ -448,7 +456,7 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
 
     query.value(0).toInt();
 
-//TODO: Доделать выделение только что добавленной строки
+//TODO: Доделать выделение только, что добавленной строки
 
     // Сгененрируем сигнал, для обновления списка студентов с учётом фильтра
     ui->comboBoxDepartment->currentIndexChanged(ui->comboBoxDepartment->currentIndex());

@@ -2,7 +2,7 @@
 #define FRAMEADDCONTRACT_HPP
 
 #include <QFrame>
-#include <QSqlRelationalTableModel>
+#include <QSqlQuery>
 #include <QString>
 
 namespace Ui {
@@ -17,14 +17,15 @@ public:
     explicit FrameAddContract(QWidget *parent = 0);
     ~FrameAddContract();
 
-    void setModel(QSqlRelationalTableModel *model);
+    void setModel(QSqlQuery *query);
+    void loadData(const int numStr);
 
 private slots:
-    void addRow();
+
 
 private:
     Ui::FrameAddContract *ui;
-    QSqlRelationalTableModel *rmodel;
+//    QSqlQuery *mQuery;
 };
 
 #endif // FRAMEADDCONTRACT_HPP

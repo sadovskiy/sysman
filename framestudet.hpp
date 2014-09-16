@@ -9,6 +9,7 @@
 #include <QMap>
 
 #include "department.hpp"
+#include <QMdiSubWindow>
 
 namespace Ui {
 class FrameStudet;
@@ -25,7 +26,7 @@ public:
 private slots:
     void handleSelectionChanged(QModelIndex selection);
 
-    void addWindow(QModelIndex selection);
+    void addWindow(QModelIndex selection, QModelIndex deselection);
 
     void on_comboBoxDepartment_currentIndexChanged(int index);
 
