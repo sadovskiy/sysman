@@ -14,7 +14,6 @@
 #include "frameaddorderdismission.hpp"
 #include "frameaddpayment.hpp"
 #include "frameaddphasepayment.hpp"
-#include "frameaddall.hpp"
 
 namespace Ui {
 class TableViewTabForm;
@@ -54,7 +53,6 @@ private:
     FrameAddOrderDismission *frameodism;
     FrameAddPayment *framepayment;
     FrameAddPhasePayment *framepp;
-    FrameAddAll *frameall;
     QSortFilterProxyModel *sort_filter;
 };
 

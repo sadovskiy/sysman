@@ -7,9 +7,9 @@
 #include <QItemSelection>
 #include <QModelIndex>
 #include <QMap>
+#include <QMdiSubWindow>
 
 #include "department.hpp"
-#include <QMdiSubWindow>
 
 namespace Ui {
 class FrameStudet;
@@ -26,7 +26,7 @@ public:
 private slots:
     void handleSelectionChanged(QModelIndex selection);
 
-    void addWindow(QModelIndex selection, QModelIndex deselection);
+//    void addWindow(QModelIndex selection, QModelIndex deselection);
 
     void on_comboBoxDepartment_currentIndexChanged(int index);
 
@@ -42,6 +42,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_treeWidgetContract_clicked(const QModelIndex &index);
+
 private:
     Ui::FrameStudet *ui;
 
@@ -52,12 +54,18 @@ private:
     QMap<int, Department *> departmentList;
     QMap<int, QString> yearList;
     QMap<int, QString> groupList;
+    QMap<int, QString> cntrTypeList;
+    QMap<int, QString> durationList;
+    QMap<int, QString> curriculumList;
 
     QSqlQueryModel *qmodstud;
     QSqlQueryModel *qmodpay;
     QSqlQueryModel *qmoddepartment;
     QSqlQueryModel *qmodyear;
     QSqlQueryModel *qmodgroup;
+    QSqlQuery *qmodcontrtype;
+    QSqlQuery *qmodcuriculum;
+
     QSqlQuery *qcontract;
     QSqlQuery *qInsertStudent;
     QSqlQuery *qDeleteStudent;

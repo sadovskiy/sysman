@@ -24,12 +24,11 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
     hspbottom->addWidget(ui->pushButtonShowHideFrameAddRow);
 
     framestud = new FrameAddStudent(this);
-    framecontr = new FrameAddContract(this);
+//    framecontr = new FrameAddContract(this);
     frameoadm = new FrameAddOrderAdmission(this);
     frameodism = new FrameAddOrderDismission(this);
     framepayment = new FrameAddPayment(this);
     framepp = new FrameAddPhasePayment(this);
-    frameall = new FrameAddAll(this);
 
     glayout->addWidget(ui->tableView, 0, 0);
 
@@ -39,7 +38,6 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
     glayout->addWidget(frameodism, 4, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(framepayment, 5, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(framepp, 6, 0, Qt::AlignLeft | Qt::AlignBottom);
-    glayout->addWidget(frameall, 7, 0, Qt::AlignLeft | Qt::AlignBottom);
 
     framestud->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -56,7 +54,6 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
     frameodism->setVisible(false);
     framepayment->setVisible(false);
     framepp->setVisible(false);
-    frameall->setVisible(false);
 
     ui->tableView->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->tableView->horizontalHeader(), SIGNAL(customContextMenuRequested(QPoint)),
@@ -279,8 +276,6 @@ void TableViewTabForm::ShowHideFrameAddRow()
         frame = framepayment;
     if (tName == "phase_payment")
         frame = framepp;
-    if (tName == "all_data")
-        frame = frameall;
 
     if (frame) {
         if (frame->isVisible()) {

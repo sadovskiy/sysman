@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>553</width>
-    <height>112</height>
+    <height>143</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,12 +34,26 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="2">
+   <item row="1" column="4">
+    <layout class="QVBoxLayout" name="verticalLayoutPayment">
+     <item>
+      <widget class="QLabel" name="labelPayment">
+       <property name="text">
+        <string>Payment</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEditPayment"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="2" colspan="2">
     <layout class="QVBoxLayout" name="verticalLayoutContractType">
      <item>
-      <widget class="QLabel" name="labelContractType">
+      <widget class="QLabel" name="labelAcademicProgram">
        <property name="text">
-        <string>Contract Type</string>
+        <string>Academic Program</string>
        </property>
       </widget>
      </item>
@@ -52,17 +66,17 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="3">
-    <layout class="QVBoxLayout" name="verticalLayoutYearOfStudy">
+   <item row="0" column="4">
+    <layout class="QVBoxLayout" name="verticalLayoutacAdemicProgram">
      <item>
-      <widget class="QLabel" name="labelDurationOfStudy">
+      <widget class="QLabel" name="labelContractType">
        <property name="text">
-        <string>Duration Of Study</string>
+        <string>Contract Type</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxDurationOfStudy">
+      <widget class="QComboBox" name="comboBoxAcademicProgram">
        <property name="editable">
         <bool>true</bool>
        </property>
@@ -70,7 +84,7 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="4">
+   <item row="1" column="0" colspan="2">
     <layout class="QVBoxLayout" name="verticalLayoutContractDate">
      <item>
       <widget class="QLabel" name="labelContractDate">
@@ -91,17 +105,17 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
-    <layout class="QVBoxLayout" name="verticalLayoutacAdemicProgram">
+   <item row="1" column="2" colspan="2">
+    <layout class="QVBoxLayout" name="verticalLayoutYearOfStudy">
      <item>
-      <widget class="QLabel" name="labelAcademicProgram">
+      <widget class="QLabel" name="labelDurationOfStudy">
        <property name="text">
-        <string>Academic Program</string>
+        <string>Duration Of Study</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBoxAcademicProgram">
+      <widget class="QComboBox" name="comboBoxDurationOfStudy">
        <property name="editable">
         <bool>true</bool>
        </property>
@@ -109,47 +123,14 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="1" colspan="2">
-    <layout class="QVBoxLayout" name="verticalLayoutDepartmentContract">
-     <item>
-      <widget class="QLabel" name="labelDepartmentContract">
-       <property name="text">
-        <string>Department Contract</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBoxDepartmentContract">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="3">
-    <layout class="QVBoxLayout" name="verticalLayoutPayment">
-     <item>
-      <widget class="QLabel" name="labelPayment">
-       <property name="text">
-        <string>Payment</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineEditPayment"/>
-     </item>
-    </layout>
+   <item row="2" column="4">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Apply Changes</string>
+     </property>
+    </widget>
    </item>
   </layout>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget_2</zorder>
-  <zorder>layoutWidget_3</zorder>
-  <zorder>layoutWidget_4</zorder>
-  <zorder>layoutWidget_5</zorder>
-  <zorder>layoutWidget_6</zorder>
-  <zorder>labelContractNumber</zorder>
-  <zorder>layoutWidget_7</zorder>
  </widget>
  <resources/>
  <connections/>

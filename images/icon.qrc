@@ -9,12 +9,12 @@
         <file>256x256/gotocell.png</file>
         <file>256x256/Information.png</file>
         <file>256x256/new.png</file>
-        <file>256x256/open.png</file>
         <file>256x256/Open.png</file>
         <file>256x256/paste.png</file>
-        <file>256x256/save.png</file>
         <file>256x256/Save.png</file>
         <file>256x256/Serp molot.png</file>
+        <file>256x256/open2.png</file>
+        <file>256x256/save as.png</file>
     </qresource>
     <qresource prefix="/new/48x48">
         <file>48x48/About.png</file>

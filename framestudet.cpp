@@ -1,5 +1,6 @@
 #include "framestudet.hpp"
 #include "frameaddcontract.hpp"
+#include "frameaddorderadmission.hpp"
 #include "ui_framestudet.h"
 
 #include <QSqlError>
@@ -101,6 +102,8 @@ FrameStudet::FrameStudet(QWidget *parent) :
     qmodstud = new QSqlQueryModel(this);
     qmodpay = new QSqlQueryModel(this);
     qmoddepartment = new QSqlQueryModel(this);
+    qmodcontrtype = new QSqlQuery;
+    qmodcuriculum = new QSqlQuery;
     qInsertStudent = new QSqlQuery;
     qDeleteStudent = new QSqlQuery;
     qcontract = new QSqlQuery;
@@ -130,7 +133,6 @@ FrameStudet::FrameStudet(QWidget *parent) :
         ui->comboBoxDepartment->addItem(idepart.value()->getDepShort());
     }
 
-
     qmodyear->setQuery("SELECT duration_of_studies FROM duration_of_studies");
 
     if (qmodyear->lastError().isValid())
@@ -138,6 +140,42 @@ FrameStudet::FrameStudet(QWidget *parent) :
 
 
     yearList.insert(0, tr("All"));
+
+    qmodcontrtype->exec("SELECT * FROM contract_type");
+
+    if (qmodcontrtype->lastError().isValid())
+        qDebug() << qmodcontrtype->lastError().text();
+
+    while (qmodcontrtype->next()) {
+        int CTid = qmodcontrtype->value(0).toInt();
+        QString CTstr = qmodcontrtype->value(1).toString();
+        cntrTypeList.insert(CTid, CTstr);
+    }
+
+    qmodcuriculum->exec("SELECT * FROM list_training_programs_students");
+
+    if (qmodcuriculum->lastError().isValid())
+        qDebug() << qmodcuriculum->lastError().text();
+
+    while (qmodcuriculum->next()) {
+        int CTid = qmodcuriculum->value(0).toInt();
+        curriculumList.insert(CTid,
+                              qmodcuriculum->value(1).toString() + " " +
+                              qmodcuriculum->value(2).toString() + " " +
+                              qmodcuriculum->value(3).toString() + " " +
+                              qmodcuriculum->value(4).toString() + " " +
+                              qmodcuriculum->value(5).toString() + "." +
+                              qmodcuriculum->value(6).toString() + "." +
+                              qmodcuriculum->value(7).toString() + " " +
+                              qmodcuriculum->value(8).toString() + " " +
+                              qmodcuriculum->value(9).toString() + " " +
+                              qmodcuriculum->value(10).toString() + " " +
+                              qmodcuriculum->value(11).toString() + "." +
+                              qmodcuriculum->value(12).toString() + "." +
+                              qmodcuriculum->value(13).toString() + " " +
+                              qmodcuriculum->value(14).toString() + " " +
+                              qmodcuriculum->value(15).toString());
+    }
 
     qCountRows.exec("SELECT COUNT(*) FROM duration_of_studies");
 
@@ -231,8 +269,8 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
         ui->treeWidgetContract->header()->model()->setHeaderData(1, Qt::Horizontal, tr("Id documents"));
         QTreeWidgetItem *parent = ui->treeWidgetContract->invisibleRootItem();
         parent->setFlags(Qt::ItemIsEnabled);
-        connect(ui->treeWidgetContract->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-                this, SLOT(addWindow(QModelIndex,QModelIndex)));
+//        connect(ui->treeWidgetContract->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+//                this, SLOT(addWindow(QModelIndex,QModelIndex)));
 
 
         QSqlQuery queryadmission;
@@ -301,48 +339,12 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
         ui->treeWidgetContract->expandAll();
     }
 }
-
+/*
 void FrameStudet::addWindow(QModelIndex selection, QModelIndex deselection)
 {
-//    FrameAddContract *fcontract = qobject_cast<FrameAddContract *>(ui->mdiArea->activateWindow(););
-    FrameAddContract *fcontract = 0;
-    if (!fcontract)
-        fcontract = new FrameAddContract(this);
 
-    QMdiSubWindow *subWin = ui->mdiArea->addSubWindow(fcontract);
-
-    subWin->show();
-
-//    QSqlQuery query;
-    // Временно 0 вместо index(selection.row(), 1)
-    const int num = ui->treeWidgetContract->model()->index(0, 1).data(Qt::DisplayRole).toInt();
-    qDebug() << "New SubWindow Row Contract: " << selection.row();
-    qDebug() << "New SubWindow Num Contract: " << num;
-    fcontract->loadData(num);
-/*    qcontract->exec(QString("SELECT * FROM contract AS ctr "
-                            "JOIN (SELECT lcst.contract2_id FROM list_contract_student AS lcst WHERE lcst.student_id = %1) AS stud "
-                            "ON stud.contract2_id = ctr.contract_id").arg(num));
-
-    if (qcontract->lastError().isValid())
-        qDebug() << qcontract->lastError().text();
-
-    qcontract->first();
-    fcontract->setModel(qcontract);
-    qDebug() << qcontract->value(1).toString();
-
-
-    ui->lineEditContractNumber->setText(qcontract->value(1).toString());
-    ui->dateEditContractDate->setDate(qcontract->value(2).toDate());
-    ui->lineEditPayment->setText(qcontract->value(3).toString());
-    ui->comboBoxDepartmentContract->setCurrentText(qcontract->value(4).toString());
-    ui->comboBoxDurationOfStudy->setCurrentText(qcontract->value(4).toString());
-    ui->comboBoxAcademicProgram->setCurrentText(qcontract->value(5).toString());
-    ui->comboBoxContractType->setCurrentText(qcontract->value(6).toString());
-
-    ui->treeWidgetContract->addAction(new QAction("qcontract->value(1).toString()", this));
-*/
 }
-
+*/
 void FrameStudet::on_comboBoxDepartment_currentIndexChanged(int index)
 {
     qDebug() << "on_comboBoxDepartment_currentIndexChanged: " << index;
@@ -594,4 +596,50 @@ void FrameStudet::on_pushButton_clicked()
         qDebug() << "UPDATE orders_admission: " << qInsertStudent->lastError().text();
     qDeleteStudent->exec();
     qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt ORDER BY stt.surname");
+}
+
+
+
+void FrameStudet::on_treeWidgetContract_clicked(const QModelIndex &index)
+{
+    QMdiSubWindow *subWindow = ui->mdiArea->activeSubWindow();
+    int num = 0;
+    if (ui->treeWidgetContract->currentItem()->parent()) {
+        if (ui->treeWidgetContract->currentItem()->parent()->text(0) == "Contract") {
+            FrameAddContract *fcontract = 0;
+            if (subWindow) {
+                fcontract = qobject_cast<FrameAddContract *>(subWindow->widget()->window());
+                ui->mdiArea->setActiveSubWindow(subWindow);
+            }
+            if (!fcontract) {
+                fcontract = new FrameAddContract(this);
+                QMdiSubWindow *subWin = ui->mdiArea->addSubWindow(fcontract);
+                subWin->setAttribute(Qt::WA_DeleteOnClose);
+                subWin->setWindowFlags(Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+                subWin->setWindowTitle(ui->treeWidgetContract->currentItem()->data(0, Qt::DisplayRole).toString());
+                num = ui->treeWidgetContract->currentItem()->data(1, Qt::DisplayRole).toInt();
+                qDebug() << num;
+                subWin->show();
+                fcontract->loadData(cntrTypeList, curriculumList, yearList, num);
+            }
+        }
+        if (ui->treeWidgetContract->currentItem()->parent()->text(0) == "Order Admission") {
+            FrameAddOrderAdmission *fadm = 0;
+            if (subWindow) {
+                fadm = qobject_cast<FrameAddOrderAdmission *>(subWindow->widget());
+                ui->mdiArea->setActiveSubWindow(subWindow);
+            }
+            if (!fadm) {
+                fadm = new FrameAddOrderAdmission(this);
+                QMdiSubWindow *subWin = ui->mdiArea->addSubWindow(fadm);
+                subWin->setAttribute(Qt::WA_DeleteOnClose);
+                subWin->setWindowFlags(Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+                subWin->setWindowTitle(ui->treeWidgetContract->currentItem()->data(0, Qt::DisplayRole).toString());
+                num = ui->treeWidgetContract->currentItem()->data(1, Qt::DisplayRole).toInt();
+                qDebug() << num;
+                subWin->show();
+                fadm->loadData(departmentList, num);
+            }
+        }
+    }
 }

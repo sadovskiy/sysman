@@ -29,7 +29,6 @@ SOURCES += main.cpp\
     frameaddorderadmission.cpp \
     frameaddorderdismission.cpp \
     frameaddpayment.cpp \
-    frameaddall.cpp \
     frameaddphasepayment.cpp \
     framestudet.cpp \
     department.cpp
@@ -46,7 +45,6 @@ HEADERS  += mainwindow.hpp \
     frameaddorderadmission.hpp \
     frameaddorderdismission.hpp \
     frameaddpayment.hpp \
-    frameaddall.hpp \
     frameaddphasepayment.hpp \
     framestudet.hpp \
     department.hpp
@@ -59,7 +57,6 @@ FORMS    += mainwindow.ui \
     frameaddorderadmission.ui \
     frameaddorderdismission.ui \
     frameaddpayment.ui \
-    frameaddall.ui \
     frameaddphasepayment.ui \
     framestudet.ui
 

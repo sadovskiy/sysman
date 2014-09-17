@@ -2,8 +2,11 @@
 #define FRAMEADDORDERADMISSION_HPP
 
 #include <QFrame>
-#include <QSqlRelationalTableModel>
+#include <QSqlQuery>
 #include <QString>
+#include <QMap>
+
+#include "department.hpp"
 
 namespace Ui {
 class FrameAddOrderAdmission;
@@ -17,14 +20,15 @@ public:
     explicit FrameAddOrderAdmission(QWidget *parent = 0);
     ~FrameAddOrderAdmission();
 
-    void setModel(QSqlRelationalTableModel *model);
+    void loadData(QMap<int, Department *> &departmentList, const int num);
 
 private slots:
     void addRow();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::FrameAddOrderAdmission *ui;
-    QSqlRelationalTableModel *rmodel;
 };
 
 #endif // FRAMEADDORDERADMISSION_HPP
