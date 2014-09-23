@@ -26,204 +26,30 @@
    <set>QMainWindow::AllowNestedDocks|QMainWindow::AnimatedDocks|QMainWindow::VerticalTabs</set>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QSplitter" name="splitter">
-      <property name="mouseTracking">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="documentMode">
        <bool>false</bool>
       </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::NoContextMenu</enum>
+      <property name="tabsClosable">
+       <bool>true</bool>
       </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+      <property name="movable">
+       <bool>true</bool>
       </property>
-      <widget class="QTreeWidget" name="treeWidget">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="sizeIncrement">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="baseSize">
-        <size>
-         <width>200</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="autoScroll">
-        <bool>false</bool>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="autoExpandDelay">
-        <number>-1</number>
-       </property>
-       <property name="rootIsDecorated">
-        <bool>false</bool>
-       </property>
-       <property name="uniformRowHeights">
-        <bool>true</bool>
-       </property>
-       <property name="itemsExpandable">
-        <bool>true</bool>
-       </property>
-       <property name="animated">
-        <bool>true</bool>
-       </property>
-       <property name="allColumnsShowFocus">
-        <bool>true</bool>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-       <property name="headerHidden">
-        <bool>true</bool>
-       </property>
-       <property name="expandsOnDoubleClick">
-        <bool>false</bool>
-       </property>
-       <property name="columnCount">
-        <number>2</number>
-       </property>
-       <attribute name="headerVisible">
-        <bool>false</bool>
-       </attribute>
-       <column>
-        <property name="text">
-         <string>List Table</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string notr="true">table name</string>
-        </property>
-       </column>
-       <item>
-        <property name="text">
-         <string>Tables summary</string>
-        </property>
-        <property name="text">
-         <string notr="true"/>
-        </property>
-        <property name="flags">
-         <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-        </property>
-        <item>
-         <property name="text">
-          <string>Students</string>
-         </property>
-         <property name="text">
-          <string notr="true">student</string>
-         </property>
-         <property name="flags">
-          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Contract</string>
-         </property>
-         <property name="text">
-          <string notr="true">contract</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Orders</string>
-         </property>
-         <property name="text">
-          <string notr="true"/>
-         </property>
-         <property name="flags">
-          <set>ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-         <item>
-          <property name="text">
-           <string>Admission</string>
-          </property>
-          <property name="text">
-           <string notr="true">orders_admission</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Dismissal</string>
-          </property>
-          <property name="text">
-           <string notr="true">orders_dismissal</string>
-          </property>
-         </item>
-        </item>
-        <item>
-         <property name="text">
-          <string>Payment</string>
-         </property>
-         <property name="text">
-          <string notr="true">payment</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>Phases</string>
-          </property>
-          <property name="text">
-           <string notr="true">phase_payment</string>
-          </property>
-         </item>
-        </item>
-       </item>
-      </widget>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="tabPosition">
-        <enum>QTabWidget::North</enum>
-       </property>
-       <property name="tabShape">
-        <enum>QTabWidget::Rounded</enum>
-       </property>
-       <property name="currentIndex">
-        <number>-1</number>
-       </property>
-       <property name="elideMode">
-        <enum>Qt::ElideNone</enum>
-       </property>
-       <property name="documentMode">
-        <bool>false</bool>
-       </property>
-       <property name="tabsClosable">
-        <bool>true</bool>
-       </property>
-       <property name="movable">
-        <bool>true</bool>
-       </property>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -242,7 +68,8 @@
      <string>File</string>
     </property>
     <addaction name="actionConnect"/>
-    <addaction name="actionOpen"/>
+    <addaction name="actionOpenStudentsList"/>
+    <addaction name="actionOpenStudentsPayments"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -283,7 +110,8 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionConnect"/>
-   <addaction name="actionOpen"/>
+   <addaction name="actionOpenStudentsList"/>
+   <addaction name="actionOpenStudentsPayments"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect">
@@ -391,16 +219,28 @@
     <string>Abstract</string>
    </property>
   </action>
-  <action name="actionOpen">
+  <action name="actionOpenStudentsList">
    <property name="icon">
     <iconset resource="images/icon.qrc">
      <normaloff>:/new/48x48/48x48/Open.png</normaloff>:/new/48x48/48x48/Open.png</iconset>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>Open Students List</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionOpenStudentsPayments">
+   <property name="icon">
+    <iconset resource="images/icon.qrc">
+     <normaloff>:/new/48x48/48x48/Open.png</normaloff>:/new/48x48/48x48/Open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Students Payments</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

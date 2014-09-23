@@ -59,7 +59,7 @@ private:
     QMap<int, QString> curriculumList;
 
     QSqlQueryModel *qmodstud;
-    QSqlQueryModel *qmodpay;
+
     QSqlQueryModel *qmoddepartment;
     QSqlQueryModel *qmodyear;
     QSqlQueryModel *qmodgroup;

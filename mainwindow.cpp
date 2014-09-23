@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug() << "FAILURE: No PostgreSQL Database driver available." << endl;
 
     // Развернуть всё дерево
-    ui->treeWidget->expandAll();
+//    ui->treeWidget->expandAll();
 
     connect(ui->tabWidget, SIGNAL(tabCloseRequested(int)),
             this, SLOT(closeTab(int)));
@@ -62,8 +62,10 @@ MainWindow::MainWindow(QWidget *parent) :
 /*    connect(ui->treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*,int)),
             this, SLOT(itemTabNewOrOpenCurrent(QTreeWidgetItem*,int)));
             */
-    connect(ui->actionOpen, SIGNAL(triggered()),
-                this, SLOT(newTab()));
+    connect(ui->actionOpenStudentsList, SIGNAL(triggered()),
+                this, SLOT(newTabStudentsList()));
+    connect(ui->actionOpenStudentsPayments, SIGNAL(triggered()),
+                this, SLOT(newTabStudentsPayment()));
     connect(ui->tabWidget, SIGNAL(currentChanged(int)),
             this, SLOT(setCurrentItem(int)));
 
@@ -71,10 +73,10 @@ MainWindow::MainWindow(QWidget *parent) :
             qApp, SLOT(aboutQt()));
 
     // Прячем первую колонку списка так как там хранятся названия таблиц БД
-    ui->treeWidget->hideColumn(1);
+    //ui->treeWidget->hideColumn(1);
 
 
-    ui->treeWidget->setVisible(false);
+//    ui->treeWidget->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -82,10 +84,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::newTab()
+void MainWindow::newTabStudentsList()
 {
-    fs = new FrameStudet(this);
-    ui->tabWidget->addTab(fs, "Edit");
+    fs1 = new FrameStudet(this);
+    fs1->setAttribute(Qt::WA_DeleteOnClose);
+    ui->tabWidget->addTab(fs1, "Students List");
+    ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
+}
+
+void MainWindow::newTabStudentsPayment()
+{
+    fs2 = new FrameAddPayment(this);
+    fs2->setAttribute(Qt::WA_DeleteOnClose);
+    ui->tabWidget->addTab(fs2, "Students List");
     ui->tabWidget->setCurrentIndex(ui->tabWidget->count() - 1);
 }
 
@@ -108,11 +119,11 @@ void MainWindow::on_actionConnect_triggered()
             qDebug() << db.lastError().text();
             ui->statusBar->showMessage(db.lastError().text());
             ui->actionConnect->setChecked(false);
-            ui->treeWidget->setEnabled(false);
+ //           ui->treeWidget->setEnabled(false);
             ui->tabWidget->clear();
         }
         else {
-            ui->treeWidget->setEnabled(true);
+ //           ui->treeWidget->setEnabled(true);
             ui->statusBar->showMessage("Connected!", 2000);
         }
     }
@@ -168,12 +179,12 @@ void MainWindow::itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col)
 
 void MainWindow::setCurrentItem(int index)
 {
-    if (index != -1) {
+/*    if (index != -1) {
         QString s = ui->tabWidget->widget(index)->windowTitle();
         QList<QTreeWidgetItem*> items;
         items = ui->treeWidget->findItems(s, Qt::MatchRecursive, 0);
         if (!items.isEmpty())
             ui->treeWidget->setCurrentItem(items.at(0));
-    }
+    }*/
 }
 

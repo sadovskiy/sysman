@@ -2,8 +2,12 @@
 #define FRAMEADDPAYMENT_HPP
 
 #include <QFrame>
-#include <QSqlRelationalTableModel>
+#include <QSqlQueryModel>
+#include <QSqlQuery>
+#include <QSqlTableModel>
 #include <QString>
+#include <QMap>
+#include "department.hpp"
 
 namespace Ui {
 class FrameAddPayment;
@@ -17,14 +21,40 @@ public:
     explicit FrameAddPayment(QWidget *parent = 0);
     ~FrameAddPayment();
 
-    void setModel(QSqlRelationalTableModel *model);
-
 private slots:
     void addRow();
+    void on_comboBoxYear_currentIndexChanged(int index);
+    void on_comboBoxDepartment_currentIndexChanged(int index);
+    void on_comboBoxGroup_currentIndexChanged(int index);
+    void handleSelectionChanged(QModelIndex selection);
 
 private:
     Ui::FrameAddPayment *ui;
-    QSqlRelationalTableModel *rmodel;
+
+    QMap<QString, int> sexList;
+    QMap<QString, int> countryList;
+    QMap<QString, int> admUnitList;
+
+    QMap<int, Department *> departmentList;
+    QMap<int, QString> yearList;
+    QMap<int, QString> groupList;
+    QMap<int, QString> cntrTypeList;
+    QMap<int, QString> durationList;
+    QMap<int, QString> curriculumList;
+
+    QSqlQueryModel *qmodstud;
+
+    QSqlQueryModel *qmoddepartment;
+    QSqlQueryModel *qmodyear;
+    QSqlQueryModel *qmodgroup;
+    QSqlQuery *qmodcontrtype;
+    QSqlQuery *qmodcuriculum;
+
+    QSqlQuery *qcontract;
+    QSqlQuery *qInsertStudent;
+    QSqlQuery *qDeleteStudent;
+    QSqlQueryModel *qmodpay;
+    QSqlTableModel *qtablem;
 };
 
 #endif // FRAMEADDPAYMENT_HPP

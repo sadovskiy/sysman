@@ -93,14 +93,11 @@ FrameStudet::FrameStudet(QWidget *parent) :
 
     icountry.toFront();
 
-    if (QDate::currentDate().month() > 8)
-        ui->comboBoxTimeOfYear->setCurrentIndex(1);
-    ui->comboBoxYear_2->addItem(QString("%1 - %2").arg(QDate::currentDate().year()).arg(QDate::currentDate().year() + 1));
 
     qmodgroup = new QSqlQueryModel(this);
     qmodyear = new QSqlQueryModel(this);
     qmodstud = new QSqlQueryModel(this);
-    qmodpay = new QSqlQueryModel(this);
+
     qmoddepartment = new QSqlQueryModel(this);
     qmodcontrtype = new QSqlQuery;
     qmodcuriculum = new QSqlQuery;
@@ -137,7 +134,6 @@ FrameStudet::FrameStudet(QWidget *parent) :
 
     if (qmodyear->lastError().isValid())
         qDebug() << qmodyear->lastError().text();
-
 
     yearList.insert(0, tr("All"));
 
@@ -193,12 +189,7 @@ FrameStudet::FrameStudet(QWidget *parent) :
         ui->comboBoxYear->addItem(iy.value());
     }
 
-    qmodpay->setQuery("SELECT discount, actual_amount_of_payment, date_of_pay, actual_amount_of_payment - (0.01 * discount * actual_amount_of_payment) AS discount_in_prc FROM payment AS pa WHERE pa.payment_id = 4");
 
-    if (qmodpay->lastError().isValid())
-        qDebug() << qmodpay->lastError().text();
-
-    ui->tableView->setModel(qmodpay);
 
     ui->treeViewStudents->setModel(qmodstud);
 
@@ -219,125 +210,133 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
     const int num = ui->treeViewStudents->model()->index(selection.row(), 1).data(Qt::DisplayRole).toInt();
     qDebug() << num;
 
-    if (ui->tabWidget->currentIndex() == 0) {
-        QSqlQuery query;
+    QSqlQuery query;
 
-        query.exec(QString("SELECT * FROM student WHERE student_id = %1").arg(num));
+    query.exec(QString("SELECT * FROM student WHERE student_id = %1").arg(num));
 
-        if (query.lastError().isValid())
-            qDebug() << query.lastError().text();
+    if (query.lastError().isValid())
+        qDebug() << query.lastError().text();
 
-        query.first();
+    query.first();
 
-        ui->lineEditSurname->setText(query.value(1).toString());
-        ui->lineEditName->setText(query.value(2).toString());
-        ui->lineEditPatronym->setText(query.value(3).toString());
-        int n = query.value(4).toInt();
-        ui->comboBoxSex->setCurrentIndex(ui->comboBoxSex->findText(sexList.key(n)));
-        ui->dateEditDateOfBirth->setDate(query.value(5).toDate());
-        ui->comboBoxPlaceOfBirth->setCurrentText(query.value(6).toString());
-        int indexCountry = query.value(7).toInt();
-        QMapIterator<QString, int> idx(countryList);
-        QString country;
-        while (idx.hasNext()) {
-            idx.next();
-            if (idx.value() == indexCountry)
-                country = idx.key();
-        }
-        ui->comboBoxCitizenship->setCurrentText(country);
-        ui->spinBoxPassportSeries->setValue(query.value(8).toInt());
-        ui->spinBoxPassportNumber->setValue(query.value(9).toInt());
-        ui->lineEditPassportAuthority->setText(query.value(10).toString());
-        ui->dateEditPassportDateOfIssue->setDate(query.value(11).toDate());
-        ui->spinBoxPassportSubdivisionCode->setValue(query.value(12).toInt());
-        ui->comboBoxRegistrationAdministrativeUnit->setCurrentText(query.value(13).toString());
-        ui->lineEditRegistrationAdress->setText(query.value(14).toString());
-        ui->dateEditRegistrationDate->setDate(query.value(15).toDate());
-        ui->spinBoxPostcode->setValue(query.value(16).toInt());
-        ui->lineEditEmail->setText(query.value(17).toString());
-        ui->lineEditIndividualTaxpayerIdentificationNumber->setText(query.value(18).toString());
-        ui->lineEditPhone->setText(query.value(19).toString());
-
-        ui->treeWidgetContract->clear();
-
-        ui->treeWidgetContract->setColumnCount(2);
-        ui->treeWidgetContract->hideColumn(1);
-        ui->treeWidgetContract->header()->setStretchLastSection(true);
-        ui->treeWidgetContract->header()->setSortIndicator(0, Qt::AscendingOrder);
-        ui->treeWidgetContract->header()->setSortIndicatorShown(true);
-        ui->treeWidgetContract->header()->model()->setHeaderData(0, Qt::Horizontal, tr("Documents"));
-        ui->treeWidgetContract->header()->model()->setHeaderData(1, Qt::Horizontal, tr("Id documents"));
-        QTreeWidgetItem *parent = ui->treeWidgetContract->invisibleRootItem();
-        parent->setFlags(Qt::ItemIsEnabled);
-//        connect(ui->treeWidgetContract->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-//                this, SLOT(addWindow(QModelIndex,QModelIndex)));
-
-
-        QSqlQuery queryadmission;
-
-        query.exec(QString("SELECT contract2_id FROM list_contract_student WHERE student_id = %1").arg(num));
-        queryadmission.exec(QString("SELECT order_admission_id FROM list_student_in_admission WHERE student_id = %1").arg(num));
-
-        if (query.lastError().isValid())
-            qDebug() << query.lastError().text();
-
-        query.first();
-
-        qDebug() << "contract2_id" << query.value(0).toString();
-
-        if (query.isValid()) {
-            QSqlQuery query2;
-            query2.exec(QString("SELECT ctr.contract_date || \' - \' || ctr.contract_number, ctr.contract_id FROM contract AS ctr "
-                                "JOIN (SELECT lcst.contract2_id FROM list_contract_student AS lcst WHERE lcst.student_id = %1) AS stud "
-                                "ON stud.contract2_id = ctr.contract_id").arg(num));
-
-            if (query2.lastError().isValid())
-                qDebug() << query2.lastError().text();
-
-
-            QTreeWidgetItem *item = new QTreeWidgetItem(parent);
-
-            item->setText(0, "Contract");
-
-            item->setFlags(Qt::ItemIsEnabled);
-
-            while (query2.next()) {
-                QTreeWidgetItem *item2 = new QTreeWidgetItem(item);
-                item2->setText(0, query2.value(0).toString());
-                item2->setText(1, query2.value(1).toString());
-            }
-        }
-
-        if (queryadmission.lastError().isValid())
-            qDebug() << queryadmission.lastError().text();
-
-        queryadmission.first();
-
-        if (queryadmission.isValid()) {
-            QSqlQuery query2;
-            query2.exec(QString("SELECT adm.date_of_order_admission || \' - \' || adm.order_admission_num, adm.order_admission_id FROM orders_admission AS adm "
-                                "JOIN (SELECT lsia.order_admission_id FROM list_student_in_admission AS lsia WHERE lsia.student_id = %1) AS ordradm "
-                                "ON ordradm.order_admission_id = adm.order_admission_id").arg(num));
-
-            if (query2.lastError().isValid())
-                qDebug() << query2.lastError().text();
-
-            QTreeWidgetItem *item = new QTreeWidgetItem(parent);
-
-            item->setText(0, "Order Admission");
-
-            item->setFlags(Qt::ItemIsEnabled);
-
-            while (query2.next()) {
-                QTreeWidgetItem *item2 = new QTreeWidgetItem(item);
-                item2->setText(0, query2.value(0).toString());
-                item2->setText(1, query2.value(1).toString());
-            }
-
-        }
-
-        ui->treeWidgetContract->expandAll();
+    ui->lineEditSurname->setText(query.value(1).toString());
+    ui->lineEditName->setText(query.value(2).toString());
+    ui->lineEditPatronym->setText(query.value(3).toString());
+    int n = query.value(4).toInt();
+    ui->comboBoxSex->setCurrentIndex(ui->comboBoxSex->findText(sexList.key(n)));
+    ui->dateEditDateOfBirth->setDate(query.value(5).toDate());
+    ui->comboBoxPlaceOfBirth->setCurrentText(query.value(6).toString());
+    int indexCountry = query.value(7).toInt();
+    QMapIterator<QString, int> idx(countryList);
+    QString country;
+    while (idx.hasNext()) {
+        idx.next();
+        if (idx.value() == indexCountry)
+            country = idx.key();
     }
+    ui->comboBoxCitizenship->setCurrentText(country);
+    ui->spinBoxPassportSeries->setValue(query.value(8).toInt());
+    ui->spinBoxPassportNumber->setValue(query.value(9).toInt());
+    ui->lineEditPassportAuthority->setText(query.value(10).toString());
+    ui->dateEditPassportDateOfIssue->setDate(query.value(11).toDate());
+    ui->spinBoxPassportSubdivisionCode->setValue(query.value(12).toInt());
+    ui->comboBoxRegistrationAdministrativeUnit->setCurrentText(query.value(13).toString());
+    ui->lineEditRegistrationAdress->setText(query.value(14).toString());
+    ui->dateEditRegistrationDate->setDate(query.value(15).toDate());
+    ui->spinBoxPostcode->setValue(query.value(16).toInt());
+    ui->lineEditEmail->setText(query.value(17).toString());
+    ui->lineEditIndividualTaxpayerIdentificationNumber->setText(query.value(18).toString());
+    QSqlQuery queryPhone(QString("SELECT telephon_code, calling_code, phone_number FROM phone "
+                                 "JOIN (SELECT telephon_code FROM country WHERE num_code_country = "
+                                 "(SELECT country_calling_code FROM phone WHERE student = %1)) AS tcc ON student = %1").arg(num));
+    if (queryPhone.next()) {
+        ui->comboBoxCountryCallingCode->setCurrentText("+" + queryPhone.value(0).toString());
+        ui->lineEditPhoneCallingCode->setText(queryPhone.value(1).toString());
+        ui->lineEditPhoneNumber->setText(queryPhone.value(2).toString());
+    }
+    ui->treeWidgetContract->clear();
+
+    ui->treeWidgetContract->setColumnCount(2);
+//    ui->treeWidgetContract->hideColumn(1);
+    ui->treeWidgetContract->header()->setStretchLastSection(true);
+    ui->treeWidgetContract->header()->setSortIndicator(0, Qt::AscendingOrder);
+    ui->treeWidgetContract->header()->setSortIndicatorShown(true);
+    ui->treeWidgetContract->header()->model()->setHeaderData(0, Qt::Horizontal, tr("Documents"));
+    ui->treeWidgetContract->header()->model()->setHeaderData(1, Qt::Horizontal, tr("Id documents"));
+    QTreeWidgetItem *parent = ui->treeWidgetContract->invisibleRootItem();
+    parent->setFlags(Qt::ItemIsEnabled);
+    //        connect(ui->treeWidgetContract->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+    //                this, SLOT(addWindow(QModelIndex,QModelIndex)));
+
+
+    QSqlQuery queryadmission;
+
+    query.exec(QString("SELECT lcontract_id FROM list_contract_student WHERE lstudent_id = %1").arg(num));
+    queryadmission.exec(QString("SELECT order_admission_id FROM list_student_in_admission WHERE student_id = %1").arg(num));
+
+    if (query.lastError().isValid())
+        qDebug() << query.lastError().text();
+
+    query.first();
+
+    qDebug() << "lcontract_id" << query.value(0).toString();
+
+    if (query.isValid()) {
+        QSqlQuery query2;
+        query2.exec(QString("SELECT ctr.contract_date || \' - \' || ctr.contract_number, ctr.contract_id FROM contract AS ctr "
+                            "JOIN (SELECT lcst.lcontract_id FROM list_contract_student AS lcst WHERE lcst.lstudent_id = %1) AS stud "
+                            "ON stud.lcontract_id = ctr.contract_id").arg(num));
+
+        if (query2.lastError().isValid())
+            qDebug() << query2.lastError().text();
+
+
+        QTreeWidgetItem *item = new QTreeWidgetItem(parent);
+
+        item->setText(0, "Contract");
+
+        item->setFlags(Qt::ItemIsEnabled);
+
+        while (query2.next()) {
+            QTreeWidgetItem *item2 = new QTreeWidgetItem(item);
+            item2->setText(0, query2.value(0).toString());
+            item2->setText(1, query2.value(1).toString());
+        }
+    }
+
+    if (queryadmission.lastError().isValid())
+        qDebug() << queryadmission.lastError().text();
+
+    queryadmission.first();
+
+    if (queryadmission.isValid()) {
+        QSqlQuery query2;
+        query2.exec(QString("SELECT adm.date_of_order_admission || \' - \' || adm.order_admission_num, adm.order_admission_id FROM orders_admission AS adm "
+                            "JOIN (SELECT lsia.order_admission_id FROM list_student_in_admission AS lsia WHERE lsia.student_id = %1) AS ordradm "
+                            "ON ordradm.order_admission_id = adm.order_admission_id").arg(num));
+
+        if (query2.lastError().isValid())
+            qDebug() << query2.lastError().text();
+
+        QTreeWidgetItem *item = new QTreeWidgetItem(parent);
+
+        item->setText(0, "Order Admission");
+
+        item->setFlags(Qt::ItemIsEnabled);
+
+        while (query2.next()) {
+            QTreeWidgetItem *item2 = new QTreeWidgetItem(item);
+            if (query2.value(0).toString().isEmpty())
+                item2->setText(0, "No num and date");
+            else
+                item2->setText(0, query2.value(0).toString());
+            item2->setText(1, query2.value(1).toString());
+        }
+
+    }
+
+    ui->treeWidgetContract->expandAll();
+
 }
 /*
 void FrameStudet::addWindow(QModelIndex selection, QModelIndex deselection)
@@ -361,6 +360,11 @@ void FrameStudet::on_comboBoxDepartment_currentIndexChanged(int index)
 
     if (qmodstud->lastError().isValid())
         qDebug() << qmodstud->lastError().text();
+
+    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+
+    if (queryCountStudents.next())
+        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
 }
 
 void FrameStudet::on_comboBoxYear_currentIndexChanged(int index)
@@ -371,7 +375,7 @@ void FrameStudet::on_comboBoxYear_currentIndexChanged(int index)
         qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
                                    "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN "
                                    "(SELECT oa.order_admission_id, date_part('year', now()) - date_part('year', oa.date_of_order_admission) + "
-                                   "oa.course_enrollment AS year FROM orders_admission AS oa ORDER BY year) "
+                                   "oa.course_enrollment AS year FROM orders_admission AS oa WHERE (date_part('year', now()) - date_part('year', oa.date_of_order_admission) + oa.course_enrollment) = %1) "
                                    "oai ON oai.order_admission_id = lsiad.order_admission_id) "
                                    "lss ON lss.student_id = stt.student_id").arg(index));
     else
@@ -380,6 +384,11 @@ void FrameStudet::on_comboBoxYear_currentIndexChanged(int index)
 
     if (qmodstud->lastError().isValid())
         qDebug() << qmodstud->lastError().text();
+
+    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+
+    if (queryCountStudents.next())
+        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
 }
 
 void FrameStudet::on_comboBoxGroup_currentIndexChanged(int index)
@@ -397,6 +406,11 @@ void FrameStudet::on_comboBoxGroup_currentIndexChanged(int index)
 
     if (qmodstud->lastError().isValid())
         qDebug() << qmodstud->lastError().text();
+
+    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+
+    if (queryCountStudents.next())
+        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
 }
 
 void FrameStudet::on_pushButtonAddStudent_clicked()
@@ -412,7 +426,7 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
                             ":place_of_birth, :citizenship, :passport_series, :passport_number, "
                             ":passport_authority, :passport_date_of_issue, :passport_subdivision_code, "
                             ":registration_adm_unit, :registration_adress, :registration_date, "
-                            ":postcode, :phone, :email, :individual_taxpayer_identification_number)"));
+                            ":postcode, :email, :individual_taxpayer_identification_number)"));
 
     qInsertStudent->bindValue(":surname", ui->lineEditSurname->text());
     qInsertStudent->bindValue(":name", ui->lineEditName->text());
@@ -435,13 +449,10 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
     qInsertStudent->bindValue(":registration_adress", ui->lineEditRegistrationAdress->text());
     qInsertStudent->bindValue(":registration_date", ui->dateEditRegistrationDate->date());
     qInsertStudent->bindValue(":postcode", ui->spinBoxPostcode->text().toInt());
-    QString str = ui->lineEditPhone->text();
-    str.remove(0, 1);
+    QString str = ui->lineEditPhoneNumber->text();
     str.remove(3, 1);
-    str.remove(6, 1);
-    str.remove(8, 1);
+    str.remove(5, 1);
 
-    qInsertStudent->bindValue(":phone", str);
     qInsertStudent->bindValue(":email", ui->lineEditEmail->text());
     qInsertStudent->bindValue(":individual_taxpayer_identification_number", ui->lineEditIndividualTaxpayerIdentificationNumber->text());
     qInsertStudent->exec();
@@ -465,7 +476,11 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
 
 
     ui->treeViewStudents->setCurrentIndex(ui->treeViewStudents->model()->index(row, 1));
-//    qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt ORDER BY stt.surname");
+
+    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+
+    if (queryCountStudents.next())
+        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
 }
 
 void FrameStudet::on_pushButtonApplyChanges_clicked()
@@ -488,7 +503,6 @@ void FrameStudet::on_pushButtonApplyChanges_clicked()
                                     "registration_adress = :registration_adress, "
                                     "registration_date = :registration_date, "
                                     "postcode = :postcode, "
-                                    "phone = :phone, "
                                     "email = :email, "
                                     "individual_taxpayer_identification_number = :individual_taxpayer_identification_number "
                                     "WHERE student_id = %1").arg(index));
@@ -514,13 +528,9 @@ void FrameStudet::on_pushButtonApplyChanges_clicked()
     qInsertStudent->bindValue(":registration_adress", ui->lineEditRegistrationAdress->text());
     qInsertStudent->bindValue(":registration_date", ui->dateEditRegistrationDate->date());
     qInsertStudent->bindValue(":postcode", ui->spinBoxPostcode->text().toInt());
-    QString str = ui->lineEditPhone->text();
-    str.remove(0, 1);
+    QString str = ui->lineEditPhoneNumber->text();
     str.remove(3, 1);
-    str.remove(6, 1);
-    str.remove(8, 1);
-
-    qInsertStudent->bindValue(":phone", str);
+    str.remove(5, 1);
     qInsertStudent->bindValue(":email", ui->lineEditEmail->text());
     qInsertStudent->bindValue(":individual_taxpayer_identification_number", ui->lineEditIndividualTaxpayerIdentificationNumber->text());
     qInsertStudent->exec();
@@ -596,6 +606,10 @@ void FrameStudet::on_pushButton_clicked()
         qDebug() << "UPDATE orders_admission: " << qInsertStudent->lastError().text();
     qDeleteStudent->exec();
     qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt ORDER BY stt.surname");
+    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+
+    if (queryCountStudents.next())
+        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
 }
 
 

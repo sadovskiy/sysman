@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>CountryDelegate</name>
     <message>
@@ -51,9 +51,8 @@
 <context>
     <name>FrameAddAll</name>
     <message>
-        <location filename="frameaddall.ui" line="20"/>
         <source>Frame</source>
-        <translation>Панель</translation>
+        <translation type="vanished">Панель</translation>
     </message>
 </context>
 <context>
@@ -69,54 +68,58 @@
         <translation>Номер договора</translation>
     </message>
     <message>
-        <location filename="frameaddcontract.ui" line="60"/>
+        <location filename="frameaddcontract.ui" line="119"/>
         <source>Duration Of Study</source>
         <translation>Продолжительность обучения</translation>
     </message>
     <message>
-        <location filename="frameaddcontract.ui" line="78"/>
+        <location filename="frameaddcontract.ui" line="135"/>
+        <source>Apply Changes</source>
+        <translation>Внести иземенения</translation>
+    </message>
+    <message>
+        <location filename="frameaddcontract.ui" line="98"/>
         <source>Contract Date</source>
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="frameaddcontract.ui" line="42"/>
+        <location filename="frameaddcontract.ui" line="74"/>
         <source>Contract Type</source>
         <translation>Тип договора</translation>
     </message>
     <message>
-        <location filename="frameaddcontract.ui" line="99"/>
+        <location filename="frameaddcontract.ui" line="56"/>
         <source>Academic Program</source>
         <translation>Форма обучения</translation>
     </message>
     <message>
-        <location filename="frameaddcontract.ui" line="117"/>
         <source>Department Contract</source>
-        <translation>Факультет/институт</translation>
+        <translation type="vanished">Факультет/институт</translation>
     </message>
     <message>
         <source>Year Of Study</source>
-        <translation>Курс</translation>
+        <translation type="vanished">Курс</translation>
     </message>
     <message>
         <source>Ademic Program</source>
-        <translation>Форма обучения</translation>
+        <translation type="vanished">Форма обучения</translation>
     </message>
     <message>
         <source>Qualification</source>
-        <translation>Квалификация</translation>
+        <translation type="vanished">Квалификация</translation>
     </message>
     <message>
         <source>Specialty</source>
-        <translation>Специальность/направление</translation>
+        <translation type="vanished">Специальность/направление</translation>
     </message>
     <message>
-        <location filename="frameaddcontract.ui" line="135"/>
+        <location filename="frameaddcontract.ui" line="42"/>
         <source>Payment</source>
         <translation>Оплата</translation>
     </message>
     <message>
         <source>Add Row Contract</source>
-        <translation>Добавить студента</translation>
+        <translation type="vanished">Добавить студента</translation>
     </message>
 </context>
 <context>
@@ -152,8 +155,13 @@
         <translation>Группа</translation>
     </message>
     <message>
+        <location filename="frameaddorderadmission.ui" line="107"/>
+        <source>Apply Changes</source>
+        <translation>Внести иземенения</translation>
+    </message>
+    <message>
         <source>Add Row Order Admission</source>
-        <translation>Добавить приказ</translation>
+        <translation type="vanished">Добавить приказ</translation>
     </message>
 </context>
 <context>
@@ -187,44 +195,265 @@
         <translation>Панель</translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="41"/>
-        <source>Add Row Payment</source>
-        <translation>Добавить информацию об оплате</translation>
+        <location filename="frameaddpayment.ui" line="42"/>
+        <source>year</source>
+        <translation>Год</translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="54"/>
-        <source>Resolution Pay Phase</source>
-        <translation>Разрешение оплачивать по частям</translation>
+        <location filename="frameaddpayment.ui" line="47"/>
+        <source>fall</source>
+        <translation>Осень</translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="68"/>
-        <source>Actual Amount Of Payment</source>
-        <translation>Фактическая оплата</translation>
+        <location filename="frameaddpayment.ui" line="52"/>
+        <source>spring</source>
+        <translation>Весна</translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="82"/>
-        <source>Amount</source>
-        <translation>Оплата по договору</translation>
+        <location filename="frameaddpayment.ui" line="100"/>
+        <location filename="frameaddpayment.cpp" line="94"/>
+        <location filename="frameaddpayment.cpp" line="120"/>
+        <source>All</source>
+        <translation>Все</translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="96"/>
-        <source>Discount</source>
-        <translation>Скидка в %</translation>
+        <location filename="frameaddpayment.ui" line="105"/>
+        <source>1</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="frameaddpayment.ui" line="110"/>
-        <source>Date Of Pay</source>
-        <translation>Дата оплаты</translation>
+        <source>2</source>
+        <translation></translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="131"/>
-        <source>Penalties</source>
-        <translation>Пени</translation>
+        <location filename="frameaddpayment.ui" line="115"/>
+        <source>3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="120"/>
+        <source>4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="125"/>
+        <source>5</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="130"/>
+        <source>6</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="135"/>
+        <source>7</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="140"/>
+        <source>8</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="frameaddpayment.ui" line="145"/>
+        <source>9</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="150"/>
+        <source>10</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="155"/>
+        <source>11</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="160"/>
+        <source>12</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="165"/>
+        <source>13</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="170"/>
+        <source>14</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="175"/>
+        <source>15</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="180"/>
+        <source>16</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="185"/>
+        <source>17</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="190"/>
+        <source>18</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="195"/>
+        <source>19</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="200"/>
+        <source>20</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="205"/>
+        <source>21</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="210"/>
+        <source>22</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="215"/>
+        <source>23</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="220"/>
+        <source>24</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="225"/>
+        <source>25</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="230"/>
+        <source>26</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="235"/>
+        <source>27</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="240"/>
+        <source>28</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="245"/>
+        <source>29</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="250"/>
+        <source>30</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="255"/>
+        <source>31</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="260"/>
+        <source>32</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="265"/>
+        <source>33</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="270"/>
+        <source>34</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="275"/>
+        <source>35</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="280"/>
+        <source>36</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="285"/>
+        <source>37</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="295"/>
+        <source>Find Student</source>
+        <translation>Поиск студента</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="315"/>
+        <source>Total Students: </source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.ui" line="334"/>
+        <source>Coefficient: </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Add Row Payment</source>
+        <translation type="vanished">Добавить информацию об оплате</translation>
+    </message>
+    <message>
+        <source>Resolution Pay Phase</source>
+        <translation type="vanished">Разрешение оплачивать по частям</translation>
+    </message>
+    <message>
+        <source>Actual Amount Of Payment</source>
+        <translation type="vanished">Фактическая оплата</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation type="vanished">Оплата по договору</translation>
+    </message>
+    <message>
+        <source>Discount</source>
+        <translation type="vanished">Скидка в %</translation>
+    </message>
+    <message>
+        <source>Date Of Pay</source>
+        <translation type="vanished">Дата оплаты</translation>
+    </message>
+    <message>
+        <source>Penalties</source>
+        <translation type="vanished">Пени</translation>
+    </message>
+    <message>
         <source>Semester</source>
-        <translation>Семестр</translation>
+        <translation type="vanished">Семестр</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.cpp" line="231"/>
+        <location filename="frameaddpayment.cpp" line="255"/>
+        <location filename="frameaddpayment.cpp" line="277"/>
+        <source>Total Students: %1</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -685,206 +914,210 @@
         <translation>Панель</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="42"/>
+        <location filename="framestudet.ui" line="46"/>
         <location filename="framestudet.cpp" line="113"/>
-        <location filename="framestudet.cpp" line="140"/>
+        <location filename="framestudet.cpp" line="138"/>
         <source>All</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="47"/>
+        <location filename="framestudet.ui" line="51"/>
         <source>1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="52"/>
+        <location filename="framestudet.ui" line="56"/>
         <source>2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="57"/>
+        <location filename="framestudet.ui" line="61"/>
         <source>3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="62"/>
+        <location filename="framestudet.ui" line="66"/>
         <source>4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="67"/>
+        <location filename="framestudet.ui" line="71"/>
         <source>5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="72"/>
+        <location filename="framestudet.ui" line="76"/>
         <source>6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="77"/>
+        <location filename="framestudet.ui" line="81"/>
         <source>7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="82"/>
+        <location filename="framestudet.ui" line="86"/>
         <source>8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="87"/>
+        <location filename="framestudet.ui" line="91"/>
         <source>9</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="92"/>
+        <location filename="framestudet.ui" line="96"/>
         <source>10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="97"/>
+        <location filename="framestudet.ui" line="101"/>
         <source>11</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="102"/>
+        <location filename="framestudet.ui" line="106"/>
         <source>12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="107"/>
+        <location filename="framestudet.ui" line="111"/>
         <source>13</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="112"/>
+        <location filename="framestudet.ui" line="116"/>
         <source>14</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="117"/>
+        <location filename="framestudet.ui" line="121"/>
         <source>15</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="122"/>
+        <location filename="framestudet.ui" line="126"/>
         <source>16</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="127"/>
+        <location filename="framestudet.ui" line="131"/>
         <source>17</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="132"/>
+        <location filename="framestudet.ui" line="136"/>
         <source>18</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="137"/>
+        <location filename="framestudet.ui" line="141"/>
         <source>19</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="142"/>
+        <location filename="framestudet.ui" line="146"/>
         <source>20</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="147"/>
+        <location filename="framestudet.ui" line="151"/>
         <source>21</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="152"/>
+        <location filename="framestudet.ui" line="156"/>
         <source>22</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="157"/>
+        <location filename="framestudet.ui" line="161"/>
         <source>23</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="162"/>
+        <location filename="framestudet.ui" line="166"/>
         <source>24</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="167"/>
+        <location filename="framestudet.ui" line="171"/>
         <source>25</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="172"/>
+        <location filename="framestudet.ui" line="176"/>
         <source>26</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="177"/>
+        <location filename="framestudet.ui" line="181"/>
         <source>27</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="182"/>
+        <location filename="framestudet.ui" line="186"/>
         <source>28</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="187"/>
+        <location filename="framestudet.ui" line="191"/>
         <source>29</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="192"/>
+        <location filename="framestudet.ui" line="196"/>
         <source>30</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="197"/>
+        <location filename="framestudet.ui" line="201"/>
         <source>31</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="202"/>
+        <location filename="framestudet.ui" line="206"/>
         <source>32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="207"/>
+        <location filename="framestudet.ui" line="211"/>
         <source>33</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="212"/>
+        <location filename="framestudet.ui" line="216"/>
         <source>34</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="217"/>
+        <location filename="framestudet.ui" line="221"/>
         <source>35</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="222"/>
+        <location filename="framestudet.ui" line="226"/>
         <source>36</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="227"/>
+        <location filename="framestudet.ui" line="231"/>
         <source>37</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="237"/>
+        <location filename="framestudet.ui" line="241"/>
         <source>Find Student</source>
         <translation>Поиск студента</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="280"/>
+        <location filename="framestudet.ui" line="261"/>
+        <source>Total Students: </source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Student</source>
-        <translation>Стедент</translation>
+        <translation type="vanished">Стедент</translation>
     </message>
     <message>
         <location filename="framestudet.ui" line="292"/>
@@ -977,94 +1210,117 @@
         <translation>Номер телефона</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="664"/>
+        <location filename="framestudet.ui" line="645"/>
+        <source>(</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="framestudet.ui" line="670"/>
+        <source>000; </source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="framestudet.ui" line="677"/>
+        <source>)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="framestudet.ui" line="703"/>
         <source>Email</source>
         <translation>Электронная почта</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="678"/>
+        <location filename="framestudet.ui" line="717"/>
         <source>Individual Taxpayer Identification Number</source>
         <translation>ИНН</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="717"/>
+        <location filename="framestudet.ui" line="756"/>
         <source>Add Student</source>
         <translation>Добавить студента</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="724"/>
+        <location filename="framestudet.ui" line="763"/>
         <source>Del Student</source>
         <translation>Удалить студента</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="744"/>
+        <location filename="framestudet.ui" line="783"/>
         <source>Apply Changes</source>
         <translation>Внести иземенения</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="761"/>
         <source>Payment</source>
-        <translation>Оплата</translation>
+        <translation type="vanished">Оплата</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="780"/>
         <source>year</source>
-        <translation>Год</translation>
+        <translation type="vanished">Год</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="785"/>
         <source>fall</source>
-        <translation>Осень</translation>
+        <translation type="vanished">Осень</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="790"/>
         <source>spring</source>
-        <translation>Весна</translation>
+        <translation type="vanished">Весна</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="836"/>
         <source>Summa in semestr</source>
-        <translation>Сумма за семестр</translation>
+        <translation type="vanished">Сумма за семестр</translation>
     </message>
     <message>
-        <location filename="framestudet.ui" line="863"/>
         <source>Summa in year</source>
-        <translation>Сумма за год</translation>
+        <translation type="vanished">Сумма за год</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="68"/>
+        <location filename="framestudet.cpp" line="69"/>
         <source>Not known</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="69"/>
+        <location filename="framestudet.cpp" line="70"/>
         <source>Male</source>
         <translation>Мужской</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="70"/>
+        <location filename="framestudet.cpp" line="71"/>
         <source>Female</source>
         <translation>Женский</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="71"/>
+        <location filename="framestudet.cpp" line="72"/>
         <source>Not applicable</source>
         <translation>Непременимо</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="73"/>
+        <location filename="framestudet.cpp" line="74"/>
         <source>Russia</source>
         <translation>Россия (Российская Федерация)</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="74"/>
+        <location filename="framestudet.cpp" line="75"/>
         <source>Other</source>
         <translation>Иностранное</translation>
     </message>
     <message>
-        <location filename="framestudet.cpp" line="228"/>
+        <location filename="framestudet.cpp" line="264"/>
         <source>Documents</source>
         <translation>Документы</translation>
+    </message>
+    <message>
+        <location filename="framestudet.cpp" line="265"/>
+        <source>Id documents</source>
+        <translation>ИД документа</translation>
+    </message>
+    <message>
+        <location filename="framestudet.cpp" line="367"/>
+        <location filename="framestudet.cpp" line="391"/>
+        <location filename="framestudet.cpp" line="413"/>
+        <location filename="framestudet.cpp" line="483"/>
+        <location filename="framestudet.cpp" line="612"/>
+        <source>Total Students: %1</source>
+        <translation>Всего студентов: %1</translation>
     </message>
 </context>
 <context>
@@ -1095,19 +1351,16 @@
         <translation type="obsolete">Вся таблица</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="142"/>
         <source>Students</source>
-        <translation>Список студентов</translation>
+        <translation type="vanished">Список студентов</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="161"/>
         <source>Orders</source>
-        <translation>Приказы</translation>
+        <translation type="vanished">Приказы</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="188"/>
         <source>Payment</source>
-        <translation>Оплата</translation>
+        <translation type="vanished">Оплата</translation>
     </message>
     <message>
         <source>Tab 2</source>
@@ -1118,14 +1371,12 @@
         <translation type="obsolete">Приказы</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="122"/>
         <source>List Table</source>
-        <translation>Список таблиц</translation>
+        <translation type="vanished">Список таблиц</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="132"/>
         <source>Tables summary</source>
-        <translation>Сводная таблица</translation>
+        <translation type="vanished">Сводная таблица</translation>
     </message>
     <message>
         <source>student_table</source>
@@ -1137,132 +1388,142 @@
         <translation>Электронная система управления документооборотом ЦЭД ИСА</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="153"/>
-        <location filename="mainwindow.ui" line="341"/>
+        <location filename="mainwindow.ui" line="169"/>
         <source>Contract</source>
         <translation>Договора</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="171"/>
         <source>Admission</source>
-        <translation>Приказы о зачеслении</translation>
+        <translation type="vanished">Приказы о зачеслении</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="179"/>
         <source>Dismissal</source>
-        <translation>Приказы об отчислении</translation>
+        <translation type="vanished">Приказы об отчислении</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="195"/>
         <source>Phases</source>
-        <translation>Оплата по этапам</translation>
+        <translation type="vanished">Оплата по этапам</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="68"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="251"/>
+        <location filename="mainwindow.ui" line="78"/>
         <source>Templates Documents</source>
         <translation>Шаблоны документов</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="270"/>
+        <location filename="mainwindow.ui" line="97"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="301"/>
+        <location filename="mainwindow.ui" line="129"/>
         <source>Connect</source>
         <translation>Соединение</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="309"/>
+        <location filename="mainwindow.ui" line="137"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation>Ctrl+Q</translation>
+        <translation type="vanished">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="321"/>
+        <location filename="mainwindow.ui" line="149"/>
         <source>About Qt</source>
         <translation>О Qt</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="326"/>
+        <location filename="mainwindow.ui" line="154"/>
         <source>Order</source>
         <translation>Приказы</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="331"/>
+        <location filename="mainwindow.ui" line="159"/>
         <source>Reference</source>
         <translation>Справски</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="336"/>
+        <location filename="mainwindow.ui" line="164"/>
         <source>Memo Reference</source>
         <translation>Служебная записка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="346"/>
+        <location filename="mainwindow.ui" line="174"/>
         <source>Report</source>
         <translation>Отчёт</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="351"/>
+        <location filename="mainwindow.ui" line="179"/>
         <source>Protocol</source>
         <translation>Протокол</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="356"/>
+        <location filename="mainwindow.ui" line="184"/>
         <source>List</source>
         <translation>Список</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="361"/>
+        <location filename="mainwindow.ui" line="189"/>
         <source>Certificate</source>
         <translation>Удостоверение</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="366"/>
+        <location filename="mainwindow.ui" line="194"/>
         <source>Certificate Of Degree</source>
         <translation>Диплом</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="371"/>
+        <location filename="mainwindow.ui" line="199"/>
         <source>Timetable</source>
         <translation>Расписание</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="376"/>
+        <location filename="mainwindow.ui" line="204"/>
         <source>Application</source>
         <translation>Заявление</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="381"/>
+        <location filename="mainwindow.ui" line="209"/>
         <source>Additional Agreement</source>
         <translation>Дополнительное соглашение</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="386"/>
+        <location filename="mainwindow.ui" line="214"/>
         <source>Direction To Pay</source>
         <translation>Направление на оплату</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="391"/>
+        <location filename="mainwindow.ui" line="219"/>
         <source>Abstract</source>
         <translation>Выписка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="400"/>
-        <source>Open</source>
-        <translation>Открыть</translation>
+        <location filename="mainwindow.ui" line="228"/>
+        <source>Open Students List</source>
+        <translation>Открыть вписок студентов</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="403"/>
+        <location filename="mainwindow.ui" line="240"/>
+        <source>Open Students Payments</source>
+        <translation>Открыть оплату за обучение</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="243"/>
+        <source>Ctrl+S</source>
+        <translation>Ctrl+S</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="vanished">Открыть</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="231"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
@@ -1535,289 +1796,289 @@
     </message>
     <message>
         <location filename="tableviewtabform.ui" line="75"/>
-        <location filename="tableviewtabform.cpp" line="288"/>
+        <location filename="tableviewtabform.cpp" line="283"/>
         <source>Show Frame Add Row</source>
         <translation>Показать панель добавления строки</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="144"/>
-        <location filename="tableviewtabform.cpp" line="200"/>
+        <location filename="tableviewtabform.cpp" line="141"/>
+        <location filename="tableviewtabform.cpp" line="197"/>
         <source>order_admission_num</source>
         <translation>Номер приказа о зачислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="145"/>
-        <location filename="tableviewtabform.cpp" line="201"/>
+        <location filename="tableviewtabform.cpp" line="142"/>
+        <location filename="tableviewtabform.cpp" line="198"/>
         <source>order_dismissal_num</source>
         <translation>Номер приказа об отчислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="146"/>
-        <location filename="tableviewtabform.cpp" line="202"/>
+        <location filename="tableviewtabform.cpp" line="143"/>
+        <location filename="tableviewtabform.cpp" line="199"/>
         <source>date_of_order_admission</source>
         <translation>Дата приказа о зачислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="147"/>
-        <location filename="tableviewtabform.cpp" line="203"/>
+        <location filename="tableviewtabform.cpp" line="144"/>
+        <location filename="tableviewtabform.cpp" line="200"/>
         <source>date_of_order_dismissal</source>
         <translation>Дата приказа об отчислении</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="148"/>
-        <location filename="tableviewtabform.cpp" line="205"/>
+        <location filename="tableviewtabform.cpp" line="145"/>
+        <location filename="tableviewtabform.cpp" line="202"/>
         <source>amount</source>
         <translation>Сумма оплаты по договору</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="149"/>
-        <location filename="tableviewtabform.cpp" line="206"/>
+        <location filename="tableviewtabform.cpp" line="146"/>
+        <location filename="tableviewtabform.cpp" line="203"/>
         <source>semester</source>
         <translation>Семестр</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="150"/>
-        <location filename="tableviewtabform.cpp" line="207"/>
+        <location filename="tableviewtabform.cpp" line="147"/>
+        <location filename="tableviewtabform.cpp" line="204"/>
         <source>discount</source>
         <translation>Скидка</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="151"/>
-        <location filename="tableviewtabform.cpp" line="208"/>
+        <location filename="tableviewtabform.cpp" line="148"/>
+        <location filename="tableviewtabform.cpp" line="205"/>
         <source>actual_amount_of_payment</source>
         <translation>Сумма фактической оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="152"/>
-        <location filename="tableviewtabform.cpp" line="209"/>
+        <location filename="tableviewtabform.cpp" line="149"/>
+        <location filename="tableviewtabform.cpp" line="206"/>
         <source>date_of_pay</source>
         <translation>День оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="153"/>
-        <location filename="tableviewtabform.cpp" line="210"/>
+        <location filename="tableviewtabform.cpp" line="150"/>
+        <location filename="tableviewtabform.cpp" line="207"/>
         <source>penalties</source>
         <translation>Пени</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="155"/>
-        <location filename="tableviewtabform.cpp" line="177"/>
+        <location filename="tableviewtabform.cpp" line="152"/>
+        <location filename="tableviewtabform.cpp" line="174"/>
         <source>contract_number</source>
         <translation>Номер договора</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="156"/>
-        <location filename="tableviewtabform.cpp" line="178"/>
+        <location filename="tableviewtabform.cpp" line="153"/>
+        <location filename="tableviewtabform.cpp" line="175"/>
         <source>contract_date</source>
         <translation>Дата заключения договора</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="157"/>
-        <location filename="tableviewtabform.cpp" line="179"/>
+        <location filename="tableviewtabform.cpp" line="154"/>
+        <location filename="tableviewtabform.cpp" line="176"/>
         <source>contract_type</source>
         <translation>Тип договора</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="158"/>
-        <location filename="tableviewtabform.cpp" line="180"/>
+        <location filename="tableviewtabform.cpp" line="155"/>
+        <location filename="tableviewtabform.cpp" line="177"/>
         <source>surname</source>
         <translation>Фамилия</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="159"/>
-        <location filename="tableviewtabform.cpp" line="181"/>
+        <location filename="tableviewtabform.cpp" line="156"/>
+        <location filename="tableviewtabform.cpp" line="178"/>
         <source>name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="160"/>
-        <location filename="tableviewtabform.cpp" line="182"/>
+        <location filename="tableviewtabform.cpp" line="157"/>
+        <location filename="tableviewtabform.cpp" line="179"/>
         <source>patronym</source>
         <translation>Отчество</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="161"/>
-        <location filename="tableviewtabform.cpp" line="184"/>
+        <location filename="tableviewtabform.cpp" line="158"/>
+        <location filename="tableviewtabform.cpp" line="181"/>
         <source>date_of_birth</source>
         <translation>Дата рождения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="162"/>
-        <location filename="tableviewtabform.cpp" line="185"/>
+        <location filename="tableviewtabform.cpp" line="159"/>
+        <location filename="tableviewtabform.cpp" line="182"/>
         <source>place_of_birth</source>
         <translation>Место рождения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="163"/>
-        <location filename="tableviewtabform.cpp" line="186"/>
+        <location filename="tableviewtabform.cpp" line="160"/>
+        <location filename="tableviewtabform.cpp" line="183"/>
         <source>citizenship</source>
         <translation>Гражданство</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="164"/>
-        <location filename="tableviewtabform.cpp" line="187"/>
+        <location filename="tableviewtabform.cpp" line="161"/>
+        <location filename="tableviewtabform.cpp" line="184"/>
         <source>passport_series</source>
         <translation>Серия паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="165"/>
-        <location filename="tableviewtabform.cpp" line="188"/>
+        <location filename="tableviewtabform.cpp" line="162"/>
+        <location filename="tableviewtabform.cpp" line="185"/>
         <source>passport_number</source>
         <translation>Номер паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="166"/>
-        <location filename="tableviewtabform.cpp" line="189"/>
+        <location filename="tableviewtabform.cpp" line="163"/>
+        <location filename="tableviewtabform.cpp" line="186"/>
         <source>passport_authority</source>
         <translation>Кем выдан паспорт</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="167"/>
-        <location filename="tableviewtabform.cpp" line="190"/>
+        <location filename="tableviewtabform.cpp" line="164"/>
+        <location filename="tableviewtabform.cpp" line="187"/>
         <source>passport_date_of_issue</source>
         <translation>Дата выдачи паспорта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="168"/>
-        <location filename="tableviewtabform.cpp" line="191"/>
+        <location filename="tableviewtabform.cpp" line="165"/>
+        <location filename="tableviewtabform.cpp" line="188"/>
         <source>passport_subdivision_code</source>
         <translation>Код подразделения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="169"/>
-        <location filename="tableviewtabform.cpp" line="192"/>
+        <location filename="tableviewtabform.cpp" line="166"/>
+        <location filename="tableviewtabform.cpp" line="189"/>
         <source>registration_adm_unit</source>
         <translation>Место регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="170"/>
-        <location filename="tableviewtabform.cpp" line="193"/>
+        <location filename="tableviewtabform.cpp" line="167"/>
+        <location filename="tableviewtabform.cpp" line="190"/>
         <source>registration_adress</source>
         <translation>Адрес регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="171"/>
-        <location filename="tableviewtabform.cpp" line="194"/>
+        <location filename="tableviewtabform.cpp" line="168"/>
+        <location filename="tableviewtabform.cpp" line="191"/>
         <source>registration_date</source>
         <translation>Дата регистрации</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="172"/>
-        <location filename="tableviewtabform.cpp" line="195"/>
+        <location filename="tableviewtabform.cpp" line="169"/>
+        <location filename="tableviewtabform.cpp" line="192"/>
         <source>postcode</source>
         <translation>Почтовый индекс</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="173"/>
-        <location filename="tableviewtabform.cpp" line="196"/>
+        <location filename="tableviewtabform.cpp" line="170"/>
+        <location filename="tableviewtabform.cpp" line="193"/>
         <source>phone</source>
         <translation>Телефон</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="174"/>
-        <location filename="tableviewtabform.cpp" line="197"/>
+        <location filename="tableviewtabform.cpp" line="171"/>
+        <location filename="tableviewtabform.cpp" line="194"/>
         <source>email</source>
         <translation>Электронная почта</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="175"/>
-        <location filename="tableviewtabform.cpp" line="198"/>
+        <location filename="tableviewtabform.cpp" line="172"/>
+        <location filename="tableviewtabform.cpp" line="195"/>
         <source>individual_taxpayer_identification_number</source>
         <translation>ИНН</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="183"/>
+        <location filename="tableviewtabform.cpp" line="180"/>
         <source>sex</source>
         <translation>Пол</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="211"/>
+        <location filename="tableviewtabform.cpp" line="208"/>
         <source>department</source>
         <translation>Факультет</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="212"/>
+        <location filename="tableviewtabform.cpp" line="209"/>
         <source>student</source>
         <translation>Ф.И.О студента</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="213"/>
+        <location filename="tableviewtabform.cpp" line="210"/>
         <source>phase_1_amount</source>
         <translation>Этап 1 Сумма оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="214"/>
+        <location filename="tableviewtabform.cpp" line="211"/>
         <source>phase_1_date</source>
         <translation>Этап 1 дата оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="215"/>
+        <location filename="tableviewtabform.cpp" line="212"/>
         <source>phase_2_amount</source>
         <translation>Этап 2 сумма оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="216"/>
+        <location filename="tableviewtabform.cpp" line="213"/>
         <source>phase_2_date</source>
         <translation>Этап 2 дата оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="217"/>
+        <location filename="tableviewtabform.cpp" line="214"/>
         <source>phase_3_amount</source>
         <translation>Этап 3 сумма оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="218"/>
+        <location filename="tableviewtabform.cpp" line="215"/>
         <source>phase_3_date</source>
         <translation>Этап 3 дата оплаты</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="219"/>
+        <location filename="tableviewtabform.cpp" line="216"/>
         <source>comment</source>
         <translation>Комментарий</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="220"/>
+        <location filename="tableviewtabform.cpp" line="217"/>
         <source>resolution_pay_phase</source>
         <translation>Разрешение на опалты по частям</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="221"/>
+        <location filename="tableviewtabform.cpp" line="218"/>
         <source>year_of_study</source>
         <translation>Курс</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="222"/>
+        <location filename="tableviewtabform.cpp" line="219"/>
         <source>academic_program</source>
         <translation>Форма обучения</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="223"/>
+        <location filename="tableviewtabform.cpp" line="220"/>
         <source>qualification</source>
         <translation>Квалификация</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="224"/>
+        <location filename="tableviewtabform.cpp" line="221"/>
         <source>specialty</source>
         <translation>Специальность/направление подготовки</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="225"/>
+        <location filename="tableviewtabform.cpp" line="222"/>
         <source>payment</source>
         <oldsource>ayment</oldsource>
         <translation>Цена за обучение по договору</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="226"/>
+        <location filename="tableviewtabform.cpp" line="223"/>
         <source>department_contract</source>
         <translation>Факультет/Инстутут</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="247"/>
+        <location filename="tableviewtabform.cpp" line="244"/>
         <source>Hide</source>
         <translation>Спрятать</translation>
     </message>
     <message>
-        <location filename="tableviewtabform.cpp" line="292"/>
+        <location filename="tableviewtabform.cpp" line="287"/>
         <source>Hide Frame Add Row</source>
         <translation>Спрятать панель добавления строки</translation>
     </message>

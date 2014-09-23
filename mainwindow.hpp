@@ -10,6 +10,7 @@
 #include "country.hpp"
 #include "tableviewtabform.hpp"
 #include "framestudet.hpp"
+#include "frameaddpayment.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -29,7 +30,8 @@ private slots:
     void closeTab(int index);
     void itemTabNewOrOpenCurrent(QTreeWidgetItem *item, int col);
     void setCurrentItem(int index);
-    void newTab();
+    void newTabStudentsList();
+    void newTabStudentsPayment();
 
 
 private:
@@ -39,7 +41,8 @@ private:
     QTranslator  qtTranslator;
 
     TableViewTabForm *tvtab;
-    FrameStudet *fs;
+    FrameStudet *fs1;
+    FrameAddPayment *fs2;
 
     QVector<Country> countryList;
 };
