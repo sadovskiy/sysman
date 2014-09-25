@@ -316,9 +316,12 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QListView" name="listViewPhone"/>
+       </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">

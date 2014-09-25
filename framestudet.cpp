@@ -590,8 +590,12 @@ void FrameStudet::updateStudent()
 
 void FrameStudet::on_lineEditFind_textEdited(const QString &arg1)
 {
+    QString str = arg1;
+    if (!arg1.isEmpty()) {
+        str[0] = arg1.at(0).toTitleCase();
+    }
     qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
-                               "WHERE surname LIKE \'%1\%\' ").arg(arg1));
+                               "WHERE surname LIKE \'%1\%\' ").arg(str));
     if (qmodstud->lastError().isValid())
         qDebug() << qmodstud->lastError().text();
 }

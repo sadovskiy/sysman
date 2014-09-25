@@ -22,11 +22,11 @@ public:
     ~FrameAddPayment();
 
 private slots:
-    void addRow();
     void on_comboBoxYear_currentIndexChanged(int index);
     void on_comboBoxDepartment_currentIndexChanged(int index);
     void on_comboBoxGroup_currentIndexChanged(int index);
     void handleSelectionChanged(QModelIndex selection);
+    void on_lineEditFind_textEdited(const QString &arg1);
 
 private:
     Ui::FrameAddPayment *ui;
@@ -54,6 +54,7 @@ private:
     QSqlQuery *qInsertStudent;
     QSqlQuery *qDeleteStudent;
     QSqlQueryModel *qmodpay;
+    QSqlQueryModel *qphone;
     QSqlTableModel *qtablem;
 };
 

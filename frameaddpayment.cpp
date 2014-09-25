@@ -85,6 +85,7 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
     qInsertStudent = new QSqlQuery;
     qDeleteStudent = new QSqlQuery;
     qcontract = new QSqlQuery;
+    qphone = new QSqlQueryModel;
 
     qmoddepartment->setQuery("SELECT department_id, department_short, department_full FROM department");
 
@@ -197,14 +198,24 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
     ui->tableView->hideColumn(0);
 }
 
+
+FrameAddPayment::~FrameAddPayment()
+{
+    delete ui;
+}
+
 void FrameAddPayment::handleSelectionChanged(QModelIndex selection)
 {
     const int num = ui->treeViewStudents->model()->index(selection.row(), 1).data(Qt::DisplayRole).toInt();
     qDebug() << num;
 
 
-    ui->tableView->selectRow(num);
+    ui->tableView->selectRow(num - 1);
 
+    qphone->setQuery(QString("SELECT \'+' || country_calling_code || \'(' || "
+                             "calling_code || \')' || phone_number AS phone FROM phone WHERE student = %1").arg(num));
+
+    ui->listViewPhone->setModel(qphone);
 
 }
 
@@ -277,13 +288,15 @@ void FrameAddPayment::on_comboBoxGroup_currentIndexChanged(int index)
         ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
 }
 
-
-FrameAddPayment::~FrameAddPayment()
+void FrameAddPayment::on_lineEditFind_textEdited(const QString &arg1)
 {
-    delete ui;
-}
-
-void FrameAddPayment::addRow()
-{
+    QString str = arg1;
+    if (!arg1.isEmpty()) {
+        str[0] = arg1.at(0).toTitleCase();
+    }
+    qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
+                               "WHERE surname LIKE \'%1\%\' ").arg(str));
+    if (qmodstud->lastError().isValid())
+        qDebug() << qmodstud->lastError().text();
 
 }
