@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     frameaddpayment.cpp \
     frameaddphasepayment.cpp \
     framestudet.cpp \
-    department.cpp
+    department.cpp \
+    money.cpp
 
 HEADERS  += mainwindow.hpp \
     dialogconnecttodatabase.hpp \
@@ -47,7 +48,8 @@ HEADERS  += mainwindow.hpp \
     frameaddpayment.hpp \
     frameaddphasepayment.hpp \
     framestudet.hpp \
-    department.hpp
+    department.hpp \
+    money.hpp
 
 FORMS    += mainwindow.ui \
     dialogconnecttodatabase.ui \

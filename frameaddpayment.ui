@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>365</height>
+    <width>848</width>
+    <height>663</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -317,7 +317,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QListView" name="listViewPhone"/>
+        <widget class="QListWidget" name="listWidgetPhone">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -369,6 +376,15 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

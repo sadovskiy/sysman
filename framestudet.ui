@@ -371,70 +371,6 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayoutDateOfBirth">
-              <item>
-               <widget class="QLabel" name="labelDateOfBirth">
-                <property name="text">
-                 <string>Date Of Birth</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QDateEdit" name="dateEditDateOfBirth">
-                <property name="currentSection">
-                 <enum>QDateTimeEdit::DaySection</enum>
-                </property>
-                <property name="displayFormat">
-                 <string notr="true">dd.MM.yyyy (ddd)</string>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayoutPlaceOfBirth">
-              <item>
-               <widget class="QLabel" name="labelPlaceOfBirth">
-                <property name="text">
-                 <string>Place Of Birth</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBoxPlaceOfBirth">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayoutCitizenship">
-              <item>
-               <widget class="QLabel" name="labelCitizenship">
-                <property name="text">
-                 <string>Citizenship</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBoxCitizenship">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
           <item row="2" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
@@ -484,70 +420,6 @@
               </item>
               <item>
                <widget class="QLineEdit" name="lineEditPassportAuthority"/>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayoutPassportDateOfIssue">
-              <item>
-               <widget class="QLabel" name="labelPassportDateOfIssue">
-                <property name="text">
-                 <string>Passport Date Of Issue</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QDateEdit" name="dateEditPassportDateOfIssue">
-                <property name="currentSection">
-                 <enum>QDateTimeEdit::DaySection</enum>
-                </property>
-                <property name="displayFormat">
-                 <string notr="true">dd.MM.yyyy (ddd)</string>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayoutPassportSubdivisionCode">
-              <item>
-               <widget class="QLabel" name="labelPassportSubdivisionCode">
-                <property name="text">
-                 <string>Passport Subdivision Code</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBoxPassportSubdivisionCode">
-                <property name="maximum">
-                 <number>999999</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayoutRegistrationAdministrativeUnit">
-              <item>
-               <widget class="QLabel" name="labelRegistrationAdministrativeUnit">
-                <property name="text">
-                 <string>Registration Administrative Unit</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBoxRegistrationAdministrativeUnit">
-                <property name="editable">
-                 <bool>true</bool>
-                </property>
-               </widget>
               </item>
              </layout>
             </item>
@@ -748,6 +620,70 @@
             </property>
            </spacer>
           </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutDateOfBirth">
+              <item>
+               <widget class="QLabel" name="labelDateOfBirth">
+                <property name="text">
+                 <string>Date Of Birth</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dateEditDateOfBirth">
+                <property name="currentSection">
+                 <enum>QDateTimeEdit::DaySection</enum>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">dd.MM.yyyy (ddd)</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutPlaceOfBirth">
+              <item>
+               <widget class="QLabel" name="labelPlaceOfBirth">
+                <property name="text">
+                 <string>Place Of Birth</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxPlaceOfBirth">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutCitizenship">
+              <item>
+               <widget class="QLabel" name="labelCitizenship">
+                <property name="text">
+                 <string>Citizenship</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxCitizenship">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
           <item row="7" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
@@ -783,6 +719,70 @@
                <string>Apply Changes</string>
               </property>
              </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutPassportDateOfIssue">
+              <item>
+               <widget class="QLabel" name="labelPassportDateOfIssue">
+                <property name="text">
+                 <string>Passport Date Of Issue</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="dateEditPassportDateOfIssue">
+                <property name="currentSection">
+                 <enum>QDateTimeEdit::DaySection</enum>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">dd.MM.yyyy (ddd)</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutPassportSubdivisionCode">
+              <item>
+               <widget class="QLabel" name="labelPassportSubdivisionCode">
+                <property name="text">
+                 <string>Passport Subdivision Code</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBoxPassportSubdivisionCode">
+                <property name="maximum">
+                 <number>999999</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayoutRegistrationAdministrativeUnit">
+              <item>
+               <widget class="QLabel" name="labelRegistrationAdministrativeUnit">
+                <property name="text">
+                 <string>Registration Administrative Unit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBoxRegistrationAdministrativeUnit">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>

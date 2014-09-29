@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QDate>
 #include <QSqlRecord>
-
+#include "money.hpp"
 
 FrameAddPayment::FrameAddPayment(QWidget *parent) :
     QFrame(parent),
@@ -191,11 +191,35 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
 
     ui->tableView->setModel(qmodpay);*/
     qtablem->setTable("payment");
+//    qtablem->setSort(0, Qt::AscendingOrder);
+//    qtablem->setFilter("");
+//    qtablem->columnCount();
+    qtablem->insertColumn(0, QModelIndex());
+
     qtablem->select();
+
+    QString n = 0;
+
+    qcontract->exec("SELECT payment FROM contract WHERE contract_id = 10");
+    if (qcontract->lastError().isValid())
+        qDebug() << qcontract->lastError().text();
+    Money m;
+    QLocale locale = QLocale::system();
+
+    while (qcontract->next()) {
+        n = qcontract->value(0).toString().remove(qcontract->value(0).toString().length() - 7, 7);
+    }
+    n.remove(locale.groupSeparator());
+//    m.parse(n);
+    int mon = (double)n.toInt() * ui->lineEditCoefficient->text().toDouble();
+    qtablem->setData(qtablem->index(2, 1), mon);
+//    qtablem->index(1, 2).data(Qt::DisplayRole).toInt();
+
     ui->tableView->setModel(qtablem);
     ui->tableView->hideColumn(qtablem->columnCount()-1);
     ui->tableView->hideColumn(qtablem->columnCount()-2);
     ui->tableView->hideColumn(0);
+    ui->tableView->resizeColumnsToContents();
 }
 
 
@@ -209,13 +233,41 @@ void FrameAddPayment::handleSelectionChanged(QModelIndex selection)
     const int num = ui->treeViewStudents->model()->index(selection.row(), 1).data(Qt::DisplayRole).toInt();
     qDebug() << num;
 
+    ui->listWidgetPhone->clear();
+
 
     ui->tableView->selectRow(num - 1);
 
-    qphone->setQuery(QString("SELECT \'+' || country_calling_code || \'(' || "
-                             "calling_code || \')' || phone_number AS phone FROM phone WHERE student = %1").arg(num));
+//    qphone->setQuery(QString("SELECT \'+' || country_calling_code || \'(' || "
+//                             "calling_code || \')' || phone_number AS phone FROM phone WHERE student = %1").arg(num));
 
-    ui->listViewPhone->setModel(qphone);
+    QSqlQuery countryCode(QString("SELECT country_calling_code FROM phone WHERE student = %1").arg(num));
+    QSqlQuery callingCode(QString("SELECT calling_code FROM phone WHERE student = %1").arg(num));
+    QSqlQuery phoneNumber(QString("SELECT phone_number FROM phone WHERE student = %1").arg(num));
+    QSqlQuery phoneComment(QString("SELECT \'(' || comment || \')' AS comment FROM phone WHERE student = %1").arg(num));
+
+
+
+    while (countryCode.next() && callingCode.next() && phoneNumber.next() && phoneComment.next()) {
+        QString number = phoneNumber.value(0).toString();
+        number.insert(3, QString("-"));
+        number.insert(6, QString("-"));
+
+        qDebug() << "+" << countryCode.value(0).toString() << "("
+                 << callingCode.value(0).toString() << ")"
+                 << number;
+        if (!phoneNumber.value(0).isNull())
+            ui->listWidgetPhone->addItem(QString("+%1(%2)%3 %4").
+                                         arg(countryCode.value(0).toString()).
+                                         arg(callingCode.value(0).toString()).
+                                         arg(number).
+                                         arg(phoneComment.value(0).toString()));
+    }
+
+
+
+
+//    ui->listViewPhone->setModel(qphone);
 
 }
 
@@ -299,4 +351,12 @@ void FrameAddPayment::on_lineEditFind_textEdited(const QString &arg1)
     if (qmodstud->lastError().isValid())
         qDebug() << qmodstud->lastError().text();
 
+}
+
+void FrameAddPayment::on_tableView_clicked(const QModelIndex &index)
+{
+    qDebug() << "test";
+    ui->tableView->model()->index(index.row(), 1).data()
+            ui->treeViewStudents->find();
+    ui->treeViewStudents->setCurrentIndex(QModelIndex());
 }

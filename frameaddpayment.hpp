@@ -28,6 +28,8 @@ private slots:
     void handleSelectionChanged(QModelIndex selection);
     void on_lineEditFind_textEdited(const QString &arg1);
 
+    void on_tableView_clicked(const QModelIndex &index);
+
 private:
     Ui::FrameAddPayment *ui;
 
