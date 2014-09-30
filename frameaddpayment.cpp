@@ -200,6 +200,13 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
 
     QString n = 0;
 
+    qtablem->setHeaderData(qtablem->fieldIndex("semester"), Qt::Horizontal, tr("semester"));
+    qtablem->setHeaderData(qtablem->fieldIndex("discount"), Qt::Horizontal, tr("discount"));
+    qtablem->setHeaderData(qtablem->fieldIndex("actual_amount_of_payment"), Qt::Horizontal, tr("actual_amount_of_payment"));
+    qtablem->setHeaderData(qtablem->fieldIndex("date_of_pay"), Qt::Horizontal, tr("date_of_pay"));
+    qtablem->setHeaderData(qtablem->fieldIndex("penalties"), Qt::Horizontal, tr("penalties"));
+//    qtablem->setData(qtablem->index(row, qtablem->fieldIndex(""), Qt::Horizontal, tr("")));
+
     qcontract->exec("SELECT payment FROM contract WHERE contract_id = 10");
     if (qcontract->lastError().isValid())
         qDebug() << qcontract->lastError().text();
@@ -219,6 +226,7 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
     ui->tableView->hideColumn(qtablem->columnCount()-1);
     ui->tableView->hideColumn(qtablem->columnCount()-2);
     ui->tableView->hideColumn(0);
+    ui->tableView->hideColumn(qtablem->fieldIndex("resolution_pay_phase"));
     ui->tableView->resizeColumnsToContents();
 }
 
@@ -354,10 +362,3 @@ void FrameAddPayment::on_lineEditFind_textEdited(const QString &arg1)
 
 }
 
-void FrameAddPayment::on_tableView_clicked(const QModelIndex &index)
-{
-    qDebug() << "test";
-//    ui->tableView->model()->index(index.row(), 1).data()
-            //ui->treeViewStudents->find();
-    ui->treeViewStudents->setCurrentIndex(QModelIndex());
-}

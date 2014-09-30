@@ -54,6 +54,10 @@ private slots:
 
     void on_pushButtonAddOrder_clicked();
 
+    void on_pushButtonDelContract_clicked();
+
+    void on_pushButtonDelOrder_clicked();
+
 private:
     Ui::FrameStudet *ui;
 

@@ -412,9 +412,9 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="frameaddpayment.ui" line="344"/>
+        <location filename="frameaddpayment.ui" line="357"/>
         <source>Coefficient: </source>
-        <translation></translation>
+        <translation>Коэффициент</translation>
     </message>
     <message>
         <source>Add Row Payment</source>
@@ -449,9 +449,34 @@
         <translation type="vanished">Семестр</translation>
     </message>
     <message>
-        <location filename="frameaddpayment.cpp" line="294"/>
-        <location filename="frameaddpayment.cpp" line="318"/>
-        <location filename="frameaddpayment.cpp" line="340"/>
+        <location filename="frameaddpayment.cpp" line="203"/>
+        <source>semester</source>
+        <translation>Семестр</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.cpp" line="204"/>
+        <source>discount</source>
+        <translation>Скидка</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.cpp" line="205"/>
+        <source>actual_amount_of_payment</source>
+        <translation>Сумма фактической оплаты</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.cpp" line="206"/>
+        <source>date_of_pay</source>
+        <translation>День оплаты</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.cpp" line="207"/>
+        <source>penalties</source>
+        <translation>Пени</translation>
+    </message>
+    <message>
+        <location filename="frameaddpayment.cpp" line="302"/>
+        <location filename="frameaddpayment.cpp" line="326"/>
+        <location filename="frameaddpayment.cpp" line="348"/>
         <source>Total Students: %1</source>
         <translation></translation>
     </message>
@@ -1160,8 +1185,9 @@
     </message>
     <message>
         <location filename="framestudet.ui" line="607"/>
-        <source>000; </source>
-        <translation></translation>
+        <source>000</source>
+        <oldsource>000; </oldsource>
+        <translation>000</translation>
     </message>
     <message>
         <location filename="framestudet.ui" line="614"/>

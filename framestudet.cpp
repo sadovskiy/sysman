@@ -718,7 +718,7 @@ void FrameStudet::on_pushButtonDelPhone_clicked()
 {
     int index = ui->treeViewStudents->model()->index(ui->treeViewStudents->currentIndex().row(), 1).data(Qt::DisplayRole).toInt();
     QSqlQuery queryDel;
-    queryDel.prepare(QString("DELETE FROM phone WHERE student = %1").arg(index));
+    queryDel.prepare(QString("DELETE FROM phone WHERE lstudent_id = %1").arg(index));
     queryDel.exec();
     if (queryDel.lastError().isValid())
         qDebug() << "DELETE phone: " << queryDel.lastError().text();
@@ -762,4 +762,24 @@ void FrameStudet::on_pushButtonAddOrder_clicked()
         subWin->show();
         fadm->loadData(departmentList, 0);
     }
+}
+
+void FrameStudet::on_pushButtonDelContract_clicked()
+{
+    QSqlQuery queryDel;
+    int index = ui->treeWidgetContract->currentItem()->data(1, Qt::DisplayRole).toInt();
+    queryDel.prepare(QString("DELETE FROM contract WHERE contract_id = %1").arg(index));
+    queryDel.exec();
+    if (queryDel.lastError().isValid())
+        qDebug() << "DELETE phone: " << queryDel.lastError().text();
+}
+
+void FrameStudet::on_pushButtonDelOrder_clicked()
+{
+    QSqlQuery queryDel;
+    int index = ui->treeWidgetContract->currentItem()->data(1, Qt::DisplayRole).toInt();
+    queryDel.prepare(QString("DELETE FROM orders_admission WHERE order_admission_id = %1").arg(index));
+    queryDel.exec();
+    if (queryDel.lastError().isValid())
+        qDebug() << "DELETE phone: " << queryDel.lastError().text();
 }

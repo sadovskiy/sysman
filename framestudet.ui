@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1107</width>
-    <height>821</height>
+    <height>646</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -250,7 +250,7 @@
           <property name="minimumSize">
            <size>
             <width>260</width>
-            <height>400</height>
+            <height>0</height>
            </size>
           </property>
          </widget>
@@ -277,7 +277,7 @@
         </property>
        </column>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QPushButton" name="pushButtonAddContract">
@@ -604,7 +604,7 @@
                  </size>
                 </property>
                 <property name="inputMask">
-                 <string>000; </string>
+                 <string>000</string>
                 </property>
                </widget>
               </item>
@@ -618,7 +618,7 @@
               <item>
                <widget class="QLineEdit" name="lineEditPhoneNumber">
                 <property name="inputMask">
-                 <string notr="true">000-00-00; </string>
+                 <string notr="true">000-00-00</string>
                 </property>
                 <property name="text">
                  <string notr="true">--</string>
@@ -755,7 +755,7 @@
               <item>
                <widget class="QLineEdit" name="lineEditIndividualTaxpayerIdentificationNumber">
                 <property name="inputMask">
-                 <string notr="true">999999999999; </string>
+                 <string notr="true">999999999999</string>
                 </property>
                 <property name="maxLength">
                  <number>12</number>
