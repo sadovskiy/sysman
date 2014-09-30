@@ -40,9 +40,19 @@ private slots:
 
     void on_lineEditFind_textEdited(const QString &arg1);
 
-    void on_pushButton_clicked();
+    void on_pushButtonDelStudent_clicked();
 
     void on_treeWidgetContract_clicked(const QModelIndex &index);
+
+    void on_pushButtonAddPhonNum_clicked();
+
+    void on_listWidgetPhone_currentRowChanged(int currentRow);
+
+    void on_pushButtonDelPhone_clicked();
+
+    void on_pushButtonAddContract_clicked();
+
+    void on_pushButtonAddOrder_clicked();
 
 private:
     Ui::FrameStudet *ui;

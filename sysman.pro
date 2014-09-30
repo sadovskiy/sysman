@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     sexcolumndelegate.cpp \
     countrydelegate.cpp \
     country.cpp \
-    frameaddstudent.cpp \
     frameaddcontract.cpp \
     frameaddorderadmission.cpp \
     frameaddorderdismission.cpp \
@@ -41,7 +40,6 @@ HEADERS  += mainwindow.hpp \
     sexcolumndelegate.hpp \
     countrydelegate.hpp \
     country.hpp \
-    frameaddstudent.hpp \
     frameaddcontract.hpp \
     frameaddorderadmission.hpp \
     frameaddorderdismission.hpp \
@@ -54,7 +52,6 @@ HEADERS  += mainwindow.hpp \
 FORMS    += mainwindow.ui \
     dialogconnecttodatabase.ui \
     tableviewtabform.ui \
-    frameaddstudent.ui \
     frameaddcontract.ui \
     frameaddorderadmission.ui \
     frameaddorderdismission.ui \

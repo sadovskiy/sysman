@@ -342,6 +342,7 @@ void FrameAddPayment::on_comboBoxGroup_currentIndexChanged(int index)
 
 void FrameAddPayment::on_lineEditFind_textEdited(const QString &arg1)
 {
+    // Для поиска с любым регистром при вводе
     QString str = arg1;
     if (!arg1.isEmpty()) {
         str[0] = arg1.at(0).toTitleCase();
@@ -356,7 +357,7 @@ void FrameAddPayment::on_lineEditFind_textEdited(const QString &arg1)
 void FrameAddPayment::on_tableView_clicked(const QModelIndex &index)
 {
     qDebug() << "test";
-    ui->tableView->model()->index(index.row(), 1).data()
-            ui->treeViewStudents->find();
+//    ui->tableView->model()->index(index.row(), 1).data()
+            //ui->treeViewStudents->find();
     ui->treeViewStudents->setCurrentIndex(QModelIndex());
 }

@@ -8,7 +8,6 @@
 #include <QAction>
 #include <QSortFilterProxyModel>
 
-#include "frameaddstudent.hpp"
 #include "frameaddcontract.hpp"
 #include "frameaddorderadmission.hpp"
 #include "frameaddorderdismission.hpp"
@@ -47,7 +46,6 @@ private:
     QAction *actionHeader;
     QPoint mPos;
 
-    FrameAddStudent *framestud;
     FrameAddContract *framecontr;
     FrameAddOrderAdmission *frameoadm;
     FrameAddOrderDismission *frameodism;

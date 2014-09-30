@@ -23,7 +23,6 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
     hspbottom->addItem(horizontalSpacerButtonSHFrame);
     hspbottom->addWidget(ui->pushButtonShowHideFrameAddRow);
 
-    framestud = new FrameAddStudent(this);
 //    framecontr = new FrameAddContract(this);
     frameoadm = new FrameAddOrderAdmission(this);
     frameodism = new FrameAddOrderDismission(this);
@@ -32,23 +31,16 @@ TableViewTabForm::TableViewTabForm(QWidget *parent) :
 
     glayout->addWidget(ui->tableView, 0, 0);
 
-    glayout->addWidget(framestud, 1, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(framecontr, 2, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(frameoadm, 3, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(frameodism, 4, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(framepayment, 5, 0, Qt::AlignLeft | Qt::AlignBottom);
     glayout->addWidget(framepp, 6, 0, Qt::AlignLeft | Qt::AlignBottom);
 
-    framestud->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-
-
     glayout->addLayout(hspbottom, 8, 0, Qt::AlignRight);
 
     this->setLayout(glayout);
 
-
-    framestud->setVisible(false);
     framecontr->setVisible(false);
     frameoadm->setVisible(false);
     frameodism->setVisible(false);
@@ -264,8 +256,6 @@ void TableViewTabForm::clear() const
 void TableViewTabForm::ShowHideFrameAddRow()
 {
     QFrame *frame = 0;
-    if (tName == "student")
-        frame = framestud;
     if (tName == "contract")
         frame = framecontr;
     if (tName == "orders_admission")

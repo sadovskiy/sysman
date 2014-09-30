@@ -335,6 +335,31 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
 
     }
 
+    ui->listWidgetPhone->clear();
+
+    QSqlQuery countryCode(QString("SELECT country_calling_code FROM phone WHERE student = %1").arg(num));
+    QSqlQuery callingCode(QString("SELECT calling_code FROM phone WHERE student = %1").arg(num));
+    QSqlQuery phoneNumber(QString("SELECT phone_number FROM phone WHERE student = %1").arg(num));
+    QSqlQuery phoneComment(QString("SELECT \'(' || comment || \')' AS comment FROM phone WHERE student = %1").arg(num));
+
+
+
+    while (countryCode.next() && callingCode.next() && phoneNumber.next() && phoneComment.next()) {
+        QString number = phoneNumber.value(0).toString();
+        number.insert(3, QString("-"));
+        number.insert(6, QString("-"));
+
+        qDebug() << "+" << countryCode.value(0).toString() << "("
+                 << callingCode.value(0).toString() << ")"
+                 << number;
+        if (!phoneNumber.value(0).isNull())
+            ui->listWidgetPhone->addItem(QString("+%1(%2)%3 %4").
+                                         arg(countryCode.value(0).toString()).
+                                         arg(callingCode.value(0).toString()).
+                                         arg(number).
+                                         arg(phoneComment.value(0).toString()));
+    }
+
     ui->treeWidgetContract->expandAll();
 
 }
@@ -421,7 +446,7 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
                             "place_of_birth, citizenship, passport_series, passport_number, "
                             "passport_authority, passport_date_of_issue, passport_subdivision_code, "
                             "registration_adm_unit, registration_adress, registration_date, "
-                            "postcode, phone, email, individual_taxpayer_identification_number) "
+                            "postcode, email, individual_taxpayer_identification_number) "
                             "VALUES (:surname, :name, :patronym, :sex, :date_of_birth, "
                             ":place_of_birth, :citizenship, :passport_series, :passport_number, "
                             ":passport_authority, :passport_date_of_issue, :passport_subdivision_code, "
@@ -449,9 +474,6 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
     qInsertStudent->bindValue(":registration_adress", ui->lineEditRegistrationAdress->text());
     qInsertStudent->bindValue(":registration_date", ui->dateEditRegistrationDate->date());
     qInsertStudent->bindValue(":postcode", ui->spinBoxPostcode->text().toInt());
-    QString str = ui->lineEditPhoneNumber->text();
-    str.remove(3, 1);
-    str.remove(5, 1);
 
     qInsertStudent->bindValue(":email", ui->lineEditEmail->text());
     qInsertStudent->bindValue(":individual_taxpayer_identification_number", ui->lineEditIndividualTaxpayerIdentificationNumber->text());
@@ -600,7 +622,7 @@ void FrameStudet::on_lineEditFind_textEdited(const QString &arg1)
         qDebug() << qmodstud->lastError().text();
 }
 
-void FrameStudet::on_pushButton_clicked()
+void FrameStudet::on_pushButtonDelStudent_clicked()
 {
     int row = ui->treeViewStudents->currentIndex().row();
     int index = ui->treeViewStudents->model()->index(row, 1).data(Qt::DisplayRole).toInt();
@@ -659,5 +681,85 @@ void FrameStudet::on_treeWidgetContract_clicked(const QModelIndex &index)
                 fadm->loadData(departmentList, num);
             }
         }
+    }
+}
+
+void FrameStudet::on_pushButtonAddPhonNum_clicked()
+{
+    ui->listWidgetPhone->addItem(QString("+" + ui->comboBoxCountryCallingCode->currentText() + "(" +
+                                         ui->lineEditPhoneCallingCode->text() + ")" +
+                                         ui->lineEditPhoneNumber->text() +
+                                         ui->lineEditCommentPhon->text()));
+
+    QSqlQuery queryAddPhone;
+    queryAddPhone.prepare(QString("INSERT INTO phone(student, country_calling_code, calling_code, phone_number, comment)"
+                                   "VALUES (:student, :country_calling_code, :calling_code, :phone_number, :comment)"));
+    queryAddPhone.bindValue(":student", ui->treeViewStudents->model()->index(ui->treeViewStudents->currentIndex().row(), 1).data(Qt::DisplayRole).toInt());
+    queryAddPhone.bindValue(":country_calling_code", ui->comboBoxCountryCallingCode->currentText());
+    queryAddPhone.bindValue(":calling_code", ui->lineEditPhoneCallingCode->text());
+    queryAddPhone.bindValue(":phone_number", ui->lineEditPhoneNumber->text().remove(3, 1).remove(5, 1));
+    queryAddPhone.bindValue(":comment", ui->lineEditCommentPhon->text());
+
+    queryAddPhone.exec();
+    if (queryAddPhone.lastError().isValid())
+        qDebug() << "INSERT phone: " << queryAddPhone.lastError().text();
+    ui->comboBoxCountryCallingCode->clear();
+    ui->lineEditPhoneCallingCode->clear();
+    ui->lineEditPhoneNumber->clear();
+    ui->lineEditCommentPhon->clear();
+}
+
+void FrameStudet::on_listWidgetPhone_currentRowChanged(int currentRow)
+{
+    qDebug() << currentRow;
+}
+
+void FrameStudet::on_pushButtonDelPhone_clicked()
+{
+    int index = ui->treeViewStudents->model()->index(ui->treeViewStudents->currentIndex().row(), 1).data(Qt::DisplayRole).toInt();
+    QSqlQuery queryDel;
+    queryDel.prepare(QString("DELETE FROM phone WHERE student = %1").arg(index));
+    queryDel.exec();
+    if (queryDel.lastError().isValid())
+        qDebug() << "DELETE phone: " << queryDel.lastError().text();
+
+    ui->listWidgetPhone->takeItem(ui->listWidgetPhone->currentIndex().row());
+}
+
+void FrameStudet::on_pushButtonAddContract_clicked()
+{
+    QMdiSubWindow *subWindow = ui->mdiArea->activeSubWindow();
+    FrameAddContract *fcontract = 0;
+    if (subWindow) {
+        fcontract = qobject_cast<FrameAddContract *>(subWindow->widget()->window());
+        ui->mdiArea->setActiveSubWindow(subWindow);
+    }
+    if (!fcontract) {
+        fcontract = new FrameAddContract(this);
+        QMdiSubWindow *subWin = ui->mdiArea->addSubWindow(fcontract);
+        subWin->setAttribute(Qt::WA_DeleteOnClose);
+        subWin->setWindowFlags(Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+        subWin->setWindowTitle("New Contract");
+        subWin->show();
+        fcontract->loadData(cntrTypeList, curriculumList, yearList, 0);
+    }
+}
+
+void FrameStudet::on_pushButtonAddOrder_clicked()
+{
+    QMdiSubWindow *subWindow = ui->mdiArea->activeSubWindow();
+    FrameAddOrderAdmission *fadm = 0;
+    if (subWindow) {
+        fadm = qobject_cast<FrameAddOrderAdmission *>(subWindow->widget());
+        ui->mdiArea->setActiveSubWindow(subWindow);
+    }
+    if (!fadm) {
+        fadm = new FrameAddOrderAdmission(this);
+        QMdiSubWindow *subWin = ui->mdiArea->addSubWindow(fadm);
+        subWin->setAttribute(Qt::WA_DeleteOnClose);
+        subWin->setWindowFlags(Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);
+        subWin->setWindowTitle("New Order");
+        subWin->show();
+        fadm->loadData(departmentList, 0);
     }
 }
