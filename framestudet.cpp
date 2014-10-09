@@ -271,7 +271,7 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
 
     QSqlQuery queryadmission;
 
-    query.exec(QString("SELECT lcontract_id FROM list_contract_student WHERE lstudent_id = %1").arg(num));
+    query.exec(QString("SELECT lcontract_id, lstudent_id FROM list_contract_student WHERE lstudent_id = %1").arg(num));
     queryadmission.exec(QString("SELECT order_admission_id FROM list_student_in_admission WHERE student_id = %1").arg(num));
 
     if (query.lastError().isValid())
@@ -280,8 +280,9 @@ void FrameStudet::handleSelectionChanged(QModelIndex selection)
     query.first();
 
     qDebug() << "lcontract_id" << query.value(0).toString();
+    qDebug() << "lstudent_id" << query.value(1).toString();
 
-    if (query.isValid()) {
+    if (query.isValid() && !query.value(1).isNull()) {
         QSqlQuery query2;
         query2.exec(QString("SELECT ctr.contract_date || \' - \' || ctr.contract_number, ctr.contract_id FROM contract AS ctr "
                             "JOIN (SELECT lcst.lcontract_id FROM list_contract_student AS lcst WHERE lcst.lstudent_id = %1) AS stud "
@@ -474,9 +475,10 @@ void FrameStudet::on_pushButtonAddStudent_clicked()
     qInsertStudent->bindValue(":registration_adress", ui->lineEditRegistrationAdress->text());
     qInsertStudent->bindValue(":registration_date", ui->dateEditRegistrationDate->date());
     qInsertStudent->bindValue(":postcode", ui->spinBoxPostcode->text().toInt());
-
+    if (!ui->lineEditEmail->text().isEmpty())
     qInsertStudent->bindValue(":email", ui->lineEditEmail->text());
-    qInsertStudent->bindValue(":individual_taxpayer_identification_number", ui->lineEditIndividualTaxpayerIdentificationNumber->text());
+    if (!ui->lineEditIndividualTaxpayerIdentificationNumber->text().isEmpty())
+        qInsertStudent->bindValue(":individual_taxpayer_identification_number", ui->lineEditIndividualTaxpayerIdentificationNumber->text());
     qInsertStudent->exec();
 
     if (qInsertStudent->lastError().isValid())
@@ -549,11 +551,12 @@ void FrameStudet::on_pushButtonApplyChanges_clicked()
     qInsertStudent->bindValue(":registration_adm_unit", ui->comboBoxRegistrationAdministrativeUnit->currentText());
     qInsertStudent->bindValue(":registration_adress", ui->lineEditRegistrationAdress->text());
     qInsertStudent->bindValue(":registration_date", ui->dateEditRegistrationDate->date());
+    if (!ui->spinBoxPostcode->text().toInt())
     qInsertStudent->bindValue(":postcode", ui->spinBoxPostcode->text().toInt());
-    QString str = ui->lineEditPhoneNumber->text();
-    str.remove(3, 1);
-    str.remove(5, 1);
-    qInsertStudent->bindValue(":email", ui->lineEditEmail->text());
+
+    if (!ui->lineEditEmail->text().isEmpty())
+        qInsertStudent->bindValue(":email", ui->lineEditEmail->text());
+    if (!ui->lineEditIndividualTaxpayerIdentificationNumber->text().isEmpty())
     qInsertStudent->bindValue(":individual_taxpayer_identification_number", ui->lineEditIndividualTaxpayerIdentificationNumber->text());
     qInsertStudent->exec();
 
@@ -686,10 +689,7 @@ void FrameStudet::on_treeWidgetContract_clicked(const QModelIndex &index)
 
 void FrameStudet::on_pushButtonAddPhonNum_clicked()
 {
-    ui->listWidgetPhone->addItem(QString("+" + ui->comboBoxCountryCallingCode->currentText() + "(" +
-                                         ui->lineEditPhoneCallingCode->text() + ")" +
-                                         ui->lineEditPhoneNumber->text() +
-                                         ui->lineEditCommentPhon->text()));
+
 
     QSqlQuery queryAddPhone;
     queryAddPhone.prepare(QString("INSERT INTO phone(student, country_calling_code, calling_code, phone_number, comment)"
@@ -698,11 +698,17 @@ void FrameStudet::on_pushButtonAddPhonNum_clicked()
     queryAddPhone.bindValue(":country_calling_code", ui->comboBoxCountryCallingCode->currentText());
     queryAddPhone.bindValue(":calling_code", ui->lineEditPhoneCallingCode->text());
     queryAddPhone.bindValue(":phone_number", ui->lineEditPhoneNumber->text().remove(3, 1).remove(5, 1));
-    queryAddPhone.bindValue(":comment", ui->lineEditCommentPhon->text());
+    if (!ui->lineEditCommentPhon->text().isEmpty())
+        queryAddPhone.bindValue(":comment", ui->lineEditCommentPhon->text());
 
     queryAddPhone.exec();
     if (queryAddPhone.lastError().isValid())
         qDebug() << "INSERT phone: " << queryAddPhone.lastError().text();
+    else
+        ui->listWidgetPhone->addItem(QString("+" + ui->comboBoxCountryCallingCode->currentText() + "(" +
+                                             ui->lineEditPhoneCallingCode->text() + ")" +
+                                             ui->lineEditPhoneNumber->text() +
+                                             ui->lineEditCommentPhon->text()));
     ui->comboBoxCountryCallingCode->clear();
     ui->lineEditPhoneCallingCode->clear();
     ui->lineEditPhoneNumber->clear();
@@ -716,14 +722,19 @@ void FrameStudet::on_listWidgetPhone_currentRowChanged(int currentRow)
 
 void FrameStudet::on_pushButtonDelPhone_clicked()
 {
-    int index = ui->treeViewStudents->model()->index(ui->treeViewStudents->currentIndex().row(), 1).data(Qt::DisplayRole).toInt();
-    QSqlQuery queryDel;
-    queryDel.prepare(QString("DELETE FROM phone WHERE lstudent_id = %1").arg(index));
-    queryDel.exec();
+    int indexStudent = ui->treeViewStudents->model()->index(ui->treeViewStudents->currentIndex().row(), 1).data(Qt::DisplayRole).toInt();
+    QString phone = ui->listWidgetPhone->currentIndex().data(Qt::DisplayRole).toString();
+    phone.remove(0, 7);
+    phone.remove(3, 1);
+    phone.remove(5, 1);
+    phone.remove(7, 1);
+    qDebug() << phone;
+    QSqlQuery queryDel(QString("DELETE FROM phone WHERE student = %1 AND phone_number = '%2'").arg(indexStudent).arg(phone));
+
     if (queryDel.lastError().isValid())
         qDebug() << "DELETE phone: " << queryDel.lastError().text();
-
-    ui->listWidgetPhone->takeItem(ui->listWidgetPhone->currentIndex().row());
+    else
+        ui->listWidgetPhone->takeItem(ui->listWidgetPhone->currentIndex().row());
 }
 
 void FrameStudet::on_pushButtonAddContract_clicked()

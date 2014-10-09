@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QDate>
 #include <QSqlRecord>
+#include <QHeaderView>
 #include "money.hpp"
 
 FrameAddPayment::FrameAddPayment(QWidget *parent) :
@@ -12,6 +13,8 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
     ui(new Ui::FrameAddPayment)
 {
     ui->setupUi(this);
+
+    ui->treeViewStudents->header()->setSortIndicator(0, Qt::AscendingOrder);
 
     ui->splitterH->setStretchFactor(1, 1);
 
@@ -86,6 +89,7 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
     qDeleteStudent = new QSqlQuery;
     qcontract = new QSqlQuery;
     qphone = new QSqlQueryModel;
+    resultTable = new QSqlQueryModel;
 
     qmoddepartment->setQuery("SELECT department_id, department_short, department_full FROM department");
 
@@ -112,13 +116,6 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
         ui->comboBoxDepartment->addItem(idepart.value()->getDepShort());
     }
 
-    qmodyear->setQuery("SELECT duration_of_studies FROM duration_of_studies");
-
-    if (qmodyear->lastError().isValid())
-        qDebug() << qmodyear->lastError().text();
-
-
-    yearList.insert(0, tr("All"));
 
     qmodcontrtype->exec("SELECT * FROM contract_type");
 
@@ -156,12 +153,21 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
                               qmodcuriculum->value(15).toString());
     }
 
-    qCountRows.exec("SELECT COUNT(*) FROM duration_of_studies");
+    qmodyear->setQuery("SELECT DISTINCT(date_part('year', now()) - date_part('year', date_of_order_admission) + course_enrollment) AS year FROM orders_admission WHERE course_enrollment IS NOT NULL ORDER BY year");
+
+    if (qmodyear->lastError().isValid())
+        qDebug() << qmodyear->lastError().text();
+
+
+    yearList.insert(0, tr("All"));
+
+    qCountRows.exec("SELECT COUNT(DISTINCT (date_part('year', now()) - date_part('year', date_of_order_admission) + course_enrollment)) FROM orders_admission WHERE course_enrollment IS NOT NULL");
 
     qCountRows.next();
-/*
+
+
     for (int i = 0; i < qCountRows.value(0).toInt(); ++i) {
-        QString duration = qmodyear->record(i).value("duration_of_studies").toString();
+        QString duration = qmodyear->record(i).value("year").toString();
         yearList.insert(i + 1, duration);
     }
 
@@ -172,7 +178,11 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
         ui->comboBoxYear->addItem(iy.value());
     }
 
-*/
+    sqlproxy = new QSortFilterProxyModel(this);
+    sqlproxy->setDynamicSortFilter(true);
+    sqlproxy->setSourceModel(qmodstud);
+
+
 
     ui->treeViewStudents->setModel(qmodstud);
 
@@ -182,7 +192,7 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
             this, SLOT(handleSelectionChanged(QModelIndex)));
     if (QDate::currentDate().month() > 8)
         ui->comboBoxTimeOfYear->setCurrentIndex(1);
-    ui->comboBoxYear_2->addItem(QString("%1 - %2").arg(QDate::currentDate().year()).arg(QDate::currentDate().year() + 1));
+    ui->comboBoxAcademicYear->addItem(QString("%1 - %2").arg(QDate::currentDate().year()).arg(QDate::currentDate().year() + 1));
 /*
     qmodpay->setQuery("SELECT discount, actual_amount_of_payment, date_of_pay, actual_amount_of_payment - (0.01 * discount * actual_amount_of_payment) AS discount_in_prc FROM payment AS pa WHERE pa.payment_id = 16");
 
@@ -191,10 +201,12 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
 
     ui->tableView->setModel(qmodpay);*/
     qtablem->setTable("payment");
-//    qtablem->setSort(0, Qt::AscendingOrder);
+    resultTable->setQuery("SELECT ct.payment, ct.payment * 1.065 AS cof, semester, discount || \'\%\' AS discount, payment - (0.01 * discount * payment) AS discount_in_prc, penalties FROM payment AS pm JOIN (SELECT contract_id, payment FROM contract) AS ct ON pm.payment_id = ct.contract_id ORDER BY payment_id");
 //    qtablem->setFilter("");
 //    qtablem->columnCount();
-    qtablem->insertColumn(0, QModelIndex());
+
+//    qtablem->insertColumn(0, QModelIndex());
+    qtablem->sort(0, Qt::AscendingOrder);
 
     qtablem->select();
 
@@ -218,22 +230,45 @@ FrameAddPayment::FrameAddPayment(QWidget *parent) :
     }
     n.remove(locale.groupSeparator());
 //    m.parse(n);
-    int mon = (double)n.toInt() * ui->lineEditCoefficient->text().toDouble();
-    qtablem->setData(qtablem->index(2, 1), mon);
+//    int mon = (double)n.toInt() * ui->lineEditCoefficient->text().toDouble();
+//    qtablem->setData(qtablem->index(2, 1), mon);
 //    qtablem->index(1, 2).data(Qt::DisplayRole).toInt();
 
+    ui->tableViewResult->setModel(resultTable);
+
     ui->tableView->setModel(qtablem);
-    ui->tableView->hideColumn(qtablem->columnCount()-1);
-    ui->tableView->hideColumn(qtablem->columnCount()-2);
     ui->tableView->hideColumn(0);
     ui->tableView->hideColumn(qtablem->fieldIndex("resolution_pay_phase"));
+    ui->tableView->hideColumn(qtablem->fieldIndex("id"));
+    ui->tableView->hideColumn(qtablem->fieldIndex("phase"));
+    ui->tableView->hideColumn(qtablem->fieldIndex("semester"));
+    ui->tableView->hideColumn(qtablem->fieldIndex("discount"));
+    ui->tableView->hideColumn(qtablem->fieldIndex("penalties"));
     ui->tableView->resizeColumnsToContents();
+
+    ui->treeViewStudents->header()->setSectionsClickable(true);
+    connect(ui->treeViewStudents->header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
+            this, SLOT(sortStudent(int,Qt::SortOrder)));
+
 }
 
 
 FrameAddPayment::~FrameAddPayment()
 {
     delete ui;
+}
+
+void FrameAddPayment::sortStudent(int index, Qt::SortOrder order)
+{
+//    ui->treeViewStudents->sortByColumn(0, order);
+
+    //    ui->treeViewStudents->setSortingEnabled(true);
+    //    sqlproxy->sort(0, order);
+    if (ui->comboBoxDepartment->currentIndex() == 0)
+        ui->comboBoxDepartment->currentIndexChanged(ui->comboBoxDepartment->currentIndex());
+    else
+        ui->comboBoxYear->currentIndexChanged(ui->comboBoxYear->currentIndex());
+
 }
 
 void FrameAddPayment::handleSelectionChanged(QModelIndex selection)
@@ -243,16 +278,15 @@ void FrameAddPayment::handleSelectionChanged(QModelIndex selection)
 
     ui->listWidgetPhone->clear();
 
-
-    ui->tableView->selectRow(num - 1);
-
-//    qphone->setQuery(QString("SELECT \'+' || country_calling_code || \'(' || "
-//                             "calling_code || \')' || phone_number AS phone FROM phone WHERE student = %1").arg(num));
+    ui->tableView->selectRow(num - 2);
+    ui->tableViewResult->selectRow(num);
 
     QSqlQuery countryCode(QString("SELECT country_calling_code FROM phone WHERE student = %1").arg(num));
     QSqlQuery callingCode(QString("SELECT calling_code FROM phone WHERE student = %1").arg(num));
     QSqlQuery phoneNumber(QString("SELECT phone_number FROM phone WHERE student = %1").arg(num));
     QSqlQuery phoneComment(QString("SELECT \'(' || comment || \')' AS comment FROM phone WHERE student = %1").arg(num));
+
+
 
 
 
@@ -284,51 +318,100 @@ void FrameAddPayment::on_comboBoxDepartment_currentIndexChanged(int index)
     qDebug() << "on_comboBoxDepartment_currentIndexChanged: " << index;
 
 
-    if (index)
-        qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
-                                   "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN (SELECT oa.order_admission_id "
-                                   "FROM orders_admission oa WHERE oa.department = %1) oai ON oai.order_admission_id = lsiad.order_admission_id) "
-                                   "lss ON lss.student_id = stt.student_id ORDER BY stt.surname").arg(index));
-    else
-        qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt ORDER BY stt.surname");
+    if (index) {
+        if (ui->treeViewStudents->header()->sortIndicatorOrder() == Qt::AscendingOrder)
+            qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
+                                       "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN (SELECT oa.order_admission_id "
+                                       "FROM orders_admission oa WHERE oa.department = %1) oai ON oai.order_admission_id = lsiad.order_admission_id) "
+                                       "lss ON lss.student_id = stt.student_id ORDER BY stt.surname").arg(index));
+        else
+            qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
+                                       "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN (SELECT oa.order_admission_id "
+                                       "FROM orders_admission oa WHERE oa.department = %1) oai ON oai.order_admission_id = lsiad.order_admission_id) "
+                                       "lss ON lss.student_id = stt.student_id ORDER BY stt.surname DESC").arg(index));
+        if (qmodstud->lastError().isValid())
+            qDebug() << qmodstud->lastError().text();
+
+        QSqlQuery queryCountStudents("SELECT COUNT(*) FROM orders_admission WHERE course_enrollment IS NOT NULL");
+        QSqlQuery queryCountDepartmentStudents(QString("SELECT COUNT(*) AS count "
+                                                 "FROM orders_admission "
+                                                 "WHERE department = %1").arg(index));
 
 
-    if (qmodstud->lastError().isValid())
-        qDebug() << qmodstud->lastError().text();
+        if (queryCountStudents.next() && queryCountDepartmentStudents.next())
+            ui->labelTotalStudents->setText(tr("Total Students: %1/%2").arg(queryCountStudents.value(0).toInt()).
+                                            arg(queryCountDepartmentStudents.value(0).toInt()));
+    }
+    else {
+        if (ui->treeViewStudents->header()->sortIndicatorOrder() == Qt::AscendingOrder)
+            qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt JOIN (SELECT lsa.student_id FROM list_student_in_admission AS lsa JOIN (SELECT order_admission_id FROM orders_admission WHERE course_enrollment IS NOT NULL) AS adm ON adm.order_admission_id = lsa.order_admission_id) AS lss ON lss.student_id = stt.student_id ORDER BY stt.surname");
+        else
+            qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt JOIN (SELECT lsa.student_id FROM list_student_in_admission AS lsa JOIN (SELECT order_admission_id FROM orders_admission WHERE course_enrollment IS NOT NULL) AS adm ON adm.order_admission_id = lsa.order_admission_id) AS lss ON lss.student_id = stt.student_id ORDER BY stt.surname DESC");
 
-    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+        if (qmodstud->lastError().isValid())
+            qDebug() << qmodstud->lastError().text();
 
-    if (queryCountStudents.next())
-        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
+        QSqlQuery queryCountStudents("SELECT COUNT(*) FROM orders_admission WHERE course_enrollment IS NOT NULL");
+
+        if (queryCountStudents.next())
+            ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
+    }
 }
 
 void FrameAddPayment::on_comboBoxYear_currentIndexChanged(int index)
 {
-    qDebug() << index;
+    qDebug() << "on_comboBoxYear_currentIndexChanged: " << index;
 
-    if (index)
-        qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
-                                   "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN "
-                                   "(SELECT oa.order_admission_id, date_part('year', now()) - date_part('year', oa.date_of_order_admission) + "
-                                   "oa.course_enrollment AS year FROM orders_admission AS oa WHERE (date_part('year', now()) - date_part('year', oa.date_of_order_admission) + oa.course_enrollment) = %1) "
-                                   "oai ON oai.order_admission_id = lsiad.order_admission_id) "
-                                   "lss ON lss.student_id = stt.student_id").arg(index));
-    else
-        qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt ORDER BY stt.surname");
+    int year = ui->comboBoxYear->itemText(index).toInt();
 
+    if (index) {
+        if (ui->treeViewStudents->header()->sortIndicatorOrder() == Qt::AscendingOrder)
+            qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
+                                       "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN "
+                                       "(SELECT oa.order_admission_id, date_part('year', now()) - date_part('year', oa.date_of_order_admission) + "
+                                       "oa.course_enrollment AS year FROM orders_admission AS oa WHERE (date_part('year', now()) - date_part('year', oa.date_of_order_admission) + oa.course_enrollment) = %1) "
+                                       "oai ON oai.order_admission_id = lsiad.order_admission_id) "
+                                       "lss ON lss.student_id = stt.student_id ORDER BY stt.surname").arg(year));
+        else
+            qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
+                                       "JOIN (SELECT lsiad.student_id FROM list_student_in_admission lsiad JOIN "
+                                       "(SELECT oa.order_admission_id, date_part('year', now()) - date_part('year', oa.date_of_order_admission) + "
+                                       "oa.course_enrollment AS year FROM orders_admission AS oa WHERE (date_part('year', now()) - date_part('year', oa.date_of_order_admission) + oa.course_enrollment) = %1) "
+                                       "oai ON oai.order_admission_id = lsiad.order_admission_id) "
+                                       "lss ON lss.student_id = stt.student_id ORDER BY stt.surname DESC").arg(year));
 
-    if (qmodstud->lastError().isValid())
-        qDebug() << qmodstud->lastError().text();
+        QSqlQuery queryCountYearStudents(QString("SELECT COUNT(*) AS count "
+                                                 "FROM orders_admission "
+                                                 "WHERE (date_part('year', now()) - date_part('year', date_of_order_admission) + course_enrollment) = %1").arg(year));
 
-    QSqlQuery queryCountStudents("SELECT COUNT(*) FROM student");
+        if (qmodstud->lastError().isValid())
+            qDebug() << qmodstud->lastError().text();
 
-    if (queryCountStudents.next())
-        ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
+        QSqlQuery queryCountStudents("SELECT COUNT(*) FROM orders_admission WHERE course_enrollment IS NOT NULL");
+
+        if (queryCountStudents.next() && queryCountYearStudents.next())
+            ui->labelTotalStudents->setText(tr("Total Students: %1/%2").arg(queryCountStudents.value(0).toInt()).
+                                            arg(queryCountYearStudents.value(0).toInt()));
+    }
+    else {
+        if (ui->treeViewStudents->header()->sortIndicatorOrder() == Qt::AscendingOrder)
+            qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt JOIN (SELECT lsa.student_id FROM list_student_in_admission AS lsa JOIN (SELECT order_admission_id FROM orders_admission WHERE course_enrollment IS NOT NULL) AS adm ON adm.order_admission_id = lsa.order_admission_id) AS lss ON lss.student_id = stt.student_id ORDER BY stt.surname");
+        else
+            qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt JOIN (SELECT lsa.student_id FROM list_student_in_admission AS lsa JOIN (SELECT order_admission_id FROM orders_admission WHERE course_enrollment IS NOT NULL) AS adm ON adm.order_admission_id = lsa.order_admission_id) AS lss ON lss.student_id = stt.student_id ORDER BY stt.surname DESC");
+
+        if (qmodstud->lastError().isValid())
+            qDebug() << qmodstud->lastError().text();
+
+        QSqlQuery queryCountStudents("SELECT COUNT(*) FROM orders_admission WHERE course_enrollment IS NOT NULL");
+
+        if (queryCountStudents.next())
+            ui->labelTotalStudents->setText(tr("Total Students: %1").arg(queryCountStudents.value(0).toInt()));
+    }
 }
 
 void FrameAddPayment::on_comboBoxGroup_currentIndexChanged(int index)
 {
-    qDebug() << index;
+    qDebug() << "on_comboBoxGroup_currentIndexChanged: " << index;
 
     if (index)
         qmodstud->setQuery(QString("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, stt.student_id FROM student AS stt "
@@ -336,7 +419,7 @@ void FrameAddPayment::on_comboBoxGroup_currentIndexChanged(int index)
                                    "FROM orders_admission oa WHERE oa.group = %1) oai ON oai.order_admission_id = lsiad.order_admission_id) "
                                    "lss ON lss.student_id = stt.student_id").arg(index));
     else
-        qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt ORDER BY stt.surname");
+        qmodstud->setQuery("SELECT stt.surname || \' \' || stt.name || \' \' || stt.patronym AS Students, student_id FROM student AS stt");
 
 
     if (qmodstud->lastError().isValid())

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>FrameStudet</class>
  <widget class="QFrame" name="FrameStudet">
@@ -29,8 +29,8 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
-      <widget class="QWidget" name="layoutWidget">
-       <layout class="QVBoxLayout" name="verticalLayout">
+      <widget class="QWidget" name="layoutWidget1">
+       <layout class="QVBoxLayout" name="verticalLayoutStudents">
         <item>
          <widget class="QComboBox" name="comboBoxDepartment"/>
         </item>
@@ -41,6 +41,9 @@
           </item>
           <item>
            <widget class="QComboBox" name="comboBoxGroup">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <item>
              <property name="text">
               <string>All</string>
@@ -253,6 +256,15 @@
             <height>0</height>
            </size>
           </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="animated">
+           <bool>true</bool>
+          </property>
+          <property name="headerHidden">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -277,8 +289,8 @@
         </property>
        </column>
       </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <layout class="QHBoxLayout" name="horizontalLayout">
+      <widget class="QWidget" name="layoutWidget2">
+       <layout class="QHBoxLayout" name="horizontalLayoutDocs">
         <item>
          <widget class="QPushButton" name="pushButtonAddContract">
           <property name="text">
@@ -323,7 +335,7 @@
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget3">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QGroupBox" name="groupBoxStudent">
@@ -604,7 +616,7 @@
                  </size>
                 </property>
                 <property name="inputMask">
-                 <string>000</string>
+                 <string>000; </string>
                 </property>
                </widget>
               </item>
@@ -618,7 +630,7 @@
               <item>
                <widget class="QLineEdit" name="lineEditPhoneNumber">
                 <property name="inputMask">
-                 <string notr="true">000-00-00</string>
+                 <string notr="true">000-00-00; </string>
                 </property>
                 <property name="text">
                  <string notr="true">--</string>
@@ -755,7 +767,7 @@
               <item>
                <widget class="QLineEdit" name="lineEditIndividualTaxpayerIdentificationNumber">
                 <property name="inputMask">
-                 <string notr="true">999999999999</string>
+                 <string notr="true">999999999999; </string>
                 </property>
                 <property name="maxLength">
                  <number>12</number>

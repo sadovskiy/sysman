@@ -7,6 +7,7 @@
 #include <QSqlTableModel>
 #include <QString>
 #include <QMap>
+#include <QSortFilterProxyModel>
 #include "department.hpp"
 
 namespace Ui {
@@ -27,6 +28,7 @@ private slots:
     void on_comboBoxGroup_currentIndexChanged(int index);
     void handleSelectionChanged(QModelIndex selection);
     void on_lineEditFind_textEdited(const QString &arg1);
+    void sortStudent(int index, Qt::SortOrder order);
 
 private:
     Ui::FrameAddPayment *ui;
@@ -56,6 +58,8 @@ private:
     QSqlQueryModel *qmodpay;
     QSqlQueryModel *qphone;
     QSqlTableModel *qtablem;
+    QSqlQueryModel *resultTable;
+    QSortFilterProxyModel *sqlproxy;
 };
 
 #endif // FRAMEADDPAYMENT_HPP

@@ -86,11 +86,40 @@ void FrameAddContract::loadData(QMap<int, QString> &cntrTypeList, QMap<int, QStr
 
 void FrameAddContract::on_pushButton_clicked()
 {
-/*    ui->lineEditContractNumber->setText();
-    ui->dateEditContractDate->setDate(query.value(2).toDate());
-    ui->lineEditPayment->setText(query.value(3).toString());
-    ui->comboBoxDepartmentContract->setCurrentText(query.value(4).toString());
-    ui->comboBoxDurationOfStudy->setCurrentText(query.value(7).toString());
-    ui->comboBoxAcademicProgram->setCurrentText(query.value(5).toString());
-    ui->comboBoxContractType->setCurrentText(query.value(6).toString());*/
+/*    int row = ui->treeViewStudents->currentIndex().row();
+    qDebug() << "pushButtonApplyChanges_clicked row: " << row;
+    int index = ui->treeViewStudents->model()->index(row, 1).data(Qt::DisplayRole).toInt();
+    qDebug() << "pushButtonApplyChanges_clicked index: " << index;
+    qInsertStudent->prepare(QString("UPDATE contract SET contract_number = :contract_number, "
+                                    "contract_date = :contract_date, payment = :payment, "
+                                    "curriculum = :curriculum, contract_type = :contract_type, "
+                                    "duration_of_studies = :duration_of_studies, "
+                                    "WHERE contract_id = %1").arg(index));
+
+    qInsertStudent->bindValue(":surname", ui->lineEditSurname->text());
+    qInsertStudent->bindValue(":name", ui->lineEditName->text());
+    qInsertStudent->bindValue(":patronym", ui->lineEditPatronym->text());
+    qInsertStudent->bindValue(":sex", sexList.value(ui->comboBoxSex->currentText()));
+    qInsertStudent->bindValue(":date_of_birth", ui->dateEditDateOfBirth->date());
+    qInsertStudent->bindValue(":place_of_birth", ui->comboBoxPlaceOfBirth->currentText());
+    countryList.find(ui->comboBoxCitizenship->currentText());
+    QMap<QString, int>::const_iterator idx  = countryList.find(ui->comboBoxCitizenship->currentText());
+    if (idx != countryList.end() && idx.key() == ui->comboBoxCitizenship->currentText())
+        qInsertStudent->bindValue(":citizenship", idx.value());
+    else
+        qInsertStudent->bindValue(":citizenship", 0);
+    qInsertStudent->bindValue(":passport_series", ui->spinBoxPassportSeries->text().toInt());
+    qInsertStudent->bindValue(":passport_number", ui->spinBoxPassportNumber->text().toInt());
+    qInsertStudent->bindValue(":passport_authority", ui->lineEditPassportAuthority->text());
+    qInsertStudent->bindValue(":passport_date_of_issue", ui->dateEditPassportDateOfIssue->date());
+    qInsertStudent->bindValue(":passport_subdivision_code", ui->spinBoxPassportSubdivisionCode->text().toInt());
+    qInsertStudent->bindValue(":registration_adm_unit", ui->comboBoxRegistrationAdministrativeUnit->currentText());
+    qInsertStudent->bindValue(":registration_adress", ui->lineEditRegistrationAdress->text());
+    qInsertStudent->bindValue(":registration_date", ui->dateEditRegistrationDate->date());
+    qInsertStudent->bindValue(":postcode", ui->spinBoxPostcode->text().toInt());
+
+    qInsertStudent->exec();
+
+    if (qInsertStudent->lastError().isValid())
+        qDebug() << "UPDATE student: "  << qInsertStudent->lastError().text();*/
 }
